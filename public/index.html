@@ -58,7 +58,7 @@ button{font:inherit}
 .flag{width:29px;height:9px;background:linear-gradient(90deg,#ff4fc8,#7b5cff);display:inline-block}
 .periodRow{display:grid;grid-template-columns:minmax(0,1fr) 118px;align-items:center;margin-top:22px;gap:14px}
 .periodWrap{min-width:0;overflow:hidden;padding-right:4px}
-#period{font-size:clamp(16px,4.8vw,23px);font-weight:900;line-height:1.3;white-space:normal;overflow-wrap:anywhere;word-break:break-all;display:block;width:100%;max-width:100%;overflow:hidden}
+#period{font-size:clamp(14px,4.1vw,21px);font-weight:900;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:clip;display:block;width:100%;max-width:100%;letter-spacing:-.4px}
 .timer{width:118px;height:118px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:6px solid #64e8ff;border-left-color:#7b5cff;border-bottom-color:#45d7ff;box-shadow:0 0 24px #45d7ff3d,inset 0 0 20px #45d7ff12;position:relative}
 .timer:before{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid #45d7ff12}
 .timer div{font-size:26px;font-weight:900;font-family:monospace}
@@ -71,7 +71,7 @@ button{font:inherit}
 .patternValue{color:#64e8ff;font-size:17px}
 .patternBar{height:17px;margin-top:12px;border-radius:20px;padding:2px;background:#10262c;border:1px solid #007d8a;overflow:hidden}
 .patternFill{width:60%;height:100%;border-radius:20px;background:linear-gradient(90deg,#ffd75a 0 40%,#64e8ff 40%);box-shadow:0 0 10px #64e8ffaa}
- .lockCard{min-height:335px;border-radius:22px;border:2px solid #5f7dff67;background:radial-gradient(circle at 50% 22%,#45d7ff16,transparent 33%),linear-gradient(135deg,#11183f,#0a102b);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 28px;box-shadow:0 18px 50px #0007,inset 0 0 55px #7b5cff10;margin-bottom:28px}
+.lockCard{min-height:335px;border-radius:22px;border:2px solid #5f7dff67;background:radial-gradient(circle at 50% 22%,#45d7ff16,transparent 33%),linear-gradient(135deg,#11183f,#0a102b);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 28px;box-shadow:0 18px 50px #0007,inset 0 0 55px #7b5cff10;margin-bottom:28px}
 .lockCircle{width:104px;height:104px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;border:3px solid #45d7ff;box-shadow:0 0 23px #45d7ff66,inset 0 0 25px #45d7ff1a}
 .lockCircle:before{content:"";position:absolute;inset:-14px;border:3px dashed #7b7cff;border-radius:50%;animation:spin 7s linear infinite}
 .lockCircle:after{content:"";position:absolute;inset:-22px;border:2px dotted #45d7ff59;border-radius:50%;animation:spinr 10s linear infinite}
@@ -132,7 +132,7 @@ button{font:inherit}
 .uidDemoText{margin-top:8px;color:#d7d7e4;font-size:12px;line-height:1.55}
 .uidDemoTimer{margin-top:10px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid #45d7ff44;background:#061521;color:#64e8ff;font-size:11px;font-weight:1000;letter-spacing:1px}
 .uidDemoOpen{width:100%;height:52px;margin-top:9px;border:0;border-radius:14px;background:linear-gradient(100deg,#19e6ff,#168cff);color:#02151c;font-size:13px;font-weight:1000;cursor:pointer}
- .adminLaunch{display:none;width:100%;height:48px;margin:-10px 0 22px;border-radius:16px;border:1px solid #45d7ff55;background:#0b1535;color:#64e8ff;font-size:12px;font-weight:1000;letter-spacing:1px;cursor:pointer}
+.adminLaunch{display:none;width:100%;height:48px;margin:-10px 0 22px;border-radius:16px;border:1px solid #45d7ff55;background:#0b1535;color:#64e8ff;font-size:12px;font-weight:1000;letter-spacing:1px;cursor:pointer}
 .adminOverlay{position:fixed;inset:0;z-index:11000;display:none;align-items:center;justify-content:center;padding:14px;background:#000c;backdrop-filter:blur(10px)}
 .adminOverlay.show{display:flex}
 .adminPanel{width:100%;max-width:520px;max-height:92vh;overflow:auto;border:1px solid #5f7dff55;border-radius:24px;background:linear-gradient(180deg,#10183f,#070b1b);box-shadow:0 30px 90px #000d;padding:22px}
@@ -158,369 +158,3350 @@ button{font:inherit}
 .navItem{height:74px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#66939d;font-size:11px;font-weight:900;letter-spacing:1px;border-radius:36px;cursor:pointer}
 .navIcon{font-size:29px;margin-bottom:7px}
 .navItem.active{color:#64e8ff;background:linear-gradient(145deg,#45d7ff14,#7b5cff18);box-shadow:inset 0 0 22px #45d7ff10,0 0 18px #7b5cff12}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes spinr{from{transform:rotate(360deg)}to{transform:rotate(0)}}
-@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 18px #64e8ff,0 0 55px #00dfff66}50%{transform:scale(1.035);box-shadow:0 0 28px #64e8ff,0 0 70px #00dfff88}}
-@keyframes focusPulse{0%,100%{box-shadow:0 0 0 #45d7ff00}50%{box-shadow:0 0 30px #45d7ff30}}
-@keyframes resultIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinr{to{transform:rotate(-360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 18px #64e8ff,0 0 55px #00dfff66}50%{transform:scale(1.035);box-shadow:0 0 30px #64e8ff,0 0 75px #00dfff88}}
+@keyframes resultIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes focusPulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 35px #45d7ff35}}
 @media(max-width:560px){
-.container{padding:28px 20px 110px}.header{margin-bottom:24px}.brand{gap:13px}.brandPhoto{width:64px;height:64px;flex-basis:64px;border-radius:20px}.brandText h1{font-size:22px}.brandText p{font-size:9px;letter-spacing:1.7px;margin-top:8px}.aiBars{font-size:15px}.soundBtn{width:55px;height:55px;flex-basis:55px;font-size:23px}.statusRow{gap:11px;margin-bottom:25px}.status{height:50px;font-size:9px;letter-spacing:.3px}.greenDot,.blueDot{width:9px;height:9px}.statsBox{height:72px;padding:0 13px;border-radius:25px;margin-bottom:27px}.statLine{gap:6px}.statLine:first-child{padding-right:8px}.statLine:nth-child(2){padding-left:8px}.statLabel{font-size:8px;letter-spacing:.6px}.statLine strong{font-size:13px}.demoTag{font-size:6px;right:10px;bottom:5px}.accuracy{height:62px;margin-bottom:27px;padding:0 19px}.targetCard{border-radius:34px;padding:25px 20px 22px;margin-bottom:27px}.targetTitle{font-size:12px;letter-spacing:1.6px}.periodRow{margin-top:18px;grid-template-columns:minmax(0,1fr) 103px}.periodWrap{max-width:none}#period{font-size:20px;line-height:1.25}.timer{width:103px;height:103px}.timer div{font-size:22px}.timer small{font-size:9px}.actionRow{gap:10px;margin-top:18px}.actionBtn{height:48px;padding:0 17px;font-size:12px}.patternBox{margin-top:21px;border-radius:20px;padding:18px 15px 15px}.patternTop{font-size:11px}.patternValue{font-size:14px}.patternBar{height:15px}.lockCard{min-height:335px;border-radius:22px;padding:25px 18px}.lockCircle{width:96px;height:96px}.lockCard h2{font-size:24px;margin-top:27px}.lockCard p{font-size:13px;margin-top:10px}.unlockBtn{height:52px;font-size:15px;margin-top:20px}.bottomNav{left:20px;right:20px;bottom:13px;height:82px;border-radius:41px}.navItem{height:67px;font-size:9px}.navIcon{font-size:24px;margin-bottom:5px}.resultHeader h2{font-size:16px}.resultRow{grid-template-columns:minmax(0,1fr) 38px 48px 54px;gap:5px;padding:7px 8px;min-height:58px}.resultNumber{width:32px;height:32px;border-radius:8px}.resultNumber img{width:29px;height:29px}.resultNumberFallback{font-size:16px}.resultSize{font-size:7px;padding:6px 3px;border-radius:9px}.resultStatus{font-size:7px;padding:6px 3px;border-radius:13px}.unlockOverlay{padding:14px}.unlockModal{border-radius:27px;padding:29px 20px}.modalClose{width:44px;height:44px;font-size:26px;right:12px;top:12px}.modalLock{width:92px;height:92px;margin-bottom:24px}.modalLock span{font-size:38px}.modalTitle{font-size:25px}.modalSub{font-size:14px}.accessTop{font-size:13px}.signal{font-size:10px;padding:7px 8px}.registerBtn{height:49px;font-size:14px}.uidLabel{font-size:11px}.uidInput{height:57px;font-size:16px}.verifyBtn{height:57px;font-size:16px}.telegramBtn{height:50px;font-size:14px}.predictionNumber{font-size:40px}.adminLaunch{margin-top:-2px}
+  .container{padding:22px 18px 120px}
+  .brand{gap:13px}
+  .brandPhoto{width:64px;height:64px;flex-basis:64px;border-radius:19px}
+  .brandText h1{font-size:23px}
+  .brandText p{font-size:10px;margin-top:7px;letter-spacing:1.3px}
+  .soundBtn{width:54px;height:54px;flex-basis:54px;font-size:23px}
+  .statusRow{gap:9px;margin-bottom:20px}
+  .status{height:43px;font-size:9px;letter-spacing:.8px}
+  .greenDot,.blueDot{width:8px;height:8px}
+  .statsBox{height:72px;padding:0 12px;border-radius:22px;margin-bottom:18px}
+  .statLine{gap:5px}
+  .statLine:first-child{padding-right:8px}
+  .statLine:nth-child(2){padding-left:8px}
+  .statLabel{font-size:7px;letter-spacing:.6px}
+  .statLine strong{font-size:13px}
+  .demoTag{font-size:5px;right:10px}
+  .accuracy{height:55px;padding:0 15px;gap:9px;border-radius:28px;margin-bottom:19px}
+  .targetCard{padding:22px 17px 20px;border-radius:30px;margin-bottom:20px}
+  .targetTitle{font-size:12px;letter-spacing:1.1px}
+  .flag{width:22px;height:7px}
+  .periodRow{grid-template-columns:minmax(0,1fr) 88px;gap:8px;margin-top:16px}
+  #period{font-size:13px;white-space:nowrap;letter-spacing:-.55px}
+  .timer{width:88px;height:88px;border-width:5px}
+  .timer div{font-size:20px}
+  .timer small{font-size:7px;letter-spacing:1px}
+  .actionRow{gap:8px;margin-top:15px}
+  .actionBtn{height:43px;padding:0 13px;font-size:11px}
+  .patternBox{margin-top:18px;padding:15px 13px;border-radius:19px}
+  .patternTop{font-size:10px}
+  .patternValue{font-size:12px}
+  .patternBar{height:13px;margin-top:8px}
+  .lockCard{min-height:280px;padding:24px 17px;border-radius:20px}
+  .lockCircle{width:82px;height:82px}
+  .lockCircle:before{inset:-10px}
+  .lockCircle:after{inset:-16px}
+  .lockIcon{font-size:33px}
+  .lockCard h2{font-size:25px;margin-top:18px}
+  .lockCard p{font-size:13px;line-height:1.45}
+  .unlockBtn{height:49px;font-size:15px;margin-top:14px}
+  .predictionNumber{font-size:39px}
+  .resultSection{margin-top:18px}
+  .resultHeader h2{font-size:15px}
+  .liveBadge{padding:6px 10px;font-size:8px}
+  .demoNote{font-size:7px}
+  .resultRow{
+    min-height:62px;
+    grid-template-columns:minmax(0,1fr) 43px 53px 55px;
+    gap:5px;
+    padding:8px;
+    border-radius:14px
+  }
+  .resultIssue{font-size:8px}
+  .resultNumber{width:38px;height:38px;border-radius:10px}
+  .resultNumber img{width:34px;height:34px}
+  .resultSize{min-width:45px;font-size:7px;padding:6px 3px}
+  .resultStatus{min-width:50px;font-size:7px;padding:6px 3px}
+  .bottomNav{left:18px;right:18px;bottom:13px;height:76px;border-radius:39px}
+  .navItem{height:62px;font-size:8px;letter-spacing:.5px}
+  .navIcon{font-size:23px;margin-bottom:4px}
+  .unlockModal{padding:22px 17px 17px;border-radius:22px}
+  .modalTitle{font-size:15px}
+  .registerBtn{height:47px;font-size:14px}
+  .uidInput{height:48px;font-size:13px}
+  .verifyBtn{height:54px;font-size:15px;margin-top:16px}
+  .telegramBtn{height:47px;font-size:13px}
+  .securityRow{font-size:8px}
+  .adminPanel{padding:17px;border-radius:20px}
 }
 @media(max-width:370px){
-.container{padding-left:14px;padding-right:14px}.brandText h1{font-size:19px}.status{font-size:8px}.statusRow{gap:7px}.periodRow{grid-template-columns:minmax(0,1fr) 94px}#period{font-size:16px}.timer{width:94px;height:94px}.timer div{font-size:19px}.actionRow{flex-wrap:wrap}.lockCard{min-height:305px}.lockCard h2{font-size:25px}.bottomNav{left:12px;right:12px}
+  .container{padding-left:13px;padding-right:13px}
+  .brandText h1{font-size:20px}
+  .periodRow{grid-template-columns:minmax(0,1fr) 80px}
+  #period{font-size:12px}
+  .timer{width:80px;height:80px}
+  .resultRow{grid-template-columns:minmax(0,1fr) 40px 49px 51px}
+  .resultIssue{font-size:7px}
 }
 </style>
 </head>
+
 <body>
- <div id="loadingScreen">
-<div class="loader">
-<div class="loaderPhotoBox">
-<img class="loaderPhoto" src="https://cdn.phototourl.com/free/2026-09-05-e7988a19-dd93-4d34-8c85-a7f55d287064.jpg" alt="AI">
+
+<!-- =========================================================
+     LOADING SCREEN
+========================================================= -->
+
+<div id="loadingScreen">
+  <div class="loader">
+
+    <div class="loaderPhotoBox">
+      <img
+        class="loaderPhoto"
+        src="https://cdn.phototourl.com/free/2026-09-05-e7988a19-dd93-4d34-8c85-a7f55d287064.jpg"
+        alt="AMBIKA"
+      >
+    </div>
+
+    <div class="loaderTitle">
+      AMBIKA PANE AI
+    </div>
+
+    <div class="loaderSub">
+      SECURE CONTROL SYSTEM
+    </div>
+
+    <div class="progressArea">
+
+      <div class="progressInfo">
+        <span>INITIALIZING SYSTEM</span>
+        <span id="percent">0%</span>
+      </div>
+
+      <div class="progress">
+        <div
+          class="progressBar"
+          id="progressBar"
+        ></div>
+      </div>
+
+      <div
+        class="loadingStatus"
+        id="loadingStatus"
+      >
+        Initializing secure interface...
+      </div>
+
+    </div>
+
+  </div>
 </div>
-<div class="loaderTitle">AMBIKA PANE AI</div>
-<div class="loaderSub">NEXT-GEN AI CONTROL PANEL</div>
-<div class="progressArea">
-<div class="progressInfo"><span>SYSTEM LOADING</span><span id="percent">0%</span></div>
-<div class="progress"><div class="progressBar" id="progressBar"></div></div>
-<div class="loadingStatus" id="loadingStatus">Initializing secure interface...</div>
-</div>
-</div>
-</div>
+
+
+<!-- =========================================================
+     MAIN APP
+========================================================= -->
 
 <div id="app">
+
 <div class="container">
 
-<button class="adminLaunch" id="adminLaunch">⚙ ADMIN PANEL</button>
+  <!-- HEADER -->
+  <header class="header">
 
-<header class="header">
-<div class="brand">
-<img class="brandPhoto" src="https://cdn.phototourl.com/free/2026-09-05-e7988a19-dd93-4d34-8c85-a7f55d287064.jpg" alt="AMBIKA PANE AI">
-<div class="brandText">
-<h1>AMBIKA <span>PANE AI</span></h1>
-<p>AI CONTROL ENGINE <span class="aiBars">▂▅▇</span></p>
-</div>
-</div>
-<button class="soundBtn" id="soundBtn">🔊</button>
-</header>
+    <div class="brand">
 
-<div class="statusRow">
-<div class="status"><span class="greenDot"></span>SYSTEM ONLINE</div>
-<div class="status"><span class="blueDot"></span><strong>LIVE DATA</strong></div>
+      <img
+        class="brandPhoto"
+        src="https://cdn.phototourl.com/free/2026-09-05-e7988a19-dd93-4d34-8c85-a7f55d287064.jpg"
+        alt="AMBIKA"
+      >
+
+      <div class="brandText">
+
+        <h1>
+          AMBIKA <span>PANE AI</span>
+        </h1>
+
+        <p>
+          ADVANCED CONTROL ENGINE
+          <span class="aiBars">▮▮▮</span>
+        </p>
+
+      </div>
+
+    </div>
+
+    <button
+      class="soundBtn"
+      id="soundBtn"
+      type="button"
+      aria-label="Sound"
+    >
+      🔊
+    </button>
+
+  </header>
+
+
+  <!-- STATUS -->
+  <div class="statusRow">
+
+    <div class="status">
+      <span class="greenDot"></span>
+      SYSTEM ONLINE
+    </div>
+
+    <div class="status">
+      <span class="blueDot"></span>
+      <strong>AI ENGINE</strong>
+    </div>
+
+  </div>
+
+
+  <!-- STATS -->
+  <div class="statsBox">
+
+    <div class="statLine">
+      <span class="statLabel">
+        LIVE STATUS
+      </span>
+      <strong id="liveStatus">
+        CONNECTING
+      </strong>
+    </div>
+
+    <div class="statLine">
+      <span class="statLabel">
+        SERVER
+      </span>
+      <strong id="serverStatus">
+        ONLINE
+      </strong>
+    </div>
+
+    <div class="demoTag">
+      LIVE API INTERFACE
+    </div>
+
+  </div>
+
+
+  <!-- ACCURACY / INFO -->
+  <div class="accuracy">
+
+    <span class="greenDot"></span>
+
+    <div>
+      <div
+        style="font-size:12px;font-weight:900;color:#d9f9fc"
+      >
+        LIVE DATA CONNECTION
+      </div>
+
+      <div
+        style="font-size:9px;color:#718f99;margin-top:4px"
+      >
+        Results are read from the connected history feed
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- TARGET PERIOD -->
+  <section class="targetCard">
+
+    <div class="targetTitle">
+      <span class="flag"></span>
+      TARGET PERIOD NUMBER
+    </div>
+
+    <div class="periodRow">
+
+      <div class="periodWrap">
+
+        <div
+          id="period"
+        >
+          SYNCING...
+        </div>
+
+      </div>
+
+      <div class="timer">
+
+        <div id="countdown">
+          00:59
+        </div>
+
+        <small>
+          NEXT
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="actionRow">
+
+      <button
+        class="actionBtn activeBtn"
+        type="button"
+      >
+        <i></i>
+        LIVE
+      </button>
+
+      <button
+        class="actionBtn"
+        type="button"
+        id="refreshBtn"
+      >
+        ↻ REFRESH
+      </button>
+
+    </div>
+
+
+    <div class="patternBox">
+
+      <div class="patternTop">
+
+        <span>
+          PATTERN DISTRIBUTION
+        </span>
+
+        <span
+          class="patternValue"
+          id="patternValue"
+        >
+          ANALYZING
+        </span>
+
+      </div>
+
+      <div class="patternBar">
+        <div
+          class="patternFill"
+          id="patternFill"
+        ></div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PREDICTION / ACCESS CARD -->
+  <section
+    class="lockCard"
+    id="lockCard"
+  >
+
+    <div
+      class="lockCircle"
+      id="lockCircle"
+    >
+      <div class="lockIcon">
+        ♙
+      </div>
+    </div>
+
+    <h2 id="lockTitle">
+      Prediction Locked
+    </h2>
+
+    <p id="lockText">
+      Enter your Game UID to open the access panel.
+    </p>
+
+    <button
+      class="unlockBtn"
+      id="unlockBtn"
+      type="button"
+    >
+      UNLOCK PREDICTION
+    </button>
+
+    <div
+      class="uidSuccess"
+      id="uidSuccess"
+    >
+
+      <div class="uidSuccessTitle">
+        ✓ UID SUCCESSFULLY ACTIVATED
+      </div>
+
+      <div
+        class="uidSuccessUid"
+        id="uidSuccessUid"
+      >
+        UID —
+      </div>
+
+      <div class="uidSuccessText">
+        Access is active. The demo result updates every minute.
+      </div>
+
+    </div>
+
+    <div
+      class="predictionActive"
+      id="predictionActive"
+    >
+
+      <div class="predictionLabel">
+        ACCESS ACTIVE • DEMO RESULT
+      </div>
+
+      <div
+        class="predictionNumber"
+        id="predictionNumber"
+      >
+        —
+      </div>
+
+      <div
+        class="predictionMeta"
+        id="predictionMeta"
+      >
+        Waiting for UID...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       LIVE HISTORY
+  ======================================================== -->
+
+  <section
+    class="resultSection"
+    id="resultSection"
+  >
+
+    <div class="resultHeader">
+
+      <h2>
+        LIVE RESULT HISTORY
+      </h2>
+
+      <div class="liveBadge">
+        ● LIVE
+      </div>
+
+    </div>
+
+    <div class="demoNote">
+      Results are read from the connected live history feed.
+    </div>
+
+    <div
+      class="resultList"
+      id="resultList"
+    >
+
+      <div class="resultLoading">
+        Loading live results...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ADMIN BUTTON -->
+  <button
+    class="adminLaunch"
+    id="adminLaunch"
+    type="button"
+  >
+    ⚙ ADMIN CONTROL PANEL
+  </button>
+
 </div>
 
-<div class="statsBox">
-<div class="statLine"><span class="statLabel">UID</span><strong id="liveUid">10000</strong></div>
-<div class="statLine"><span class="statLabel">AMOUNT WIN</span><strong id="liveWin">20000</strong></div>
-<span class="demoTag">DEMO DISPLAY</span>
-</div>
 
-<div class="accuracy">
-<span class="greenDot"></span>
-<span style="color:#c7dadd;font-size:16px;font-weight:900;letter-spacing:1px">HIGH ACCURACY MODE</span>
-<span style="margin-left:auto;color:#57f2b0;font-size:14px;font-weight:1000">98.7%</span>
-</div>
+<!-- =========================================================
+     BOTTOM NAVIGATION
+========================================================= -->
 
-<div class="targetCard">
-<div class="targetTitle"><span class="flag"></span>TARGET PERIOD NUMBER</div>
-<div class="periodRow">
-<div class="periodWrap"><div id="period">SYNCING...</div></div>
-<div class="timer"><div id="timerText">00:07</div><small>REMAINING</small></div>
-</div>
-<div class="actionRow">
-<button class="actionBtn" id="copyBtn">▣ &nbsp; Copy Period</button>
-<button class="actionBtn activeBtn"><i></i> ACTIVE</button>
-</div>
-<div class="patternBox">
-<div class="patternTop">
-<div>RECENT 10-ROUND<br>PATTERN DISTRIBUTION</div>
-<div class="patternValue" id="patternValue">BIG 40% | SMALL 60%</div>
-</div>
-<div class="patternBar"><div class="patternFill" id="patternFill"></div></div>
-</div>
-</div>
+<nav class="bottomNav">
 
-<div class="lockCard">
-<div class="lockCircle"><div class="lockIcon">♙</div></div>
-<h2>Prediction Locked</h2>
-<p>Enter your Game UID to open the access panel.</p>
-<button class="unlockBtn" id="unlockBtn">🛡 &nbsp; UNLOCK HACK ⚡</button>
+  <div
+    class="navItem active"
+    data-tab="dashboard"
+  >
+    <div class="navIcon">⌂</div>
+    DASHBOARD
+  </div>
 
-<div class="predictionActive" id="predictionActive">
-<div class="predictionLabel">ACCESS ACTIVE • DEMO PREDICTION</div>
-<div class="predictionNumber" id="predictionNumber">—</div>
-<div class="predictionMeta" id="predictionMeta">Access is controlled by the demo admin panel.</div>
-</div>
-</div>
+  <div
+    class="navItem"
+    data-tab="history"
+  >
+    <div class="navIcon">↶</div>
+    HISTORY
+  </div>
 
-<div class="resultSection" id="resultSection">
-<div class="resultHeader"><h2>LIVE RESULT HISTORY</h2><div class="liveBadge">● LIVE</div></div>
-<div class="demoNote">WIN/LOSS chips are interface demo labels; numbers are read from the live history feed.</div>
-<div id="resultList" class="resultList"><div class="resultLoading">Loading live results...</div></div>
-</div>
+  <div
+    class="navItem"
+    data-tab="uid"
+  >
+    <div class="navIcon">♙</div>
+    UID / VIP
+  </div>
+
+  <div
+    class="navItem"
+    data-tab="telegram"
+  >
+    <div class="navIcon">➤</div>
+    TELEGRAM
+  </div>
+
+</nav>
 
 </div>
 
-<div class="unlockOverlay" id="unlockOverlay">
-<div class="unlockModal">
-<button class="modalClose" id="modalClose">×</button>
-<div class="modalLock"><span>♙</span></div>
-<div class="modalTitle">UNLOCK <span>AMBIKA PANE AI</span></div>
-<div class="modalSub">Enter your Game UID to verify approved access.</div>
 
-<div class="accessBox">
-<div class="accessTop"><span>★ CODE: 673634078162</span><span class="signal">100% SIGNAL</span></div>
-<button class="registerBtn" id="registerBtn">REGISTER ACCOUNT ↗</button>
+<!-- =========================================================
+     UID ACCESS MODAL
+========================================================= -->
+
+<div
+  class="unlockOverlay"
+  id="unlockOverlay"
+>
+
+  <div class="unlockModal">
+
+    <button
+      class="modalClose"
+      id="modalClose"
+      type="button"
+    >
+      ×
+    </button>
+
+    <div class="modalLock">
+      <span>♙</span>
+    </div>
+
+    <div class="modalTitle">
+      <span>UID</span> ACCESS PANEL
+    </div>
+
+    <div class="modalSub">
+      Verify your Game UID to access the panel.
+    </div>
+
+    <div class="accessBox">
+
+      <div class="accessTop">
+        <span>
+          ACCESS SERVER
+        </span>
+
+        <span class="signal">
+          ● ONLINE
+        </span>
+      </div>
+
+    </div>
+
+    <button
+      class="registerBtn"
+      id="registerBtn"
+      type="button"
+    >
+      REGISTER / JOIN
+    </button>
+
+    <div class="uidLabel">
+      <span>
+        GAME UID
+      </span>
+
+      <span>
+        5–8 DIGITS
+      </span>
+    </div>
+
+    <input
+      class="uidInput"
+      id="uidInput"
+      type="tel"
+      inputmode="numeric"
+      maxlength="8"
+      autocomplete="off"
+      placeholder="Enter your Game UID"
+    >
+
+    <button
+      class="verifyBtn"
+      id="verifyBtn"
+      type="button"
+    >
+      VERIFY UID
+    </button>
+
+    <div
+      class="unlockMessage"
+      id="unlockMessage"
+    ></div>
+
+    <div
+      class="uidDemoResult"
+      id="uidDemoResult"
+    >
+
+      <div class="uidDemoTitle">
+        UID SUBMITTED
+      </div>
+
+      <div class="uidDemoText">
+        Your UID has been sent to the admin panel.
+        Wait for activation.
+      </div>
+
+      <div
+        class="uidDemoTimer"
+        id="redirectCount"
+      >
+        WAITING FOR APPROVAL
+      </div>
+
+      <button
+        class="uidDemoOpen"
+        id="openRegisterDemo"
+        type="button"
+      >
+        OPEN REGISTRATION
+      </button>
+
+    </div>
+
+    <div class="modalDivider"></div>
+
+    <button
+      class="telegramBtn"
+      id="telegramBtn"
+      type="button"
+    >
+      CONTACT / SUPPORT
+    </button>
+
+    <div class="securityRow">
+      <span>● SECURE</span>
+      <span>● UID PROTECTED</span>
+    </div>
+
+  </div>
+
 </div>
 
-<div class="uidLabel"><span>GAME UID NUMBER</span><span>5–8 DIGITS</span></div>
-<input class="uidInput" id="uidInput" inputmode="numeric" maxlength="8" placeholder="ENTER GAME UID (e.g. 77788)">
-<button class="verifyBtn" id="verifyBtn">VERIFY &amp; UNLOCK ⚡</button>
-<div class="unlockMessage" id="unlockMessage"></div>
 
-<div class="uidDemoResult" id="uidDemoResult">
-<div class="uidDemoTitle">✕ UID #<span id="demoUidValue">—</span> — DEMO / UNAPPROVED</div>
-<div class="uidDemoText">This is a demo verification result. No real UID approval status was checked.</div>
-<div class="uidDemoTimer">⚡ REDIRECTING TO REGISTER PAGE IN <span id="redirectCount">7</span> SEC...</div>
-<button class="uidDemoOpen" id="openRegisterDemo">🚀 OPEN REGISTER LINK</button>
-</div>
+<!-- =========================================================
+     ADMIN PANEL
+========================================================= -->
 
-<div class="modalDivider"></div>
-<button class="telegramBtn" id="telegramBtn">◉ &nbsp; TELEGRAM SUPPORT</button>
-<div class="securityRow"><span>SECURITY: 256-BIT SHA</span><span>INSTANT APPROVAL</span></div>
-</div>
-</div>
+<div
+  class="adminOverlay"
+  id="adminOverlay"
+>
 
-<div class="adminOverlay" id="adminOverlay">
-<div class="adminPanel">
-<div class="adminHead"><h2>⚙ AMBIKA ADMIN</h2><button class="adminClose" id="adminClose">×</button></div>
+  <div class="adminPanel">
 
-<div id="adminLoginBox" class="adminLogin">
-<input class="adminInput" id="adminPassword" type="password" placeholder="Admin password">
-<button class="adminBtn" id="adminLoginBtn">LOGIN</button>
-<div class="adminInfo">Demo admin mode. Cross-phone control requires your own authenticated backend/database.</div>
-</div>
+    <div class="adminHead">
 
-<div id="adminControls" style="display:none">
-<div class="adminControls">
-<input class="adminInput" id="adminUid" inputmode="numeric" maxlength="8" placeholder="Game UID (5–8 digits)">
-<select class="adminSelect" id="adminDuration">
-<option value="1">Active for 1 hour</option>
-<option value="24">Active for 1 day</option>
-</select>
-<button class="adminBtn" id="adminActivate">ACTIVATE UID</button>
-<button class="adminBtn red" id="adminDeactivateAll">LOCK ALL UID ACCESS</button>
-</div>
-<div class="adminInfo" style="margin-top:12px">One UID is bound to one browser/device ID in this demo. Expired access automatically returns to locked state.</div>
-<div class="adminList" id="adminList"></div>
-</div>
-</div>
-</div>
+      <h2>
+        ADMIN CONTROL
+      </h2>
 
-<div class="bottomNav">
-<div class="navItem active" data-tab="dashboard"><div class="navIcon">⌂</div>DASHBOARD</div>
-<div class="navItem" data-tab="history"><div class="navIcon">↶</div>HISTORY</div>
-<div class="navItem" data-tab="uid"><div class="navIcon">⚿</div>UID / VIP</div>
-<div class="navItem" data-tab="telegram"><div class="navIcon">➤</div>TELEGRAM</div>
-</div>
-</div>
+      <button
+        class="adminClose"
+        id="adminClose"
+        type="button"
+      >
+        ×
+      </button>
 
+    </div>
+
+    <div
+      class="adminLogin"
+      id="adminLoginBox"
+    >
+
+      <div class="adminInfo">
+        Enter administrator password.
+      </div>
+
+      <input
+        class="adminInput"
+        id="adminPassword"
+        type="password"
+        placeholder="Admin password"
+      >
+
+      <button
+        class="adminBtn"
+        id="adminLoginBtn"
+        type="button"
+      >
+        ADMIN LOGIN
+      </button>
+
+    </div>
+
+    <div
+      class="adminControls"
+      id="adminControls"
+      style="display:none"
+    >
+
+      <div class="adminInfo">
+        MEMBER UID REQUESTS
+      </div>
+
+      <div
+        class="adminList"
+        id="requestList"
+      ></div>
+
+      <div
+        class="adminInfo"
+        style="margin-top:14px"
+      >
+        Pending UIDs appear here when a member submits one.
+      </div>
+
+      <div
+        class="adminList"
+        id="adminList"
+      ></div>
+
+      <div class="adminInfo">
+        Manual activation
+      </div>
+
+      <input
+        class="adminInput"
+        id="adminUid"
+        type="tel"
+        inputmode="numeric"
+        maxlength="8"
+        placeholder="UID"
+      >
+
+      <select
+        class="adminSelect"
+        id="adminDuration"
+      >
+        <option value="1">
+          1 Hour
+        </option>
+
+        <option value="24">
+          24 Hours
+        </option>
+      </select>
+
+      <button
+        class="adminBtn"
+        id="adminActivate"
+        type="button"
+      >
+        ACTIVATE UID
+      </button>
+
+      <button
+        class="adminBtn red"
+        id="adminDeactivateAll"
+        type="button"
+      >
+        LOCK ALL UIDS
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 <script>
- const API_URL="https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
-const REGISTER_URL="https://www.shreewin55.com/#/register?invitationCode=86286195967";
-const firstVoice=new Audio("https://www.image2url.com/r2/default/audio/1788601237629-ae72506e-6dd9-4f75-8c03-b0383f16e698.mp3");
-const secondVoice=new Audio("https://www.image2url.com/r2/default/audio/1788602798484-4fe76aab-b340-451d-aa47-eb2c157e4ea4.mp3");
-firstVoice.preload="auto";secondVoice.preload="auto";
+/* =========================================================
+   CONFIG
+========================================================= */
 
-const loadingScreen=document.getElementById("loadingScreen"),app=document.getElementById("app");
-const bar=document.getElementById("progressBar"),percent=document.getElementById("percent"),loadingStatus=document.getElementById("loadingStatus");
-const msgs=["Initializing secure interface...","Connecting AI engine...","Synchronizing game server...","Loading live database...","Preparing dashboard...","System ready..."];
-const start=performance.now();
+const API_URL = "/api/history";
+
+const REGISTER_URL =
+  "https://www.shreewin55.com/#/register?invitationCode=86286195967";
+
+const NUMBER_IMAGES = {
+  0:"https://dynamic-indigo-glkg7p1j.edgeone.dev/0.png",
+  1:"https://dynamic-indigo-glkg7p1j.edgeone.dev/1.png",
+  2:"https://dynamic-indigo-glkg7p1j.edgeone.dev/2.png",
+  3:"https://dynamic-indigo-glkg7p1j.edgeone.dev/3.png",
+  4:"https://dynamic-indigo-glkg7p1j.edgeone.dev/4.png",
+  5:"https://dynamic-indigo-glkg7p1j.edgeone.dev/5.png",
+  6:"https://dynamic-indigo-glkg7p1j.edgeone.dev/6.png",
+  7:"https://dynamic-indigo-glkg7p1j.edgeone.dev/7.png",
+  8:"https://dynamic-indigo-glkg7p1j.edgeone.dev/8.png",
+  9:"https://dynamic-indigo-glkg7p1j.edgeone.dev/9%20%281%29.png"
+};
+
+
+/* =========================================================
+   VOICE
+========================================================= */
+
+const firstVoice = new Audio(
+  "https://www.image2url.com/r2/default/audio/1788601237629-ae72506e-6dd9-4f75-8c03-b0383f16e698.mp3"
+);
+
+const secondVoice = new Audio(
+  "https://www.image2url.com/r2/default/audio/1788602798484-4fe76aab-b340-451d-aa47-eb2c157e4ea4.mp3"
+);
+
+firstVoice.preload = "auto";
+secondVoice.preload = "auto";
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+const loadingScreen =
+  document.getElementById("loadingScreen");
+
+const app =
+  document.getElementById("app");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const percent =
+  document.getElementById("percent");
+
+const loadingStatus =
+  document.getElementById("loadingStatus");
+
+const loadingMessages = [
+  "Initializing secure interface...",
+  "Connecting AI engine...",
+  "Synchronizing game server...",
+  "Loading live database...",
+  "Preparing dashboard...",
+  "System ready..."
+];
+
+const loadingStart =
+  performance.now();
 
 function loadingLoop(now){
-let p=Math.min(100,Math.floor(((now-start)/3000)*100));
-bar.style.width=p+"%";percent.textContent=p+"%";loadingStatus.textContent=msgs[Math.min(msgs.length-1,Math.floor(p/18))];
-if(p<100)requestAnimationFrame(loadingLoop);
-else setTimeout(()=>{loadingScreen.classList.add("hide");app.style.display="block"},150);
-}
-requestAnimationFrame(loadingLoop);
 
-let currentPeriod="",seconds=60;
-function pick(o,k){for(const x of k)if(o&&o[x]!==undefined&&o[x]!==null&&o[x]!=="")return o[x];return""}
-function getList(j){return j?.data?.list||j?.data?.records||j?.list||j?.records||[]}
+  const elapsed =
+    now - loadingStart;
+
+  const p =
+    Math.min(
+      100,
+      Math.floor(
+        (elapsed / 3000) * 100
+      )
+    );
+
+  progressBar.style.width =
+    p + "%";
+
+  percent.textContent =
+    p + "%";
+
+  loadingStatus.textContent =
+    loadingMessages[
+      Math.min(
+        loadingMessages.length - 1,
+        Math.floor(p / 18)
+      )
+    ];
+
+  if(p < 100){
+
+    requestAnimationFrame(
+      loadingLoop
+    );
+
+  }else{
+
+    setTimeout(()=>{
+
+      loadingScreen.classList.add(
+        "hide"
+      );
+
+      app.style.display =
+        "block";
+
+    },150);
+
+  }
+}
+
+requestAnimationFrame(
+  loadingLoop
+);
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function getNumberFromItem(item){
+
+  const candidates = [
+    item?.number,
+    item?.result,
+    item?.openNum,
+    item?.openNumber,
+    item?.winNumber,
+    item?.lotteryResult
+  ];
+
+  for(const value of candidates){
+
+    const n =
+      Number(
+        String(value ?? "")
+          .match(/\d/)?.[0]
+      );
+
+    if(Number.isInteger(n) &&
+       n >= 0 &&
+       n <= 9){
+
+      return n;
+    }
+  }
+
+  return null;
+}
+
+
+function getPeriodFromItem(item){
+
+  return String(
+    item?.issueNumber ??
+    item?.issue ??
+    item?.period ??
+    item?.issueNo ??
+    item?.number ??
+    ""
+  );
+}
+
+
+function isSmall(number){
+
+  return Number(number) >= 0 &&
+         Number(number) <= 4;
+}
+
+
+function sizeText(number){
+
+  return isSmall(number)
+    ? "SMALL"
+    : "BIG";
+}
+
+
+/* =========================================================
+   LIVE HISTORY
+========================================================= */
+
+let historyList = [];
+
+let currentPeriod = "";
+
+let currentNumber = null;
+
 
 async function loadResults(){
-const box=document.getElementById("resultList");
-try{
-const r=await fetch(API_URL,{cache:"no-store"});if(!r.ok)throw Error();
-const j=await r.json(),list=getList(j);if(!Array.isArray(list)||!list.length)throw Error();
-renderResults(list);updatePeriod(list);updatePattern(list);
-}catch(e){box.innerHTML='<div class="resultError">Live result connection unavailable.<br>Please refresh or check the server.</div>'}
+
+  const listEl =
+    document.getElementById(
+      "resultList"
+    );
+
+  const liveStatus =
+    document.getElementById(
+      "liveStatus"
+    );
+
+  const serverStatus =
+    document.getElementById(
+      "serverStatus"
+    );
+
+  try{
+
+    if(liveStatus){
+      liveStatus.textContent =
+        "LOADING";
+    }
+
+    const response =
+      await fetch(
+        API_URL + "?t=" + Date.now(),
+        {
+          method:"GET",
+          cache:"no-store",
+          headers:{
+            "Accept":
+              "application/json,text/plain,*/*"
+          }
+        }
+      );
+
+    if(!response.ok){
+      throw new Error(
+        "HTTP " +
+        response.status
+      );
+    }
+
+    const json =
+      await response.json();
+
+    let list =
+      json?.data?.list ??
+      json?.data?.records ??
+      json?.list ??
+      json?.records ??
+      [];
+
+    if(!Array.isArray(list)){
+      list = [];
+    }
+
+    historyList =
+      list
+        .map(item=>({
+          raw:item,
+          period:getPeriodFromItem(item),
+          number:getNumberFromItem(item)
+        }))
+        .filter(item=>
+          item.period ||
+          item.number !== null
+        );
+
+    if(historyList.length){
+
+      if(liveStatus){
+        liveStatus.textContent =
+          "LIVE";
+      }
+
+      if(serverStatus){
+        serverStatus.textContent =
+          "ONLINE";
+      }
+
+      renderHistory();
+
+      syncPeriod();
+
+      updatePattern();
+
+    }else{
+
+      if(liveStatus){
+        liveStatus.textContent =
+          "WAITING";
+      }
+
+      renderEmptyHistory();
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "History error:",
+      error
+    );
+
+    if(liveStatus){
+      liveStatus.textContent =
+        "OFFLINE";
+    }
+
+    if(serverStatus){
+      serverStatus.textContent =
+        "RETRY";
+    }
+
+    if(!historyList.length){
+      renderHistoryError();
+    }
+
+  }
+
 }
 
-function renderResults(list){
-const imgs={
-0:"https://dynamic-indigo-glkg7p1j.edgeone.dev/0.png",
-1:"https://dynamic-indigo-glkg7p1j.edgeone.dev/1.png",
-2:"https://dynamic-indigo-glkg7p1j.edgeone.dev/2.png",
-3:"https://dynamic-indigo-glkg7p1j.edgeone.dev/3.png",
-4:"https://dynamic-indigo-glkg7p1j.edgeone.dev/4.png",
-5:"https://dynamic-indigo-glkg7p1j.edgeone.dev/5.png",
-6:"https://dynamic-indigo-glkg7p1j.edgeone.dev/6.png",
-7:"https://dynamic-indigo-glkg7p1j.edgeone.dev/7.png",
-8:"https://dynamic-indigo-glkg7p1j.edgeone.dev/8.png",
-9:"https://dynamic-indigo-glkg7p1j.edgeone.dev/9%20%281%29.png"
-};
-document.getElementById("resultList").innerHTML=list.slice(0,20).map((x,i)=>{
-const issue=pick(x,["issueNumber","issue","period","issueNo"]);
-const n=Number(pick(x,["number","openNumber","result","resultNumber","winNumber"]));
-const valid=Number.isInteger(n)&&n>=0&&n<=9;
-const size=valid?(n>=5?"BIG":"SMALL"):"--";
-const st=i%3===2?"LOSS":"WIN";
-return `<div class="resultRow"><div class="resultIssue"><span style="display:block;color:#4f7780;font-size:8px;letter-spacing:1px;margin-bottom:4px">PERIOD</span>${issue||"Round "+(i+1)}</div><div class="resultNumber">${valid?`<img src="${imgs[n]}" alt="${n}" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=resultNumberFallback>${n}</span>'">`:`<span class=resultNumberFallback>--</span>`}</div><div class="resultSize ${size==="BIG"?"resultBig":"resultSmall"}">${size}</div><div class="resultStatus ${st==="LOSS"?"loss":""}">${st}</div></div>`;
-}).join("");
+
+/* =========================================================
+   HISTORY RENDER
+========================================================= */
+
+function renderHistory(){
+
+  const listEl =
+    document.getElementById(
+      "resultList"
+    );
+
+  if(!listEl)return;
+
+  const rows =
+    historyList
+      .slice(0,20)
+      .map((item,index)=>{
+
+        const number =
+          item.number;
+
+        const period =
+          item.period ||
+          "—";
+
+        const size =
+          number === null
+            ? "—"
+            : sizeText(number);
+
+        const numberHtml =
+          number === null
+
+            ? `<span class="resultNumberFallback">?</span>`
+
+            : `<img
+                src="${NUMBER_IMAGES[number]}"
+                alt="${number}"
+                onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=&quot;resultNumberFallback&quot;>${number}</span>')"
+              >`;
+
+        return `
+          <div class="resultRow">
+
+            <div class="resultIssue">
+              ${escapeHtml(period)}
+            </div>
+
+            <div class="resultNumber">
+              ${numberHtml}
+            </div>
+
+            <div
+              class="resultSize ${
+                size === "BIG"
+                  ? "resultBig"
+                  : "resultSmall"
+              }"
+            >
+              ${size}
+            </div>
+
+            <div class="resultStatus">
+              ${index === 0
+                ? "LIVE"
+                : "WIN"}
+            </div>
+
+          </div>
+        `;
+
+      })
+      .join("");
+
+  listEl.innerHTML =
+    rows ||
+    `<div class="resultLoading">
+       No live results available.
+     </div>`;
 }
 
-function updatePeriod(list){
-const raw=pick(list[0]||{},["issueNumber","issue","period","issueNo"]);
-const d=String(raw||"").replace(/\D/g,"");
-if(d.length>=10){try{currentPeriod=(BigInt(d)+1n).toString()}catch(e){currentPeriod=d}}
-else if(!currentPeriod)currentPeriod=String(raw||"");
-document.getElementById("period").textContent=currentPeriod||"SYNCING...";
+
+function renderEmptyHistory(){
+
+  const listEl =
+    document.getElementById(
+      "resultList"
+    );
+
+  if(!listEl)return;
+
+  listEl.innerHTML = `
+    <div class="resultLoading">
+      Waiting for live result feed...
+    </div>
+  `;
 }
 
-function updatePattern(list){
-const a=list.slice(0,10).map(x=>Number(pick(x,["number","openNumber","result","resultNumber","winNumber"]))).filter(Number.isFinite);
-if(!a.length)return;
-const big=a.filter(n=>n>=5).length,bigPct=Math.round(big/a.length*100),smallPct=100-bigPct;
-document.getElementById("patternValue").textContent=`BIG ${bigPct}% | SMALL ${smallPct}%`;
-document.getElementById("patternFill").style.background=`linear-gradient(90deg,#ffd75a 0 ${bigPct}%,#64e8ff ${bigPct}%)`;
-document.getElementById("patternFill").style.width="100%";
+
+function renderHistoryError(){
+
+  const listEl =
+    document.getElementById(
+      "resultList"
+    );
+
+  if(!listEl)return;
+
+  listEl.innerHTML = `
+    <div class="resultError">
+      Live result connection unavailable.<br>
+      Retrying automatically...
+    </div>
+  `;
 }
 
-document.getElementById("copyBtn").onclick=async()=>{
-if(!currentPeriod)return;
-try{await navigator.clipboard.writeText(currentPeriod);let b=document.getElementById("copyBtn");b.textContent="✓ Copied";setTimeout(()=>b.textContent="▣  Copy Period",1200)}catch(e){}
-};
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+/* =========================================================
+   PERIOD
+========================================================= */
+
+function syncPeriod(){
+
+  const periodEl =
+    document.getElementById(
+      "period"
+    );
+
+  if(!periodEl)return;
+
+  if(!historyList.length){
+
+    periodEl.textContent =
+      "SYNCING...";
+
+    return;
+  }
+
+  const first =
+    historyList[0];
+
+  if(first.period){
+
+    currentPeriod =
+      first.period;
+
+    periodEl.textContent =
+      first.period;
+
+  }else{
+
+    periodEl.textContent =
+      "SYNCING...";
+  }
+
+}
+
+
+/* =========================================================
+   PATTERN DISTRIBUTION
+========================================================= */
+
+function updatePattern(){
+
+  const patternValue =
+    document.getElementById(
+      "patternValue"
+    );
+
+  const patternFill =
+    document.getElementById(
+      "patternFill"
+    );
+
+  if(!patternValue)return;
+
+  const numbers =
+    historyList
+      .map(x=>x.number)
+      .filter(x=>x !== null);
+
+  if(!numbers.length){
+
+    patternValue.textContent =
+      "ANALYZING";
+
+    if(patternFill)
+      patternFill.style.width =
+        "50%";
+
+    return;
+  }
+
+  let big = 0;
+  let small = 0;
+
+  numbers.forEach(n=>{
+
+    if(Number(n) >= 5)
+      big++;
+    else
+      small++;
+
+  });
+
+  const total =
+    big + small;
+
+  const bigPercent =
+    Math.round(
+      (big / total) * 100
+    );
+
+  const smallPercent =
+    100 - bigPercent;
+
+  patternValue.textContent =
+    `BIG ${bigPercent}% • SMALL ${smallPercent}%`;
+
+  if(patternFill){
+
+    patternFill.style.width =
+      Math.max(
+        8,
+        Math.min(
+          92,
+          bigPercent
+        )
+      ) + "%";
+  }
+
+}
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
 
 function syncCountdown(){
-let s=new Date().getSeconds();seconds=s===0?60:60-s;
-document.getElementById("timerText").textContent="00:"+String(seconds).padStart(2,"0");
-}
-function randomInt(a,b){return Math.floor(Math.random()*(b-a+1))+a}
-function updateLiveDemoValues(){
-document.getElementById("liveUid").textContent=randomInt(10000,1000000).toLocaleString("en-IN");
-document.getElementById("liveWin").textContent=randomInt(20000,1000000).toLocaleString("en-IN");
-}
-syncCountdown();updateLiveDemoValues();loadResults();
-setInterval(()=>{syncCountdown();if(seconds===60)loadResults()},1000);
-setInterval(updateLiveDemoValues,2500);setInterval(loadResults,30000);
 
-/* UID */
-const unlockOverlay=document.getElementById("unlockOverlay"),uidInput=document.getElementById("uidInput"),unlockMessage=document.getElementById("unlockMessage");
-const uidDemoResult=document.getElementById("uidDemoResult"),demoUidValue=document.getElementById("demoUidValue"),redirectCount=document.getElementById("redirectCount");
-let redirectTimer=null;
+  const countdown =
+    document.getElementById(
+      "countdown"
+    );
 
-function playFirstVoice(){try{firstVoice.pause();firstVoice.currentTime=0;firstVoice.play().catch(()=>{})}catch(e){}}
-function playSecondVoice(){try{secondVoice.pause();secondVoice.currentTime=0;secondVoice.play().catch(()=>{})}catch(e){}}
-function openUnlock(){unlockOverlay.classList.add("show");unlockMessage.textContent="";uidDemoResult.classList.remove("show");clearInterval(redirectTimer);setTimeout(()=>uidInput.focus(),120)}
+  if(!countdown)return;
 
-document.getElementById("unlockBtn").onclick=()=>{openUnlock();playFirstVoice()};
-document.getElementById("modalClose").onclick=()=>{unlockOverlay.classList.remove("show");clearInterval(redirectTimer)};
-unlockOverlay.onclick=e=>{if(e.target===unlockOverlay){unlockOverlay.classList.remove("show");clearInterval(redirectTimer)}};
-uidInput.oninput=()=>uidInput.value=uidInput.value.replace(/\D/g,"").slice(0,8);
+  function tick(){
 
-function showDemoUidResult(uid){
-demoUidValue.textContent=uid;uidDemoResult.classList.add("show");unlockMessage.textContent="";setTimeout(playSecondVoice,80);clearInterval(redirectTimer);
-let left=7;redirectCount.textContent=left;
-redirectTimer=setInterval(()=>{left--;redirectCount.textContent=left;if(left<=0){clearInterval(redirectTimer);window.location.href=REGISTER_URL}},1000);
-}
+    const now =
+      new Date();
 
-document.getElementById("verifyBtn").onclick=()=>{
-const uid=uidInput.value.trim();
-if(!/^\d{5,8}$/.test(uid)){uidDemoResult.classList.remove("show");clearInterval(redirectTimer);unlockMessage.style.color="#ffd75a";unlockMessage.textContent="Please enter a valid 5–8 digit Game UID.";return}
-const active=cleanAccess().find(x=>x.uid===uid&&x.deviceId===deviceId&&x.expiresAt>Date.now());
-if(active){refreshPrediction();unlockMessage.style.color="#57f2b0";unlockMessage.textContent="UID access is active on this demo device."}
-else showDemoUidResult(uid);
-};
-document.getElementById("openRegisterDemo").onclick=()=>{clearInterval(redirectTimer);window.location.href=REGISTER_URL};
-document.getElementById("registerBtn").onclick=()=>window.location.href=REGISTER_URL;
-document.getElementById("telegramBtn").onclick=()=>window.location.href=REGISTER_URL;
-uidInput.onkeydown=e=>{if(e.key==="Enter")document.getElementById("verifyBtn").click()};
+    const seconds =
+      now.getSeconds();
 
-/* ADMIN */
-const ADMIN_PASSWORD="673634078162",DEVICE_KEY="ambika_demo_device_id_v1",ACCESS_KEY="ambika_demo_access_v1";
-const adminLaunch=document.getElementById("adminLaunch"),adminOverlay=document.getElementById("adminOverlay"),adminLoginBox=document.getElementById("adminLoginBox"),adminControls=document.getElementById("adminControls"),adminList=document.getElementById("adminList");
-const predictionActive=document.getElementById("predictionActive"),predictionNumber=document.getElementById("predictionNumber"),predictionMeta=document.getElementById("predictionMeta");
-const deviceId=(()=>{let id=localStorage.getItem(DEVICE_KEY);if(!id){id=crypto.randomUUID?crypto.randomUUID():Date.now()+"-"+Math.random();localStorage.setItem(DEVICE_KEY,id)}return id})();
+    const remaining =
+      60 - seconds;
 
-function getAccess(){try{return JSON.parse(localStorage.getItem(ACCESS_KEY)||"[]")}catch(e){return[]}}
-function setAccess(a){localStorage.setItem(ACCESS_KEY,JSON.stringify(a))}
-function cleanAccess(){const a=getAccess().filter(x=>x.expiresAt>Date.now());setAccess(a);return a}
-function demoPrediction(uid){let seed=0;for(const c of String(uid))seed=(seed*31+c.charCodeAt(0))>>>0;return seed%10}
+    countdown.textContent =
+      "00:" +
+      String(
+        remaining
+      ).padStart(2,"0");
 
-function refreshPrediction(){
-const a=cleanAccess(),uid=uidInput.value.trim(),found=a.find(x=>x.uid===uid&&x.deviceId===deviceId&&x.expiresAt>Date.now());
-if(found){
-predictionActive.classList.add("show");predictionNumber.textContent=demoPrediction(uid);
-const h=Math.max(1,Math.ceil((found.expiresAt-Date.now())/3600000));
-predictionMeta.textContent=`UID ${uid} active • expires in about ${h} hour(s) • DEMO ONLY`;
-document.getElementById("unlockBtn").style.display="none";
-}else{
-predictionActive.classList.remove("show");document.getElementById("unlockBtn").style.display="block";
-}
+  }
+
+  tick();
+
+  clearInterval(
+    window.__countdownTimer
+  );
+
+  window.__countdownTimer =
+    setInterval(
+      tick,
+      1000
+    );
+
 }
 
-function renderAdminList(){
-const a=cleanAccess();
-if(!a.length){adminList.innerHTML='<div class="adminInfo">No active UID access.</div>';return}
-adminList.innerHTML=a.map((x,i)=>`<div class="adminItem"><div class="adminItemTop"><span>UID #${x.uid}</span><span class="accessActive">ACTIVE</span></div><div class="adminItemSub">Device: ${x.deviceId.slice(0,12)}…<br>Expires: ${new Date(x.expiresAt).toLocaleString()}</div><div class="adminItemActions"><button data-lock="${i}">LOCK NOW</button></div></div>`).join("");
-adminList.querySelectorAll("[data-lock]").forEach(b=>b.onclick=()=>{let a=getAccess();a.splice(Number(b.dataset.lock),1);setAccess(a);renderAdminList();refreshPrediction()});
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+const refreshBtn =
+  document.getElementById(
+    "refreshBtn"
+  );
+
+if(refreshBtn){
+
+  refreshBtn.onclick = ()=>{
+
+    refreshBtn.textContent =
+      "↻ LOADING";
+
+    loadResults()
+      .finally(()=>{
+
+        setTimeout(()=>{
+
+          refreshBtn.textContent =
+            "↻ REFRESH";
+
+        },500);
+
+      });
+
+  };
+
 }
 
-adminLaunch.style.display="block";
-adminLaunch.onclick=()=>adminOverlay.classList.add("show");
-document.getElementById("adminClose").onclick=()=>adminOverlay.classList.remove("show");
-adminOverlay.onclick=e=>{if(e.target===adminOverlay)adminOverlay.classList.remove("show")};
 
-document.getElementById("adminLoginBtn").onclick=()=>{
-if(document.getElementById("adminPassword").value===ADMIN_PASSWORD){
-adminLoginBox.style.display="none";adminControls.style.display="block";renderAdminList();
-}else alert("Wrong admin password");
-};
+/* =========================================================
+   INITIAL HISTORY LOAD
+========================================================= */
 
-document.getElementById("adminActivate").onclick=()=>{
-const uid=document.getElementById("adminUid").value.trim();
-if(!/^\d{5,8}$/.test(uid)){alert("Enter a valid 5–8 digit UID");return}
-const hours=Number(document.getElementById("adminDuration").value),a=cleanAccess();
-const other=a.find(x=>x.uid===uid&&x.deviceId!==deviceId&&x.expiresAt>Date.now());
-if(other){alert("This UID is already active on another device in this demo.");return}
-const item={uid,deviceId,expiresAt:Date.now()+hours*3600000},idx=a.findIndex(x=>x.uid===uid);
-if(idx>=0)a[idx]=item;else a.push(item);
-setAccess(a);renderAdminList();alert(`UID ${uid} activated for ${hours===1?"1 hour":"1 day"}`);
-};
+loadResults();
 
-document.getElementById("adminDeactivateAll").onclick=()=>{
-if(confirm("Lock all demo UID access?")){setAccess([]);renderAdminList();refreshPrediction()}
-};
-
-setInterval(()=>{cleanAccess();if(uidInput.value.trim())refreshPrediction();if(adminControls.style.display!=="none")renderAdminList()},30000);
-
-/* NAV */
-const toast=document.createElement("div");toast.className="tabToast";document.body.appendChild(toast);
-function showToast(t){toast.textContent=t;toast.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.classList.remove("show"),1200)}
-
-document.querySelectorAll(".navItem").forEach(n=>n.onclick=()=>{
-document.querySelectorAll(".navItem").forEach(x=>x.classList.remove("active"));n.classList.add("active");
-const tab=n.dataset.tab;
-if(tab==="history"){document.getElementById("resultSection").scrollIntoView({behavior:"smooth",block:"start"});document.getElementById("resultSection").classList.add("historyFocus");setTimeout(()=>document.getElementById("resultSection").classList.remove("historyFocus"),1500);showToast("LIVE RESULT HISTORY")}
-else if(tab==="uid")openUnlock();
-else if(tab==="telegram"){showToast("REGISTER / SUPPORT");window.location.href=REGISTER_URL}
-else{window.scrollTo({top:0,behavior:"smooth"});showToast("DASHBOARD")}
-});
-
-document.getElementById("soundBtn").onclick=playFirstVoice;
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){syncCountdown();loadResults()}});
-window.addEventListener("load",()=>{syncCountdown();updateLiveDemoValues()});
+setInterval(
+  loadResults,
+  15000
+);
 </script>
+<script>
+/* =========================================================
+   UID ACCESS + MEMBER REQUEST
+========================================================= */
+
+const unlockOverlay =
+  document.getElementById("unlockOverlay");
+
+const uidInput =
+  document.getElementById("uidInput");
+
+const unlockMessage =
+  document.getElementById("unlockMessage");
+
+const uidDemoResult =
+  document.getElementById("uidDemoResult");
+
+const demoUidValue =
+  document.getElementById("demoUidValue");
+
+const redirectCount =
+  document.getElementById("redirectCount");
+
+const uidSuccess =
+  document.getElementById("uidSuccess");
+
+const uidSuccessUid =
+  document.getElementById("uidSuccessUid");
+
+const predictionActive =
+  document.getElementById("predictionActive");
+
+const predictionNumber =
+  document.getElementById("predictionNumber");
+
+const predictionMeta =
+  document.getElementById("predictionMeta");
+
+const lockCard =
+  document.getElementById("lockCard");
+
+const unlockBtn =
+  document.getElementById("unlockBtn");
+
+
+/* =========================================================
+   DEVICE ID
+========================================================= */
+
+const DEVICE_KEY =
+  "ambika_panel_device_v3";
+
+const UID_KEY =
+  "ambika_panel_uid_v3";
+
+const ADMIN_TOKEN_KEY =
+  "ambika_panel_admin_token_v3";
+
+let deviceId =
+  localStorage.getItem(
+    DEVICE_KEY
+  );
+
+if(!deviceId){
+
+  deviceId =
+    (
+      window.crypto &&
+      crypto.randomUUID
+    )
+      ? crypto.randomUUID()
+      : Date.now() +
+        "-" +
+        Math.random()
+          .toString(36)
+          .slice(2);
+
+  localStorage.setItem(
+    DEVICE_KEY,
+    deviceId
+  );
+}
+
+
+let currentActiveUID = "";
+
+let currentExpiresAt = 0;
+
+let predictionTimer = null;
+
+
+/* =========================================================
+   VOICE
+========================================================= */
+
+function playFirstVoice(){
+
+  try{
+
+    firstVoice.pause();
+
+    firstVoice.currentTime = 0;
+
+    firstVoice.play()
+      .catch(()=>{});
+
+  }catch(e){}
+
+}
+
+
+function playSecondVoice(){
+
+  try{
+
+    secondVoice.pause();
+
+    secondVoice.currentTime = 0;
+
+    secondVoice.play()
+      .catch(()=>{});
+
+  }catch(e){}
+
+}
+
+
+/* =========================================================
+   OPEN UID PANEL
+========================================================= */
+
+function openUnlock(){
+
+  unlockOverlay.classList.add(
+    "show"
+  );
+
+  unlockMessage.textContent =
+    "";
+
+  uidDemoResult.classList.remove(
+    "show"
+  );
+
+  setTimeout(
+    ()=>uidInput.focus(),
+    120
+  );
+
+}
+
+
+if(unlockBtn){
+
+  unlockBtn.onclick = ()=>{
+
+    openUnlock();
+
+    playFirstVoice();
+
+  };
+
+}
+
+
+document.getElementById(
+  "modalClose"
+).onclick = ()=>{
+
+  unlockOverlay.classList.remove(
+    "show"
+  );
+
+};
+
+
+unlockOverlay.onclick = e=>{
+
+  if(e.target === unlockOverlay){
+
+    unlockOverlay.classList.remove(
+      "show"
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   UID INPUT
+========================================================= */
+
+uidInput.oninput = ()=>{
+
+  uidInput.value =
+    uidInput.value
+      .replace(/\D/g,"")
+      .slice(0,8);
+
+};
+
+
+/* =========================================================
+   CHECK UID
+========================================================= */
+
+async function checkUID(uid){
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/access/check",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+            uid:uid,
+            deviceId:deviceId
+          })
+        }
+      );
+
+    return await response.json();
+
+  }catch(error){
+
+    console.error(
+      "UID check error:",
+      error
+    );
+
+    return {
+      ok:false,
+      active:false,
+      approved:false,
+      message:
+        "Server connection unavailable."
+    };
+
+  }
+
+}
+
+
+/* =========================================================
+   SUBMIT UID TO ADMIN
+========================================================= */
+
+async function submitUIDRequest(uid){
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/access/request",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+            uid:uid,
+            deviceId:deviceId
+          })
+        }
+      );
+
+    return await response.json();
+
+  }catch(error){
+
+    console.error(
+      "UID request error:",
+      error
+    );
+
+    return {
+      ok:false,
+      message:
+        "Server connection unavailable."
+    };
+
+  }
+
+}
+
+
+/* =========================================================
+   SHOW ACTIVE UID
+========================================================= */
+
+function showUIDSuccess(
+  uid,
+  expiresAt
+){
+
+  currentActiveUID =
+    uid;
+
+  currentExpiresAt =
+    Number(expiresAt) || 0;
+
+  localStorage.setItem(
+    UID_KEY,
+    uid
+  );
+
+  uidSuccessUid.textContent =
+    "UID " + uid;
+
+  uidSuccess.classList.add(
+    "show"
+  );
+
+  predictionActive.classList.add(
+    "show"
+  );
+
+  lockCard.classList.add(
+    "uidActive"
+  );
+
+  unlockBtn.style.display =
+    "none";
+
+  unlockMessage.style.color =
+    "#57f2b0";
+
+  unlockMessage.textContent =
+    "✓ UID successfully activated.";
+
+  updateDemoPrediction();
+
+}
+
+
+/* =========================================================
+   HIDE ACTIVE UID
+========================================================= */
+
+function hideUIDSuccess(){
+
+  currentActiveUID =
+    "";
+
+  currentExpiresAt =
+    0;
+
+  uidSuccess.classList.remove(
+    "show"
+  );
+
+  predictionActive.classList.remove(
+    "show"
+  );
+
+  lockCard.classList.remove(
+    "uidActive"
+  );
+
+  unlockBtn.style.display =
+    "block";
+
+}
+
+
+/* =========================================================
+   RANDOM DEMO RESULT
+========================================================= */
+
+function updateDemoPrediction(){
+
+  if(
+    !currentActiveUID ||
+    !currentExpiresAt ||
+    currentExpiresAt <= Date.now()
+  ){
+
+    hideUIDSuccess();
+
+    return;
+
+  }
+
+
+  /*
+    0–4  = SMALL
+    5–9  = BIG
+
+    This is an interface demo/random result,
+    not a real guaranteed prediction.
+  */
+
+  const number =
+    Math.floor(
+      Math.random() * 10
+    );
+
+  const size =
+    number >= 5
+      ? "BIG"
+      : "SMALL";
+
+
+  predictionNumber.textContent =
+    number;
+
+  predictionMeta.textContent =
+    `UID ${currentActiveUID} active • ${size} • DEMO / RANDOM ONLY`;
+
+}
+
+
+/* =========================================================
+   MINUTE PREDICTION TIMER
+========================================================= */
+
+function startPredictionTimer(){
+
+  clearInterval(
+    predictionTimer
+  );
+
+  updateDemoPrediction();
+
+  predictionTimer =
+    setInterval(
+      ()=>{
+        updateDemoPrediction();
+      },
+      60000
+    );
+
+}
+
+
+/* =========================================================
+   VERIFY UID BUTTON
+========================================================= */
+
+async function verifyUID(){
+
+  const uid =
+    uidInput.value.trim();
+
+
+  if(!/^\d{5,8}$/.test(uid)){
+
+    unlockMessage.style.color =
+      "#ffd75a";
+
+    unlockMessage.textContent =
+      "Please enter a valid 5–8 digit Game UID.";
+
+    hideUIDSuccess();
+
+    return;
+
+  }
+
+
+  unlockMessage.style.color =
+    "#64e8ff";
+
+  unlockMessage.textContent =
+    "Checking UID access...";
+
+
+  const result =
+    await checkUID(uid);
+
+
+  /* ACTIVE UID */
+
+  if(
+    result &&
+    result.active &&
+    result.approved
+  ){
+
+    showUIDSuccess(
+      uid,
+      result.expiresAt
+    );
+
+    playSecondVoice();
+
+    startPredictionTimer();
+
+    return;
+
+  }
+
+
+  /* NOT ACTIVE → SEND REQUEST TO ADMIN */
+
+  const request =
+    await submitUIDRequest(
+      uid
+    );
+
+
+  uidDemoResult.classList.add(
+    "show"
+  );
+
+  demoUidValue.textContent =
+    uid;
+
+
+  if(request.ok){
+
+    unlockMessage.style.color =
+      "#ffd75a";
+
+    unlockMessage.textContent =
+      "UID submitted successfully. Admin approval is required.";
+
+    redirectCount.textContent =
+      "WAITING FOR ADMIN APPROVAL";
+
+  }else{
+
+    unlockMessage.style.color =
+      "#ff8b9e";
+
+    unlockMessage.textContent =
+      request.message ||
+      result.message ||
+      "Unable to submit UID.";
+
+  }
+
+}
+
+
+document.getElementById(
+  "verifyBtn"
+).onclick =
+  verifyUID;
+
+
+uidInput.onkeydown = e=>{
+
+  if(e.key === "Enter"){
+
+    verifyUID();
+
+  }
+
+};
+
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+document.getElementById(
+  "registerBtn"
+).onclick = ()=>{
+
+  window.location.href =
+    REGISTER_URL;
+
+};
+
+
+document.getElementById(
+  "openRegisterDemo"
+).onclick = ()=>{
+
+  window.location.href =
+    REGISTER_URL;
+
+};
+
+
+document.getElementById(
+  "telegramBtn"
+).onclick = ()=>{
+
+  window.location.href =
+    REGISTER_URL;
+
+};
+
+
+/* =========================================================
+   AUTO RESTORE UID
+========================================================= */
+
+window.addEventListener(
+  "load",
+  async ()=>{
+
+    const savedUID =
+      localStorage.getItem(
+        UID_KEY
+      );
+
+    if(!savedUID){
+
+      startPredictionTimer();
+
+      return;
+
+    }
+
+
+    const result =
+      await checkUID(
+        savedUID
+      );
+
+
+    if(
+      result &&
+      result.active &&
+      result.approved
+    ){
+
+      showUIDSuccess(
+        savedUID,
+        result.expiresAt
+      );
+
+      startPredictionTimer();
+
+    }else{
+
+      localStorage.removeItem(
+        UID_KEY
+      );
+
+      hideUIDSuccess();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   CHECK ACTIVE UID PERIODICALLY
+========================================================= */
+
+setInterval(
+  async ()=>{
+
+    if(!currentActiveUID)
+      return;
+
+
+    const result =
+      await checkUID(
+        currentActiveUID
+      );
+
+
+    if(
+      result &&
+      result.active &&
+      result.approved
+    ){
+
+      currentExpiresAt =
+        Number(
+          result.expiresAt
+        ) || 0;
+
+    }else{
+
+      localStorage.removeItem(
+        UID_KEY
+      );
+
+      hideUIDSuccess();
+
+    }
+
+  },
+  30000
+);
+
+
+/* =========================================================
+   ADMIN PANEL
+========================================================= */
+
+const adminLaunch =
+  document.getElementById(
+    "adminLaunch"
+  );
+
+const adminOverlay =
+  document.getElementById(
+    "adminOverlay"
+  );
+
+const adminLoginBox =
+  document.getElementById(
+    "adminLoginBox"
+  );
+
+const adminControls =
+  document.getElementById(
+    "adminControls"
+  );
+
+const adminList =
+  document.getElementById(
+    "adminList"
+  );
+
+const requestList =
+  document.getElementById(
+    "requestList"
+  );
+
+
+function adminHeaders(){
+
+  const token =
+    sessionStorage.getItem(
+      ADMIN_TOKEN_KEY
+    );
+
+  return {
+    "Content-Type":
+      "application/json",
+
+    "Authorization":
+      "Bearer " +
+      (token || "")
+  };
+
+}
+
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+async function adminLogin(){
+
+  const password =
+    document.getElementById(
+      "adminPassword"
+    ).value;
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/admin/login",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+            password:password
+          })
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(!result.ok){
+
+      alert(
+        result.message ||
+        "Wrong admin password."
+      );
+
+      return;
+
+    }
+
+
+    sessionStorage.setItem(
+      ADMIN_TOKEN_KEY,
+      result.token
+    );
+
+
+    adminLoginBox.style.display =
+      "none";
+
+    adminControls.style.display =
+      "grid";
+
+
+    loadAdminData();
+
+
+  }catch(error){
+
+    alert(
+      "Server connection unavailable."
+    );
+
+  }
+
+}
+
+
+document.getElementById(
+  "adminLoginBtn"
+).onclick =
+  adminLogin;
+
+
+/* =========================================================
+   ADMIN DATA
+========================================================= */
+
+async function loadAdminData(){
+
+  await Promise.all([
+    loadAdminRequests(),
+    loadAdminUIDs()
+  ]);
+
+}
+
+
+/* =========================================================
+   MEMBER REQUEST LIST
+========================================================= */
+
+async function loadAdminRequests(){
+
+  if(!requestList)
+    return;
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/admin/requests",
+        {
+          method:"GET",
+          headers:adminHeaders(),
+          cache:"no-store"
+        }
+      );
+
+
+    if(response.status === 401){
+
+      sessionStorage.removeItem(
+        ADMIN_TOKEN_KEY
+      );
+
+      adminLoginBox.style.display =
+        "grid";
+
+      adminControls.style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    const list =
+      Array.isArray(
+        result.requests
+      )
+        ? result.requests
+        : [];
+
+
+    if(!list.length){
+
+      requestList.innerHTML =
+        `
+        <div class="adminInfo">
+          No pending member UID requests.
+        </div>
+        `;
+
+      return;
+
+    }
+
+
+    requestList.innerHTML =
+      list.map(
+        (item,index)=>`
+
+        <div class="adminItem requestPending">
+
+          <div class="adminItemTop">
+
+            <span>
+              UID #${escapeHtml(item.uid)}
+            </span>
+
+            <span class="accessActive">
+              PENDING
+            </span>
+
+          </div>
+
+
+          <div class="adminItemSub">
+
+            Submitted:
+            ${new Date(
+              item.requestedAt
+            ).toLocaleString()}
+
+            <br>
+
+            Device:
+            ${escapeHtml(
+              String(
+                item.deviceId || ""
+              ).slice(0,12)
+            )}…
+
+          </div>
+
+
+          <div class="adminItemActions">
+
+            <button
+              type="button"
+              data-approve="${index}"
+            >
+              ACTIVATE
+            </button>
+
+            <button
+              type="button"
+              data-reject="${index}"
+            >
+              IGNORE
+            </button>
+
+          </div>
+
+        </div>
+
+        `
+      ).join("");
+
+
+    /* ACTIVATE REQUEST */
+
+    requestList
+      .querySelectorAll(
+        "[data-approve]"
+      )
+      .forEach(button=>{
+
+        button.onclick =
+          async ()=>{
+
+            const item =
+              list[
+                Number(
+                  button.dataset
+                    .approve
+                )
+              ];
+
+
+            const hours =
+              prompt(
+                "Activate for how many hours? Enter 1 or 24.",
+                "1"
+              );
+
+
+            if(
+              hours !== "1" &&
+              hours !== "24"
+            ){
+
+              return;
+
+            }
+
+
+            try{
+
+              const response =
+                await fetch(
+                  "/api/admin/activate",
+                  {
+                    method:"POST",
+
+                    headers:
+                      adminHeaders(),
+
+                    body:
+                      JSON.stringify({
+                        uid:item.uid,
+                        hours:Number(
+                          hours
+                        )
+                      })
+                  }
+                );
+
+
+              const result =
+                await response.json();
+
+
+              alert(
+                result.message ||
+                "UID activated."
+              );
+
+
+              await loadAdminData();
+
+
+            }catch(error){
+
+              alert(
+                "Server connection unavailable."
+              );
+
+            }
+
+          };
+
+      });
+
+
+    /* IGNORE REQUEST */
+
+    requestList
+      .querySelectorAll(
+        "[data-reject]"
+      )
+      .forEach(button=>{
+
+        button.onclick =
+          async ()=>{
+
+            const item =
+              list[
+                Number(
+                  button.dataset
+                    .reject
+                )
+              ];
+
+
+            try{
+
+              await fetch(
+                "/api/admin/requests/reject",
+                {
+                  method:"POST",
+
+                  headers:
+                    adminHeaders(),
+
+                  body:
+                    JSON.stringify({
+                      uid:item.uid,
+                      deviceId:
+                        item.deviceId
+                    })
+                }
+              );
+
+
+              await loadAdminRequests();
+
+
+            }catch(error){}
+
+          };
+
+      });
+
+
+  }catch(error){
+
+    requestList.innerHTML =
+      `
+      <div class="adminInfo">
+        Unable to load member requests.
+      </div>
+      `;
+
+  }
+
+}
+
+
+/* =========================================================
+   ACTIVE UID LIST
+========================================================= */
+
+async function loadAdminUIDs(){
+
+  if(!adminList)
+    return;
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/admin/uids",
+        {
+          method:"GET",
+          headers:adminHeaders(),
+          cache:"no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    const list =
+      Array.isArray(
+        result.uids
+      )
+        ? result.uids
+        : [];
+
+
+    if(!list.length){
+
+      adminList.innerHTML =
+        `
+        <div class="adminInfo">
+          No active UID access.
+        </div>
+        `;
+
+      return;
+
+    }
+
+
+    adminList.innerHTML =
+      list.map(
+        (item,index)=>`
+
+        <div class="adminItem">
+
+          <div class="adminItemTop">
+
+            <span>
+              UID #${escapeHtml(item.uid)}
+            </span>
+
+            <span class="accessActive">
+              ACTIVE
+            </span>
+
+          </div>
+
+
+          <div class="adminItemSub">
+
+            Device:
+            ${escapeHtml(
+              String(
+                item.deviceId ||
+                "Not claimed"
+              ).slice(0,12)
+            )}…
+
+            <br>
+
+            Expires:
+            ${new Date(
+              item.expiresAt
+            ).toLocaleString()}
+
+          </div>
+
+
+          <div class="adminItemActions">
+
+            <button
+              type="button"
+              data-lock="${index}"
+            >
+              LOCK NOW
+            </button>
+
+          </div>
+
+        </div>
+
+        `
+      ).join("");
+
+
+    adminList
+      .querySelectorAll(
+        "[data-lock]"
+      )
+      .forEach(button=>{
+
+        button.onclick =
+          async ()=>{
+
+            const item =
+              list[
+                Number(
+                  button.dataset
+                    .lock
+                )
+              ];
+
+
+            if(
+              !confirm(
+                "Lock UID " +
+                item.uid +
+                "?"
+              )
+            ){
+
+              return;
+
+            }
+
+
+            try{
+
+              const response =
+                await fetch(
+                  "/api/admin/lock",
+                  {
+                    method:"POST",
+
+                    headers:
+                      adminHeaders(),
+
+                    body:
+                      JSON.stringify({
+                        uid:item.uid
+                      })
+                  }
+                );
+
+
+              const result =
+                await response.json();
+
+
+              alert(
+                result.message ||
+                "Done"
+              );
+
+
+              await loadAdminData();
+
+
+            }catch(error){
+
+              alert(
+                "Server connection unavailable."
+              );
+
+            }
+
+          };
+
+      });
+
+
+  }catch(error){
+
+    adminList.innerHTML =
+      `
+      <div class="adminInfo">
+        Unable to load active UIDs.
+      </div>
+      `;
+
+  }
+
+}
+</script>
+<script>
+/* =========================================================
+   ADMIN OPEN / CLOSE
+========================================================= */
+
+if(adminLaunch){
+
+  adminLaunch.style.display =
+    "block";
+
+  adminLaunch.onclick = ()=>{
+
+    adminOverlay.classList.add(
+      "show"
+    );
+
+    const token =
+      sessionStorage.getItem(
+        ADMIN_TOKEN_KEY
+      );
+
+    if(token){
+
+      adminLoginBox.style.display =
+        "none";
+
+      adminControls.style.display =
+        "grid";
+
+      loadAdminData();
+
+    }else{
+
+      adminLoginBox.style.display =
+        "grid";
+
+      adminControls.style.display =
+        "none";
+
+    }
+
+  };
+
+}
+
+
+document.getElementById(
+  "adminClose"
+).onclick = ()=>{
+
+  adminOverlay.classList.remove(
+    "show"
+  );
+
+};
+
+
+adminOverlay.onclick = e=>{
+
+  if(e.target === adminOverlay){
+
+    adminOverlay.classList.remove(
+      "show"
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   MANUAL ADMIN UID ACTIVATION
+========================================================= */
+
+const adminActivate =
+  document.getElementById(
+    "adminActivate"
+  );
+
+
+if(adminActivate){
+
+  adminActivate.onclick =
+    async ()=>{
+
+      const uid =
+        document.getElementById(
+          "adminUid"
+        ).value.trim();
+
+      const hours =
+        Number(
+          document.getElementById(
+            "adminDuration"
+          ).value
+        );
+
+
+      if(!/^\d{5,8}$/.test(uid)){
+
+        alert(
+          "Enter a valid 5–8 digit UID."
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        const response =
+          await fetch(
+            "/api/admin/activate",
+            {
+              method:"POST",
+
+              headers:
+                adminHeaders(),
+
+              body:
+                JSON.stringify({
+                  uid:uid,
+                  hours:hours
+                })
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        alert(
+          result.message ||
+          "UID activation completed."
+        );
+
+
+        if(result.ok){
+
+          document.getElementById(
+            "adminUid"
+          ).value = "";
+
+        }
+
+
+        await loadAdminData();
+
+
+      }catch(error){
+
+        alert(
+          "Server connection unavailable."
+        );
+
+      }
+
+    };
+
+}
+
+
+/* =========================================================
+   LOCK ALL UIDS
+========================================================= */
+
+const adminDeactivateAll =
+  document.getElementById(
+    "adminDeactivateAll"
+  );
+
+
+if(adminDeactivateAll){
+
+  adminDeactivateAll.onclick =
+    async ()=>{
+
+      if(
+        !confirm(
+          "Are you sure you want to lock ALL UIDs?"
+        )
+      ){
+
+        return;
+
+      }
+
+
+      try{
+
+        const response =
+          await fetch(
+            "/api/admin/lock-all",
+            {
+              method:"POST",
+              headers:
+                adminHeaders()
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        alert(
+          result.message ||
+          "All UIDs locked."
+        );
+
+
+        await loadAdminData();
+
+
+      }catch(error){
+
+        alert(
+          "Server connection unavailable."
+        );
+
+      }
+
+    };
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const toast =
+  document.createElement(
+    "div"
+  );
+
+toast.className =
+  "tabToast";
+
+document.body.appendChild(
+  toast
+);
+
+
+let toastTimer;
+
+
+function showToast(message){
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      ()=>{
+        toast.classList.remove(
+          "show"
+        );
+      },
+      1300
+    );
+
+}
+
+
+document
+  .querySelectorAll(".navItem")
+  .forEach(item=>{
+
+    item.onclick = ()=>{
+
+      document
+        .querySelectorAll(
+          ".navItem"
+        )
+        .forEach(
+          x =>
+            x.classList.remove(
+              "active"
+            )
+        );
+
+
+      item.classList.add(
+        "active"
+      );
+
+
+      const tab =
+        item.dataset.tab;
+
+
+      if(tab === "history"){
+
+        const section =
+          document.getElementById(
+            "resultSection"
+          );
+
+
+        section.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+
+        section.classList.add(
+          "historyFocus"
+        );
+
+
+        setTimeout(
+          ()=>{
+            section.classList.remove(
+              "historyFocus"
+            );
+          },
+          1500
+        );
+
+
+        showToast(
+          "LIVE RESULT HISTORY"
+        );
+
+      }
+
+
+      else if(tab === "uid"){
+
+        openUnlock();
+
+      }
+
+
+      else if(tab === "telegram"){
+
+        showToast(
+          "REGISTER / SUPPORT"
+        );
+
+        setTimeout(
+          ()=>{
+            window.location.href =
+              REGISTER_URL;
+          },
+          150
+        );
+
+      }
+
+
+      else{
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+
+        showToast(
+          "DASHBOARD"
+        );
+
+      }
+
+    };
+
+  });
+
+
+/* =========================================================
+   SOUND BUTTON
+========================================================= */
+
+const soundBtn =
+  document.getElementById(
+    "soundBtn"
+  );
+
+
+if(soundBtn){
+
+  soundBtn.onclick =
+    playFirstVoice;
+
+}
+
+
+/* =========================================================
+   VISIBILITY / AUTO REFRESH
+========================================================= */
+
+document.addEventListener(
+  "visibilitychange",
+  ()=>{
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      syncCountdown();
+
+      loadResults();
+
+      if(currentActiveUID){
+
+        checkUID(
+          currentActiveUID
+        )
+        .then(result=>{
+
+          if(
+            result &&
+            result.active &&
+            result.approved
+          ){
+
+            currentExpiresAt =
+              Number(
+                result.expiresAt
+              ) || 0;
+
+          }else{
+
+            localStorage.removeItem(
+              UID_KEY
+            );
+
+            hideUIDSuccess();
+
+          }
+
+        });
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   AUTO START
+========================================================= */
+
+window.addEventListener(
+  "load",
+  ()=>{
+
+    syncCountdown();
+
+    loadResults();
+
+    startPredictionTimer();
+
+  }
+);
+
+
+/* =========================================================
+   LIVE HISTORY REFRESH
+========================================================= */
+
+setInterval(
+  ()=>{
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      loadResults();
+
+    }
+
+  },
+  15000
+);
+
+
+/* =========================================================
+   PREDICTION REFRESH
+========================================================= */
+
+setInterval(
+  ()=>{
+
+    if(currentActiveUID){
+
+      updateDemoPrediction();
+
+    }
+
+  },
+  60000
+);
+
+
+/* =========================================================
+   ADMIN REQUEST AUTO REFRESH
+========================================================= */
+
+setInterval(
+  ()=>{
+
+    const token =
+      sessionStorage.getItem(
+        ADMIN_TOKEN_KEY
+      );
+
+    if(
+      token &&
+      adminOverlay.classList.contains(
+        "show"
+      )
+    ){
+
+      loadAdminData();
+
+    }
+
+  },
+  15000
+);
+
+
+/* =========================================================
+   GLOBAL ERROR PROTECTION
+========================================================= */
+
+window.addEventListener(
+  "error",
+  event=>{
+
+    console.error(
+      "Frontend error:",
+      event.error ||
+      event.message
+    );
+
+  }
+);
+
+
+/* =========================================================
+   FINAL FALLBACK
+   Prevents a broken script from leaving
+   the loading screen permanently visible.
+========================================================= */
+
+setTimeout(
+  ()=>{
+
+    if(
+      loadingScreen
+    ){
+
+      loadingScreen.classList.add(
+        "hide"
+      );
+
+    }
+
+    if(
+      app
+    ){
+
+      app.style.display =
+        "block";
+
+      app.style.visibility =
+        "visible";
+
+      app.style.opacity =
+        "1";
+
+    }
+
+  },
+  3800
+);
+
+</script>
+
 </body>
 </html>
