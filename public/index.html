@@ -325,24 +325,751 @@ button{font:inherit}
 </div>
 
 <script>
-<script src="/js/app.js"></script>
-<script src="/js/admin.js"></script>
+/* ============================================================
+   AMBIKA PANE AI - FRONTEND
+   Backend-connected version
+   ============================================================ */
 
-<script>
-setTimeout(function () {
-    const loader = document.getElementById("loadingScreen");
-    const app = document.getElementById("app");
+const API_BASE = "";
+let REGISTER_URL = "https://www.shreewin55.com/#/register?invitationCode=86286195967";
 
-    if (loader) {
-        loader.classList.add("hide");
-        loader.style.display = "none";
+const firstVoice = new Audio("https://www.image2url.com/r2/default/audio/1788601237629-ae72506e-6dd9-4f75-8c03-b0383f16e698.mp3");
+const secondVoice = new Audio("https://www.image2url.com/r2/default/audio/1788602798484-4fe76aab-b340-451d-aa47-eb2c157e4ea4.mp3");
+firstVoice.preload = "auto";
+secondVoice.preload = "auto";
+
+const NUMBER_IMAGES = {
+  0:"https://dynamic-indigo-glkg7p1j.edgeone.dev/0.png",
+  1:"https://dynamic-indigo-glkg7p1j.edgeone.dev/1.png",
+  2:"https://dynamic-indigo-glkg7p1j.edgeone.dev/2.png",
+  3:"https://dynamic-indigo-glkg7p1j.edgeone.dev/3.png",
+  4:"https://dynamic-indigo-glkg7p1j.edgeone.dev/4.png",
+  5:"https://dynamic-indigo-glkg7p1j.edgeone.dev/5.png",
+  6:"https://dynamic-indigo-glkg7p1j.edgeone.dev/6.png",
+  7:"https://dynamic-indigo-glkg7p1j.edgeone.dev/7.png",
+  8:"https://dynamic-indigo-glkg7p1j.edgeone.dev/8.png",
+  9:"https://dynamic-indigo-glkg7p1j.edgeone.dev/9%20%281%29.png"
+};
+
+const DEVICE_KEY = "ambika_panel_device_v2";
+const UID_KEY = "ambika_panel_uid_v2";
+const ADMIN_TOKEN_KEY = "ambika_panel_admin_token_v2";
+
+let currentPeriod = "";
+let seconds = 60;
+let currentUID = localStorage.getItem(UID_KEY) || "";
+let redirectTimer = null;
+let adminToken = sessionStorage.getItem(ADMIN_TOKEN_KEY) || "";
+
+function $(id){ return document.getElementById(id); }
+
+function pick(o, keys){
+  for(const k of keys){
+    if(o && o[k] !== undefined && o[k] !== null && o[k] !== "") return o[k];
+  }
+  return "";
+}
+
+function getList(j){
+  return j?.data?.list || j?.data?.records || j?.list || j?.records || [];
+}
+
+function getDeviceId(){
+  let id = localStorage.getItem(DEVICE_KEY);
+  if(!id){
+    id = (crypto && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : ("device-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+    localStorage.setItem(DEVICE_KEY, id);
+  }
+  return id;
+}
+
+const deviceId = getDeviceId();
+
+async function api(path, options = {}){
+  const headers = Object.assign(
+    {"Content-Type":"application/json","Accept":"application/json"},
+    options.headers || {}
+  );
+
+  const r = await fetch(API_BASE + path, Object.assign({}, options, {
+    headers,
+    cache:"no-store"
+  }));
+
+  let data = {};
+  try { data = await r.json(); } catch(e) {}
+
+  if(!r.ok){
+    const err = new Error(data.message || ("Request failed (" + r.status + ")"));
+    err.status = r.status;
+    err.data = data;
+    throw err;
+  }
+  return data;
+}
+
+/* ---------------- LOADING ---------------- */
+
+const loadingScreen = $("loadingScreen");
+const app = $("app");
+const bar = $("progressBar");
+const percent = $("percent");
+const loadingStatus = $("loadingStatus");
+
+const msgs = [
+  "Initializing secure interface...",
+  "Connecting AI engine...",
+  "Synchronizing game server...",
+  "Loading live database...",
+  "Preparing dashboard...",
+  "System ready..."
+];
+
+function finishLoading(){
+  if(!loadingScreen || !app) return;
+  loadingScreen.classList.add("hide");
+  loadingScreen.style.pointerEvents = "none";
+  app.style.display = "block";
+  app.style.visibility = "visible";
+  app.style.opacity = "1";
+}
+
+function loadingLoop(now){
+  if(!bar || !percent || !loadingStatus){
+    finishLoading();
+    return;
+  }
+
+  const p = Math.min(100, Math.floor(((now - window.__ambikaLoadStart) / 3000) * 100));
+  bar.style.width = p + "%";
+  percent.textContent = p + "%";
+  loadingStatus.textContent = msgs[Math.min(msgs.length - 1, Math.floor(p / 18))];
+
+  if(p < 100) requestAnimationFrame(loadingLoop);
+  else setTimeout(finishLoading, 150);
+}
+
+window.__ambikaLoadStart = performance.now();
+requestAnimationFrame(loadingLoop);
+
+/* ---------------- AUDIO ---------------- */
+
+function playFirstVoice(){
+  try{
+    firstVoice.pause();
+    firstVoice.currentTime = 0;
+    firstVoice.play().catch(()=>{});
+  }catch(e){}
+}
+
+function playSecondVoice(){
+  try{
+    secondVoice.pause();
+    secondVoice.currentTime = 0;
+    secondVoice.play().catch(()=>{});
+  }catch(e){}
+}
+
+/* ---------------- LIVE HISTORY ---------------- */
+
+async function loadConfig(){
+  try{
+    const data = await api("/api/config");
+    if(data && data.registerUrl) REGISTER_URL = data.registerUrl;
+  }catch(e){}
+}
+
+async function loadResults(){
+  const box = $("resultList");
+  if(!box) return;
+
+  try{
+    const j = await api("/api/history");
+    const list = getList(j);
+
+    if(!Array.isArray(list) || !list.length){
+      throw new Error("No live history");
     }
 
-    if (app) {
-        app.style.display = "block";
-        app.style.visibility = "visible";
-        app.style.opacity = "1";
+    renderResults(list);
+    updatePeriod(list);
+    updatePattern(list);
+  }catch(e){
+    box.innerHTML =
+      '<div class="resultError">Live result connection unavailable.<br>Please refresh or check the server.</div>';
+  }
+}
+
+function renderResults(list){
+  const box = $("resultList");
+  if(!box) return;
+
+  box.innerHTML = list.slice(0,20).map((x,i)=>{
+    const issue = pick(x,["issueNumber","issue","period","issueNo"]);
+    const n = Number(pick(x,["number","openNumber","result","resultNumber","winNumber"]));
+    const valid = Number.isInteger(n) && n >= 0 && n <= 9;
+    const size = valid ? (n >= 5 ? "BIG" : "SMALL") : "--";
+        /* Interface-only labels; not real win/loss predictions. */
+    const st = i % 3 === 2 ? "LOSS" : "WIN";
+
+    return `<div class="resultRow">
+      <div class="resultIssue">
+        <span style="display:block;color:#4f7780;font-size:8px;letter-spacing:1px;margin-bottom:4px">PERIOD</span>
+        ${issue || "Round " + (i+1)}
+      </div>
+      <div class="resultNumber">
+        ${valid
+          ? `<img src="${NUMBER_IMAGES[n]}" alt="${n}" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=resultNumberFallback>${n}</span>'">`
+          : `<span class="resultNumberFallback">--</span>`}
+      </div>
+      <div class="resultSize ${size==="BIG" ? "resultBig" : "resultSmall"}">${size}</div>
+      <div class="resultStatus ${st==="LOSS" ? "loss" : ""}">${st}</div>
+    </div>`;
+  }).join("");
+}
+
+function updatePeriod(list){
+  const raw = pick(list[0] || {},["issueNumber","issue","period","issueNo"]);
+  const d = String(raw || "").replace(/\D/g,"");
+
+  if(d.length >= 10){
+    try{
+      currentPeriod = (BigInt(d) + 1n).toString();
+    }catch(e){
+      currentPeriod = d;
     }
-}, 3500);
+  }else if(!currentPeriod){
+    currentPeriod = String(raw || "");
+  }
+
+  $("period").textContent = currentPeriod || "SYNCING...";
+}
+
+function updatePattern(list){
+  const a = list.slice(0,10)
+    .map(x => Number(pick(x,["number","openNumber","result","resultNumber","winNumber"])))
+    .filter(Number.isFinite);
+
+  if(!a.length) return;
+
+  const big = a.filter(n => n >= 5).length;
+  const bigPct = Math.round(big / a.length * 100);
+  const smallPct = 100 - bigPct;
+
+  $("patternValue").textContent = `BIG ${bigPct}% | SMALL ${smallPct}%`;
+  $("patternFill").style.background =
+    `linear-gradient(90deg,#ffd75a 0 ${bigPct}%,#64e8ff ${bigPct}%)`;
+  $("patternFill").style.width = "100%";
+}
+
+/* ---------------- PERIOD / DASHBOARD ---------------- */
+
+$("copyBtn").onclick = async()=>{
+  if(!currentPeriod) return;
+
+  try{
+    await navigator.clipboard.writeText(currentPeriod);
+    const b = $("copyBtn");
+    b.textContent = "✓ Copied";
+    setTimeout(()=>b.textContent="▣  Copy Period",1200);
+  }catch(e){}
+};
+
+function syncCountdown(){
+  const s = new Date().getSeconds();
+  seconds = s === 0 ? 60 : 60 - s;
+  $("timerText").textContent = "00:" + String(seconds).padStart(2,"0");
+}
+
+function randomInt(a,b){
+  return Math.floor(Math.random() * (b-a+1)) + a;
+}
+
+function updateLiveDemoValues(){
+  $("liveUid").textContent = randomInt(10000,1000000).toLocaleString("en-IN");
+  $("liveWin").textContent = randomInt(20000,1000000).toLocaleString("en-IN");
+}
+
+/* Deterministic interface demo value. It is not a guaranteed prediction. */
+function demoPrediction(uid){
+  let seed = 0;
+  for(const c of String(uid)){
+    seed = (seed * 31 + c.charCodeAt(0)) >>> 0;
+  }
+  return seed % 10;
+}
+
+/* ---------------- UID ACCESS ---------------- */
+
+const unlockOverlay = $("unlockOverlay");
+const uidInput = $("uidInput");
+const unlockMessage = $("unlockMessage");
+const uidDemoResult = $("uidDemoResult");
+const demoUidValue = $("demoUidValue");
+const redirectCount = $("redirectCount");
+
+function setUnlockMessage(text, type="ok"){
+  unlockMessage.style.color = type === "error" ? "#ff4f9a" :
+                              type === "warn" ? "#ffd75a" : "#57f2b0";
+  unlockMessage.textContent = text || "";
+}
+
+function openUnlock(){
+  unlockOverlay.classList.add("show");
+  setUnlockMessage("");
+  uidDemoResult.classList.remove("show");
+  clearInterval(redirectTimer);
+
+  if(currentUID){
+    uidInput.value = currentUID;
+  }
+
+  setTimeout(()=>uidInput.focus(),120);
+}
+
+function closeUnlock(){
+  unlockOverlay.classList.remove("show");
+  clearInterval(redirectTimer);
+}
+
+$("unlockBtn").onclick = ()=>{
+  openUnlock();
+  playFirstVoice();
+};
+
+$("modalClose").onclick = closeUnlock;
+
+unlockOverlay.onclick = e=>{
+  if(e.target === unlockOverlay) closeUnlock();
+};
+
+uidInput.oninput = ()=>{
+  uidInput.value = uidInput.value.replace(/\D/g,"").slice(0,8);
+};
+
+function showDemoUidResult(uid, message){
+  demoUidValue.textContent = uid;
+  uidDemoResult.classList.add("show");
+  setUnlockMessage(message || "UID is not active.", "warn");
+  setTimeout(playSecondVoice,80);
+
+  clearInterval(redirectTimer);
+  let left = 7;
+  redirectCount.textContent = left;
+
+  redirectTimer = setInterval(()=>{
+    left--;
+    redirectCount.textContent = left;
+
+    if(left <= 0){
+      clearInterval(redirectTimer);
+      window.location.href = REGISTER_URL;
+    }
+  },1000);
+}
+
+function showActiveAccess(uid, expiresAt){
+  currentUID = uid;
+  localStorage.setItem(UID_KEY, uid);
+
+  uidDemoResult.classList.remove("show");
+  setUnlockMessage("UID access is active on this device.");
+
+  $("predictionActive").classList.add("show");
+  $("predictionNumber").textContent = demoPrediction(uid);
+
+  const remaining = Math.max(0, Number(expiresAt) - Date.now());
+  const hours = Math.max(1, Math.ceil(remaining / 3600000));
+
+  $("predictionMeta").textContent =
+    `UID ${uid} active • expires in about ${hours} hour(s) • DEMO ONLY`;
+
+  $("unlockBtn").style.display = "none";
+}
+
+function showLockedAccess(){
+  $("predictionActive").classList.remove("show");
+  $("unlockBtn").style.display = "block";
+}
+
+async function checkUID(){
+  const uid = uidInput.value.trim();
+    if(!/^\d{5,8}$/.test(uid)){
+    uidDemoResult.classList.remove("show");
+    clearInterval(redirectTimer);
+    setUnlockMessage("Please enter a valid 5–8 digit Game UID.","warn");
+    return;
+  }
+
+  try{
+    setUnlockMessage("VERIFYING UID...");
+    const data = await api("/api/access/check",{
+      method:"POST",
+      body:JSON.stringify({uid,deviceId})
+    });
+
+    if(data.active){
+      showActiveAccess(uid,data.expiresAt);
+      return;
+    }
+
+    localStorage.removeItem(UID_KEY);
+    currentUID = "";
+
+    if(data.deviceMismatch){
+      showDemoUidResult(uid,"This UID is already bound to another device.");
+    }else{
+      showDemoUidResult(uid,data.message || "UID is not active.");
+    }
+  }catch(e){
+    setUnlockMessage("Server connection unavailable. Please try again.","error");
+  }
+}
+
+$("verifyBtn").onclick = checkUID;
+
+$("openRegisterDemo").onclick = ()=>{
+  clearInterval(redirectTimer);
+  window.location.href = REGISTER_URL;
+};
+
+$("registerBtn").onclick = ()=>{
+  window.location.href = REGISTER_URL;
+};
+
+$("telegramBtn").onclick = ()=>{
+  window.location.href = REGISTER_URL;
+};
+
+uidInput.onkeydown = e=>{
+  if(e.key === "Enter") checkUID();
+};
+
+async function restoreUIDAccess(){
+  if(!currentUID) return;
+
+  try{
+    const data = await api("/api/access/status",{
+      method:"POST",
+      body:JSON.stringify({
+        uid:currentUID,
+        deviceId
+      })
+    });
+
+    if(data.active){
+      uidInput.value = currentUID;
+      showActiveAccess(currentUID,data.expiresAt);
+    }else{
+      localStorage.removeItem(UID_KEY);
+      currentUID = "";
+      showLockedAccess();
+    }
+  }catch(e){
+    /* Keep the UI locked until the backend can confirm access. */
+    showLockedAccess();
+  }
+}
+
+/* ---------------- ADMIN ---------------- */
+
+const adminLaunch = $("adminLaunch");
+const adminOverlay = $("adminOverlay");
+const adminLoginBox = $("adminLoginBox");
+const adminControls = $("adminControls");
+const adminList = $("adminList");
+
+function adminHeaders(){
+  return adminToken
+    ? {"Authorization":"Bearer " + adminToken}
+    : {};
+}
+
+async function adminApi(path, options={}){
+  options.headers = Object.assign({}, options.headers || {}, adminHeaders());
+  return api(path,options);
+}
+
+function clearAdminSession(){
+  adminToken = "";
+  sessionStorage.removeItem(ADMIN_TOKEN_KEY);
+  adminLoginBox.style.display = "grid";
+  adminControls.style.display = "none";
+}
+
+async function adminLogin(){
+  const password = $("adminPassword").value;
+
+  if(!password){
+    alert("Enter admin password.");
+    return;
+  }
+
+  try{
+    const data = await api("/api/admin/login",{
+      method:"POST",
+      body:JSON.stringify({password})
+    });
+
+    if(!data.token) throw new Error("No admin token returned.");
+
+    adminToken = data.token;
+    sessionStorage.setItem(ADMIN_TOKEN_KEY,adminToken);
+
+    $("adminPassword").value = "";
+    adminLoginBox.style.display = "none";
+    adminControls.style.display = "block";
+
+    await renderAdminList();
+  }catch(e){
+    clearAdminSession();
+    alert(e.message || "Wrong admin password.");
+  }
+}
+
+async function renderAdminList(){
+  if(!adminToken) return;
+
+  try{
+    const data = await adminApi("/api/admin/uids");
+    const list = Array.isArray(data.uids) ? data.uids : [];
+
+    if(!list.length){
+      adminList.innerHTML =
+        '<div class="adminInfo">No active UID access.</div>';
+      return;
+    }
+
+    adminList.innerHTML = list.map(x=>{
+      const exp = Number(x.expiresAt);
+      const device = x.deviceId
+        ? String(x.deviceId).slice(0,12) + "…"
+        : "Not claimed yet";
+
+      return `<div class="adminItem">
+        <div class="adminItemTop">
+          <span>UID #${x.uid}</span>
+          <span class="accessActive">ACTIVE</span>
+        </div>
+        <div class="adminItemSub">
+          Device: ${device}<br>
+          Expires: ${new Date(exp).toLocaleString()}
+        </div>
+        <div class="adminItemActions">
+          <button data-lock-uid="${x.uid}">LOCK NOW</button>
+        </div>
+      </div>`;
+    }).join("");
+
+    adminList.querySelectorAll("[data-lock-uid]").forEach(btn=>{
+      btn.onclick = async()=>{
+        const uid = btn.dataset.lockUid;
+        if(!confirm("Lock UID " + uid + "?")) return;
+
+        try{
+          const data = await adminApi("/api/admin/lock",{
+            method:"POST",
+            body:JSON.stringify({uid})
+          });
+
+          alert(data.message || "UID locked.");
+          await renderAdminList();
+          await restoreUIDAccess();
+        }catch(e){
+          if(e.status === 401) clearAdminSession();
+          alert(e.message || "Unable to lock UID.");
+        }
+      };
+    });
+      }catch(e){
+    if(e.status === 401) clearAdminSession();
+    adminList.innerHTML =
+      '<div class="adminInfo">Admin session expired. Please login again.</div>';
+  }
+}
+
+adminLaunch.style.display = "block";
+
+adminLaunch.onclick = ()=>{
+  adminOverlay.classList.add("show");
+  if(adminToken){
+    adminLoginBox.style.display = "none";
+    adminControls.style.display = "block";
+    renderAdminList();
+  }else{
+    adminLoginBox.style.display = "grid";
+    adminControls.style.display = "none";
+  }
+};
+
+$("adminClose").onclick = ()=>{
+  adminOverlay.classList.remove("show");
+};
+
+adminOverlay.onclick = e=>{
+  if(e.target === adminOverlay) adminOverlay.classList.remove("show");
+};
+
+$("adminLoginBtn").onclick = adminLogin;
+
+$("adminPassword").onkeydown = e=>{
+  if(e.key === "Enter") adminLogin();
+};
+
+$("adminActivate").onclick = async()=>{
+  const uid = $("adminUid").value.trim();
+  const hours = Number($("adminDuration").value);
+
+  if(!/^\d{5,8}$/.test(uid)){
+    alert("Enter a valid 5–8 digit UID.");
+    return;
+  }
+
+  try{
+    const data = await adminApi("/api/admin/activate",{
+      method:"POST",
+      body:JSON.stringify({uid,hours})
+    });
+
+    $("adminUid").value = "";
+    alert(data.message || "UID activated.");
+    await renderAdminList();
+
+    if(uidInput.value.trim() === uid){
+      await checkUID();
+    }
+  }catch(e){
+    if(e.status === 401) clearAdminSession();
+    alert(e.message || "Unable to activate UID.");
+  }
+};
+
+$("adminDeactivateAll").onclick = async()=>{
+  if(!confirm("Lock all UID access?")) return;
+
+  try{
+    const data = await adminApi("/api/admin/lock-all",{
+      method:"POST",
+      body:JSON.stringify({})
+    });
+
+    alert(data.message || "All UID access has been locked.");
+    await renderAdminList();
+    await restoreUIDAccess();
+  }catch(e){
+    if(e.status === 401) clearAdminSession();
+    alert(e.message || "Unable to lock all UID access.");
+  }
+};
+
+/* ---------------- NAV ---------------- */
+
+const toast = document.createElement("div");
+toast.className = "tabToast";
+document.body.appendChild(toast);
+
+function showToast(t){
+  toast.textContent = t;
+  toast.classList.add("show");
+  clearTimeout(window.__toast);
+  window.__toast = setTimeout(
+    ()=>toast.classList.remove("show"),
+    1200
+  );
+}
+
+document.querySelectorAll(".navItem").forEach(n=>{
+  n.onclick = ()=>{
+    document.querySelectorAll(".navItem")
+      .forEach(x=>x.classList.remove("active"));
+
+    n.classList.add("active");
+
+    const tab = n.dataset.tab;
+
+    if(tab === "history"){
+      $("resultSection").scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+      $("resultSection").classList.add("historyFocus");
+
+      setTimeout(
+        ()=>$("resultSection").classList.remove("historyFocus"),
+        1500
+      );
+
+      showToast("LIVE RESULT HISTORY");
+    }
+    else if(tab === "uid"){
+      openUnlock();
+    }
+    else if(tab === "telegram"){
+      showToast("REGISTER / SUPPORT");
+      window.location.href = REGISTER_URL;
+    }
+    else{
+      window.scrollTo({top:0,behavior:"smooth"});
+      showToast("DASHBOARD");
+    }
+  };
+});
+
+/* ---------------- STARTUP ---------------- */
+
+async function boot(){
+  syncCountdown();
+  updateLiveDemoValues();
+
+  await loadConfig();
+  await restoreUIDAccess();
+  await loadResults();
+}
+
+$("soundBtn").onclick = playFirstVoice;
+
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState === "visible"){
+    syncCountdown();
+    loadResults();
+    restoreUIDAccess();
+  }
+});
+
+window.addEventListener("load",()=>{
+  syncCountdown();
+  updateLiveDemoValues();
+});
+
+boot();
+
+setInterval(()=>{
+  syncCountdown();
+  if(seconds === 60) loadResults();
+},1000);
+
+setInterval(updateLiveDemoValues,2500);
+setInterval(loadResults,30000);
+setInterval(restoreUIDAccess,30000);
+
+setInterval(()=>{
+  if(adminControls.style.display !== "none" && adminToken){
+    renderAdminList();
+  }
+},30000);
+
+/* Prevent a failed frontend script from leaving the page visually blank. */
+window.addEventListener("error",(e)=>{
+  console.error("AMBIKA PANE AI:",e.error || e.message);
+  if(app){
+    app.style.display = "block";
+    app.style.visibility = "visible";
+    app.style.opacity = "1";
+  }
+});
 </script>
 </body>
+</html>
