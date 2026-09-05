@@ -1,6 +1,6 @@
 // ============================================================
 // AMBIKA PANE AI - SERVER
-// PART 1 / BACKEND
+// COMPLETE FIXED BACKEND
 // ============================================================
 
 const express = require("express");
@@ -9,11 +9,12 @@ const path = require("path");
 const crypto = require("crypto");
 
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
-// ------------------------------------------------------------
+// ============================================================
 // CONFIG
-// ------------------------------------------------------------
+// ============================================================
 
 const ADMIN_PASSWORD =
   process.env.ADMIN_PASSWORD || "673634078162";
@@ -27,20 +28,30 @@ const HISTORY_URL =
 const DATA_DIR = path.join(__dirname, "data");
 const UID_FILE = path.join(DATA_DIR, "uids.json");
 
-// ------------------------------------------------------------
+
+// ============================================================
 // MIDDLEWARE
-// ------------------------------------------------------------
+// ============================================================
 
-app.use(express.json({ limit: "100kb" }));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({
+  limit: "100kb"
+}));
 
-// ------------------------------------------------------------
-// DATA FILE
-// ------------------------------------------------------------
+app.use(express.urlencoded({
+  extended: false
+}));
+
+
+// ============================================================
+// UID DATABASE
+// ============================================================
 
 function ensureDataFile() {
+
   if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.mkdirSync(DATA_DIR, {
+      recursive: true
+    });
   }
 
   if (!fs.existsSync(UID_FILE)) {
@@ -54,37 +65,66 @@ function ensureDataFile() {
 
 ensureDataFile();
 
-function readUIDs() {
-  try {
-    const data = fs.readFileSync(UID_FILE, "utf8");
-    const parsed = JSON.parse(data);
 
-    return Array.isArray(parsed) ? parsed : [];
+function readUIDs() {
+
+  try {
+
+    const data =
+      fs.readFileSync(
+        UID_FILE,
+        "utf8"
+      );
+
+    const parsed =
+      JSON.parse(data);
+
+    return Array.isArray(parsed)
+      ? parsed
+      : [];
+
   } catch (error) {
-    console.error("UID database read error:", error);
+
+    console.error(
+      "UID database read error:",
+      error.message
+    );
+
     return [];
   }
 }
 
+
 function writeUIDs(list) {
+
   ensureDataFile();
 
   fs.writeFileSync(
     UID_FILE,
-    JSON.stringify(list, null, 2),
+    JSON.stringify(
+      list,
+      null,
+      2
+    ),
     "utf8"
   );
 }
 
-// ------------------------------------------------------------
+
+// ============================================================
 // HELPERS
-// ------------------------------------------------------------
+// ============================================================
 
 function validUID(uid) {
-  return /^\d{5,8}$/.test(String(uid || ""));
+
+  return /^\d{5,8}$/.test(
+    String(uid || "")
+  );
 }
 
+
 function validDeviceId(deviceId) {
+
   return (
     typeof deviceId === "string" &&
     deviceId.length >= 8 &&
@@ -92,68 +132,108 @@ function validDeviceId(deviceId) {
   );
 }
 
+
 function cleanExpired(list) {
+
   const now = Date.now();
 
-  return list.filter((item) => {
-    if (!item.expiresAt) return false;
+  return list.filter(item => {
+
+    if (!item || !item.expiresAt) {
+      return false;
+    }
+
     return Number(item.expiresAt) > now;
   });
 }
 
+
 function saveCleanUIDs() {
-  const list = cleanExpired(readUIDs());
+
+  const list =
+    cleanExpired(
+      readUIDs()
+    );
 
   writeUIDs(list);
 
   return list;
 }
 
-// ------------------------------------------------------------
+
+// ============================================================
 // ADMIN AUTH
-// ------------------------------------------------------------
+// ============================================================
 
 const adminTokens = new Map();
 
+
 function createAdminToken() {
-  const token = crypto.randomBytes(32).toString("hex");
+
+  const token =
+    crypto.randomBytes(32).toString("hex");
 
   adminTokens.set(token, {
-    createdAt: Date.now(),
+    createdAt: Date.now()
   });
 
   return token;
 }
 
+
 function isAdminTokenValid(token) {
-  if (!token || !adminTokens.has(token)) {
+
+  if (
+    !token ||
+    !adminTokens.has(token)
+  ) {
     return false;
   }
 
-  const session = adminTokens.get(token);
+  const session =
+    adminTokens.get(token);
 
-  // Admin session expires after 12 hours
-  if (Date.now() - session.createdAt > 12 * 60 * 60 * 1000) {
+  if (
+    Date.now() -
+    session.createdAt >
+    12 * 60 * 60 * 1000
+  ) {
+
     adminTokens.delete(token);
+
     return false;
   }
 
   return true;
 }
 
-function requireAdmin(req, res, next) {
-  const auth = req.headers.authorization || "";
 
-  if (!auth.startsWith("Bearer ")) {
+function requireAdmin(
+  req,
+  res,
+  next
+) {
+
+  const auth =
+    req.headers.authorization || "";
+
+  if (
+    !auth.startsWith("Bearer ")
+  ) {
+
     return res.status(401).json({
       ok: false,
       message: "Admin login required."
     });
   }
 
-  const token = auth.slice(7);
+  const token =
+    auth.slice(7);
 
-  if (!isAdminTokenValid(token)) {
+  if (
+    !isAdminTokenValid(token)
+  ) {
+
     return res.status(401).json({
       ok: false,
       message: "Admin session expired."
@@ -163,482 +243,822 @@ function requireAdmin(req, res, next) {
   next();
 }
 
-// ------------------------------------------------------------
-// BASIC ROUTE
-// ------------------------------------------------------------
 
-app.get("/api/status", (req, res) => {
-  res.json({
-    ok: true,
-    name: "AMBIKA PANE AI",
-    serverTime: Date.now()
-  });
-});
+// ============================================================
+// BASIC API
+// ============================================================
 
-// ------------------------------------------------------------
-// REGISTER INFO
-// ------------------------------------------------------------
+app.get(
+  "/api/status",
+  (req, res) => {
 
-app.get("/api/config", (req, res) => {
-  res.json({
-    ok: true,
-    registerUrl: REGISTER_URL
-  });
-});
+    res.json({
+      ok: true,
+      name: "AMBIKA PANE AI",
+      serverTime: Date.now()
+    });
+  }
+);
 
-// ------------------------------------------------------------
+
+app.get(
+  "/api/config",
+  (req, res) => {
+
+    res.json({
+      ok: true,
+      registerUrl: REGISTER_URL
+    });
+  }
+);
+// ============================================================
 // ADMIN LOGIN
-// ------------------------------------------------------------
+// ============================================================
 
-app.post("/api/admin/login", (req, res) => {
-  const password = String(req.body.password || "");
+app.post(
+  "/api/admin/login",
+  (req, res) => {
 
-  if (password !== ADMIN_PASSWORD) {
-    return res.status(401).json({
-      ok: false,
-      message: "Wrong admin password."
+    const password =
+      String(req.body?.password || "");
+
+    if (
+      password !== ADMIN_PASSWORD
+    ) {
+
+      return res.status(401).json({
+        ok: false,
+        message: "Invalid admin password."
+      });
+    }
+
+    const token =
+      createAdminToken();
+
+    res.json({
+      ok: true,
+      token,
+      message: "Admin login successful."
     });
   }
+);
 
-  const token = createAdminToken();
 
-  res.json({
-    ok: true,
-    token,
-    message: "Admin login successful."
-  });
-});
-
-// ------------------------------------------------------------
+// ============================================================
 // ADMIN LOGOUT
-// ------------------------------------------------------------
+// ============================================================
 
-app.post("/api/admin/logout", requireAdmin, (req, res) => {
-  const auth = req.headers.authorization || "";
-  const token = auth.slice(7);
+app.post(
+  "/api/admin/logout",
+  requireAdmin,
+  (req, res) => {
 
-  adminTokens.delete(token);
+    const token =
+      (req.headers.authorization || "")
+        .slice(7);
 
-  res.json({
-    ok: true,
-    message: "Logged out."
-  });
-});
+    adminTokens.delete(token);
 
-// ------------------------------------------------------------
-// ADMIN - GET ALL UID RECORDS
-// ------------------------------------------------------------
-
-app.get("/api/admin/uids", requireAdmin, (req, res) => {
-  const list = saveCleanUIDs();
-
-  res.json({
-    ok: true,
-    count: list.length,
-    uids: list
-  });
-});
-
-// ------------------------------------------------------------
-// ADMIN - ACTIVATE UID
-// ------------------------------------------------------------
-
-app.post("/api/admin/activate", requireAdmin, (req, res) => {
-  const uid = String(req.body.uid || "").trim();
-  const hours = Number(req.body.hours);
-
-  if (!validUID(uid)) {
-    return res.status(400).json({
-      ok: false,
-      message: "UID must contain 5–8 digits."
+    res.json({
+      ok: true,
+      message: "Logged out successfully."
     });
   }
+);
 
-  if (![1, 24].includes(hours)) {
-    return res.status(400).json({
-      ok: false,
-      message: "Duration must be 1 hour or 1 day."
+
+// ============================================================
+// GET ALL UIDS
+// ============================================================
+
+app.get(
+  "/api/admin/uids",
+  requireAdmin,
+  (req, res) => {
+
+    const list =
+      saveCleanUIDs();
+
+    res.json({
+      ok: true,
+      count: list.length,
+      uids: list
     });
   }
+);
 
-  let list = saveCleanUIDs();
 
-  const now = Date.now();
-  const expiresAt = now + hours * 60 * 60 * 1000;
+// ============================================================
+// ACTIVATE UID
+// ============================================================
 
-  const existingIndex = list.findIndex(
-    (item) => item.uid === uid
-  );
+app.post(
+  "/api/admin/activate",
+  requireAdmin,
+  (req, res) => {
 
-  const existing = existingIndex >= 0
-    ? list[existingIndex]
-    : null;
+    const uid =
+      String(req.body?.uid || "").trim();
 
-  // If UID already belongs to another device
-  // and is still active, don't silently move it.
-  if (
-    existing &&
-    existing.deviceId &&
-    existing.expiresAt > now
-  ) {
-    return res.status(409).json({
-      ok: false,
-      message:
-        "This UID is already active and bound to another device."
-    });
-  }
+    const hours =
+      Number(req.body?.hours);
 
-  const record = {
-    uid,
-    deviceId: existing?.deviceId || null,
-    activatedAt: now,
-    expiresAt,
-    durationHours: hours
-  };
+    if (!validUID(uid)) {
 
-  if (existingIndex >= 0) {
-    list[existingIndex] = record;
-  } else {
+      return res.status(400).json({
+        ok: false,
+        message:
+          "UID must contain 5 to 8 digits."
+      });
+    }
+
+    if (
+      hours !== 1 &&
+      hours !== 24
+    ) {
+
+      return res.status(400).json({
+        ok: false,
+        message:
+          "Duration must be 1 or 24 hours."
+      });
+    }
+
+    let list =
+      saveCleanUIDs();
+
+    const existing =
+      list.find(
+        item => item.uid === uid
+      );
+
+    // --------------------------------------------------------
+    // UID already active and bound
+    // --------------------------------------------------------
+
+    if (
+      existing &&
+      existing.deviceId
+    ) {
+
+      return res.status(409).json({
+        ok: false,
+        message:
+          "This UID is already active and bound to another device.",
+        uid
+      });
+    }
+
+    const now =
+      Date.now();
+
+    const expiresAt =
+      now +
+      hours *
+      60 *
+      60 *
+      1000;
+
+    const record = {
+      uid,
+      deviceId: null,
+      activatedAt: now,
+      expiresAt,
+      durationHours: hours
+    };
+
+    // Remove old copy if present
+    list =
+      list.filter(
+        item => item.uid !== uid
+      );
+
     list.push(record);
-  }
 
-  writeUIDs(list);
+    writeUIDs(list);
 
-  res.json({
-    ok: true,
-    message: `UID ${uid} activated for ${
-      hours === 1 ? "1 hour" : "1 day"
-    }.`,
-    record
-  });
-});
-
-// ------------------------------------------------------------
-// ADMIN - LOCK ONE UID
-// ------------------------------------------------------------
-
-app.post("/api/admin/lock", requireAdmin, (req, res) => {
-  const uid = String(req.body.uid || "").trim();
-
-  if (!validUID(uid)) {
-    return res.status(400).json({
-      ok: false,
-      message: "Invalid UID."
+    res.json({
+      ok: true,
+      message:
+        `UID activated for ${hours} hour${hours === 1 ? "" : "s"}.`,
+      record
     });
   }
+);
 
-  const list = saveCleanUIDs();
 
-  const newList = list.filter(
-    (item) => item.uid !== uid
-  );
+// ============================================================
+// LOCK SINGLE UID
+// ============================================================
 
-  writeUIDs(newList);
+app.post(
+  "/api/admin/lock",
+  requireAdmin,
+  (req, res) => {
 
-  res.json({
-    ok: true,
-    message: `UID ${uid} locked.`
-  });
-});
+    const uid =
+      String(req.body?.uid || "").trim();
 
-// ------------------------------------------------------------
-// ADMIN - LOCK ALL
-// ------------------------------------------------------------
+    if (!validUID(uid)) {
 
-app.post("/api/admin/lock-all", requireAdmin, (req, res) => {
-  writeUIDs([]);
+      return res.status(400).json({
+        ok: false,
+        message: "Invalid UID."
+      });
+    }
 
-  res.json({
-    ok: true,
-    message: "All UID access has been locked."
-  });
-});
+    let list =
+      saveCleanUIDs();
 
-// ------------------------------------------------------------
-// USER - REGISTER / CHECK UID
-// ------------------------------------------------------------
-//
-// First device which verifies an activated UID gets ownership.
-// After that the UID works only on that device.
-// ------------------------------------------------------------
+    const before =
+      list.length;
 
-app.post("/api/access/check", (req, res) => {
-  const uid = String(req.body.uid || "").trim();
-  const deviceId = String(req.body.deviceId || "").trim();
+    list =
+      list.filter(
+        item => item.uid !== uid
+      );
 
-  if (!validUID(uid)) {
-    return res.status(400).json({
-      ok: false,
-      active: false,
-      message: "Please enter a valid 5–8 digit Game UID."
+    writeUIDs(list);
+
+    if (
+      list.length === before
+    ) {
+
+      return res.json({
+        ok: true,
+        removed: false,
+        message:
+          "UID was not found."
+      });
+    }
+
+    res.json({
+      ok: true,
+      removed: true,
+      message:
+        "UID locked successfully."
     });
   }
+);
 
-  if (!validDeviceId(deviceId)) {
-    return res.status(400).json({
-      ok: false,
-      active: false,
-      message: "Invalid device ID."
+
+// ============================================================
+// LOCK ALL UIDS
+// ============================================================
+
+app.post(
+  "/api/admin/lock-all",
+  requireAdmin,
+  (req, res) => {
+
+    writeUIDs([]);
+
+    res.json({
+      ok: true,
+      message:
+        "All UIDs locked successfully."
     });
   }
+);
 
-  let list = saveCleanUIDs();
 
-  const index = list.findIndex(
-    (item) => item.uid === uid
-  );
+// ============================================================
+// ACCESS CHECK
+// ============================================================
 
-  // UID has not been activated by admin
-  if (index === -1) {
-    return res.json({
+app.post(
+  "/api/access/check",
+  (req, res) => {
+
+    const uid =
+      String(req.body?.uid || "").trim();
+
+    const deviceId =
+      String(
+        req.body?.deviceId || ""
+      ).trim();
+
+    if (!validUID(uid)) {
+
+      return res.status(400).json({
+        ok: false,
+        active: false,
+        approved: false,
+        message:
+          "Invalid UID."
+      });
+    }
+
+    if (!validDeviceId(deviceId)) {
+
+      return res.status(400).json({
+        ok: false,
+        active: false,
+        approved: false,
+        message:
+          "Invalid device ID."
+      });
+    }
+
+    let list =
+      saveCleanUIDs();
+
+    const record =
+      list.find(
+        item => item.uid === uid
+      );
+
+    // --------------------------------------------------------
+    // UID NOT ACTIVE
+    // --------------------------------------------------------
+
+    if (!record) {
+
+      return res.json({
+        ok: true,
+        active: false,
+        approved: false,
+        message:
+          "UID is not active."
+      });
+    }
+
+    // --------------------------------------------------------
+    // EXPIRED
+    // --------------------------------------------------------
+
+    if (
+      Number(record.expiresAt) <=
+      Date.now()
+    ) {
+
+      list =
+        list.filter(
+          item => item.uid !== uid
+        );
+
+      writeUIDs(list);
+
+      return res.json({
+        ok: true,
+        active: false,
+        approved: false,
+        message:
+          "UID access has expired."
+      });
+    }
+
+    // --------------------------------------------------------
+    // FIRST DEVICE CLAIMS UID
+    // --------------------------------------------------------
+
+    if (!record.deviceId) {
+
+      record.deviceId =
+        deviceId;
+
+      writeUIDs(list);
+
+      return res.json({
+        ok: true,
+        active: true,
+        approved: true,
+        claimed: true,
+        uid: record.uid,
+        expiresAt: record.expiresAt,
+        message:
+          "UID approved and device bound."
+      });
+    }
+
+    // --------------------------------------------------------
+    // SAME DEVICE
+    // --------------------------------------------------------
+
+    if (
+      record.deviceId ===
+      deviceId
+    ) {
+
+      return res.json({
+        ok: true,
+        active: true,
+        approved: true,
+        claimed: false,
+        uid: record.uid,
+        expiresAt: record.expiresAt,
+        message:
+          "UID access approved."
+      });
+    }
+
+    // --------------------------------------------------------
+    // DIFFERENT DEVICE
+    // --------------------------------------------------------
+
+    return res.status(403).json({
       ok: true,
       active: false,
       approved: false,
-      message: "UID is not active."
+      deviceMismatch: true,
+      message:
+        "This UID is already bound to another device."
     });
   }
+);
+// ============================================================
+// ACCESS STATUS
+// ============================================================
 
-  const record = list[index];
+app.post(
+  "/api/access/status",
+  (req, res) => {
 
-  // Expired
-  if (Number(record.expiresAt) <= Date.now()) {
-    list.splice(index, 1);
-    writeUIDs(list);
+    const uid =
+      String(req.body?.uid || "").trim();
 
-    return res.json({
-      ok: true,
-      active: false,
-      approved: false,
-      message: "UID access has expired."
-    });
-  }
+    const deviceId =
+      String(req.body?.deviceId || "").trim();
 
-  // First device claims the UID
-  if (!record.deviceId) {
-    record.deviceId = deviceId;
-    record.boundAt = Date.now();
+    if (!validUID(uid) || !validDeviceId(deviceId)) {
+      return res.json({
+        ok: true,
+        active: false
+      });
+    }
 
-    list[index] = record;
-    writeUIDs(list);
+    const list = saveCleanUIDs();
 
-    return res.json({
-      ok: true,
-      active: true,
-      approved: true,
-      claimed: true,
-      uid: record.uid,
-      expiresAt: record.expiresAt,
-      message: "UID activated on this device."
-    });
-  }
+    const record = list.find(
+      item => item.uid === uid
+    );
 
-  // Same device
-  if (record.deviceId === deviceId) {
-    return res.json({
-      ok: true,
-      active: true,
-      approved: true,
-      claimed: false,
-      uid: record.uid,
-      expiresAt: record.expiresAt,
-      message: "UID access is active."
-    });
-  }
+    if (!record) {
+      return res.json({
+        ok: true,
+        active: false
+      });
+    }
 
-  // Different device
-  return res.json({
-    ok: true,
-    active: false,
-    approved: false,
-    deviceMismatch: true,
-    message:
-      "This UID is already bound to another device."
-  });
-});
+    if (
+      Number(record.expiresAt) <= Date.now()
+    ) {
+      return res.json({
+        ok: true,
+        active: false
+      });
+    }
 
-// ------------------------------------------------------------
-// USER - ACCESS STATUS
-// ------------------------------------------------------------
+    if (
+      record.deviceId &&
+      record.deviceId !== deviceId
+    ) {
+      return res.json({
+        ok: true,
+        active: false
+      });
+    }
 
-app.post("/api/access/status", (req, res) => {
-  const uid = String(req.body.uid || "").trim();
-  const deviceId = String(req.body.deviceId || "").trim();
-
-  if (!validUID(uid) || !validDeviceId(deviceId)) {
-    return res.json({
-      ok: true,
-      active: false
-    });
-  }
-
-  const list = saveCleanUIDs();
-
-  const record = list.find(
-    (item) => item.uid === uid
-  );
-
-  if (!record) {
-    return res.json({
-      ok: true,
-      active: false
-    });
-  }
-
-  if (
-    record.expiresAt > Date.now() &&
-    record.deviceId === deviceId
-  ) {
-    return res.json({
+    res.json({
       ok: true,
       active: true,
       uid: record.uid,
       expiresAt: record.expiresAt
     });
   }
+);
 
-  return res.json({
-    ok: true,
-    active: false
-  });
-});
 
-// ------------------------------------------------------------
-// LIVE HISTORY PROXY
-// ------------------------------------------------------------
+// ============================================================
+// LIVE HISTORY CACHE
+// ============================================================
 
-app.get("/api/history", async (req, res) => {
-  try {
-    const response = await fetch(
-      HISTORY_URL + "?t=" + Date.now(),
-      {
-        method: "GET",
-        headers: {
-          "Accept": "application/json,text/plain,*/*",
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36",
-          "Referer":
-            "https://draw.ar-lottery01.com/"
-        },
-        cache: "no-store"
-      }
+let historyCache = null;
+let historyCacheTime = 0;
+
+const HISTORY_CACHE_TIME =
+  30 * 1000;
+
+
+// ============================================================
+// FETCH LIVE HISTORY
+// ============================================================
+
+async function fetchLiveHistory() {
+
+  const separator =
+    HISTORY_URL.includes("?")
+      ? "&"
+      : "?";
+
+  const url =
+    HISTORY_URL +
+    separator +
+    "_t=" +
+    Date.now();
+
+  const controller =
+    new AbortController();
+
+  const timeout =
+    setTimeout(
+      () => controller.abort(),
+      10000
     );
 
-    if (!response.ok) {
-      console.log(
-        "History upstream status:",
-        response.status
+  try {
+
+    const response =
+      await fetch(
+        url,
+        {
+          method: "GET",
+          signal: controller.signal,
+
+          headers: {
+            "Accept":
+              "application/json,text/plain,*/*",
+
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36",
+
+            "Referer":
+              "https://draw.ar-lottery01.com/"
+          }
+        }
       );
 
-      return res.json({
-        ok: false,
-        success: false,
-        data: {
-          list: []
-        },
-        message:
-          "Live history temporarily unavailable."
-      });
+    if (!response.ok) {
+
+      throw new Error(
+        `History API HTTP ${response.status}`
+      );
     }
 
-    const text = await response.text();
+    const contentType =
+      String(
+        response.headers.get(
+          "content-type"
+        ) || ""
+      ).toLowerCase();
 
-    let json;
+    const text =
+      await response.text();
+
+    if (!text || !text.trim()) {
+      throw new Error(
+        "History API returned empty response."
+      );
+    }
+
+    let data;
 
     try {
-      json = JSON.parse(text);
+
+      data =
+        JSON.parse(text);
+
     } catch (error) {
+
+      throw new Error(
+        "History API returned invalid JSON."
+      );
+    }
+
+    // Save only a valid response
+    historyCache = data;
+    historyCacheTime = Date.now();
+
+    return data;
+
+  } finally {
+
+    clearTimeout(timeout);
+  }
+}
+
+
+// ============================================================
+// HISTORY API
+// ============================================================
+
+app.get(
+  "/api/history",
+  async (req, res) => {
+
+    try {
+
+      // Use a fresh live request
+      const data =
+        await fetchLiveHistory();
+
+      return res.json(data);
+
+    } catch (error) {
+
       console.error(
-        "History JSON parse error:",
+        "LIVE HISTORY ERROR:",
         error.message
       );
 
+      // ------------------------------------------------------
+      // FALLBACK TO LAST SUCCESSFUL HISTORY
+      // ------------------------------------------------------
+
+      if (
+        historyCache &&
+        historyCacheTime > 0
+      ) {
+
+        return res.json({
+          ...historyCache,
+
+          cached: true,
+
+          cacheTime:
+            historyCacheTime
+        });
+      }
+
+      // ------------------------------------------------------
+      // SAFE EMPTY RESPONSE
+      // ------------------------------------------------------
+
       return res.json({
-        ok: false,
         success: false,
+
         data: {
           list: []
         },
+
         message:
-          "History response was not JSON."
+          "Live result connection temporarily unavailable."
+      });
+    }
+  }
+);
+
+
+// ============================================================
+// HEALTH CHECK
+// ============================================================
+
+app.get(
+  "/health",
+  (req, res) => {
+
+    res.status(200).json({
+      ok: true,
+      status: "healthy",
+      time: new Date().toISOString()
+    });
+  }
+);
+//
+// ============================================================
+// STATIC FRONTEND
+// ============================================================
+
+const publicDir =
+  path.join(__dirname, "public");
+
+app.use(
+  express.static(publicDir, {
+    extensions: ["html"]
+  })
+);
+
+
+// ============================================================
+// EXPRESS 5 SPA FALLBACK
+// ============================================================
+//
+// IMPORTANT:
+// Express 5 me "*" route syntax issue de sakta hai,
+// isliye middleware based fallback use kiya gaya hai.
+//
+
+app.use(
+  (req, res, next) => {
+
+    // API routes ko frontend par redirect mat karo
+    if (
+      req.path.startsWith("/api/")
+    ) {
+      return next();
+    }
+
+    // Health endpoint bhi skip
+    if (
+      req.path === "/health"
+    ) {
+      return next();
+    }
+
+    const indexFile =
+      path.join(
+        publicDir,
+        "index.html"
+      );
+
+    if (
+      fs.existsSync(indexFile)
+    ) {
+
+      return res.sendFile(
+        indexFile
+      );
+    }
+
+    next();
+  }
+);
+
+
+// ============================================================
+// 404 HANDLER
+// ============================================================
+
+app.use(
+  (req, res) => {
+
+    if (
+      req.path.startsWith("/api/")
+    ) {
+
+      return res.status(404).json({
+        ok: false,
+        message: "API endpoint not found."
       });
     }
 
-    res.setHeader(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate"
+    res.status(404).send(
+      "Page not found."
     );
+  }
+);
 
-    return res.json(json);
 
-  } catch (error) {
+// ============================================================
+// ERROR HANDLER
+// ============================================================
+
+app.use(
+  (err, req, res, next) => {
+
     console.error(
-      "History proxy error:",
-      error.message
+      "SERVER ERROR:",
+      err
     );
 
-    return res.json({
+    if (res.headersSent) {
+      return next(err);
+    }
+
+    res.status(500).json({
       ok: false,
-      success: false,
-      data: {
-        list: []
-      },
       message:
-        "Live history unavailable."
+        "Internal server error."
     });
   }
-});
+);
 
-// ------------------------------------------------------------
-// HEALTH CHECK
-// ------------------------------------------------------------
 
-app.get("/health", (req, res) => {
-  res.json({
-    status: "online",
-    service: "AMBIKA PANE AI",
-    time: new Date().toISOString()
-  });
-});
+// ============================================================
+// START SERVER
+// ============================================================
 
-// ------------------------------------------------------------
-// STATIC FRONTEND
-// ------------------------------------------------------------
+app.listen(
+  PORT,
+  "0.0.0.0",
+  () => {
 
-const PUBLIC_DIR = path.join(__dirname, "public");
+    console.log(
+      "================================================"
+    );
 
-app.use(express.static(PUBLIC_DIR, {
-  extensions: ["html"]
-}));
+    console.log(
+      " AMBIKA PANE AI SERVER STARTED"
+    );
 
-// Express 5 compatible SPA fallback
-app.get(/.*/, (req, res) => {
-  const indexFile = path.join(
-    PUBLIC_DIR,
-    "index.html"
-  );
+    console.log(
+      ` PORT: ${PORT}`
+    );
 
-  if (fs.existsSync(indexFile)) {
-    res.sendFile(indexFile);
-  } else {
-    res.status(404).send(
-      "AMBIKA PANE AI frontend not found."
+    console.log(
+      " HISTORY PROXY: ENABLED"
+    );
+
+    console.log(
+      " UID SYSTEM: ENABLED"
+    );
+
+    console.log(
+      " ADMIN SYSTEM: ENABLED"
+    );
+
+    console.log(
+      "================================================"
     );
   }
-});
-
-// ------------------------------------------------------------
-// START SERVER
-// ------------------------------------------------------------
-
-app.listen(PORT, () => {
-  console.log("");
-  console.log("======================================");
-  console.log("       AMBIKA PANE AI SERVER");
-  console.log("======================================");
-  console.log(`Server: http://localhost:${PORT}`);
-  console.log(`Admin API: /api/admin/login`);
-  console.log(`UID API: /api/access/check`);
-  console.log(`History API: /api/history`);
-  console.log("======================================");
-  console.log("");
-});
+);
