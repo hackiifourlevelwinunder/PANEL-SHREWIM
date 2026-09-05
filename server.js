@@ -508,75 +508,36 @@ app.post("/api/access/status", (req, res) => {
 
 app.get("/api/history", async (req, res) => {
   try {
-    const response = await fetch(HISTORY_URL, {
-      method: "GET",
-      headers: {
-        "Accept": "application/json",
-        "User-Agent":
-          "Mozilla/5.0 AMBIKA-PANE-AI"
-      },
-      cache: "no-store"
-    });
+    const response = await fetch(
+      HISTORY_URL + "?t=" + Date.now(),
+      {
+        method: "GET",
+        headers: {
+          "Accept": "application/json,text/plain,*/*",
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36",
+          "Referer":
+            "https://draw.ar-lottery01.com/"
+        },
+        cache: "no-store"
+      }
+    );
 
     if (!response.ok) {
-     app.get("/api/history", async (req, res) => {
-    try {
-        const url =
-            "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
-
-        const response = await fetch(
-            url + "?t=" + Date.now(),
-            {
-                headers: {
-                    "User-Agent":
-                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36",
-                    "Accept":
-                        "application/json,text/plain,*/*",
-                    "Referer":
-                        "https://draw.ar-lottery01.com/"
-                }
-            }
-        );
-
-        if (!response.ok) {
-            console.log(
-                "History upstream status:",
-                response.status
-            );
-
-            return res.json({
-                success: false,
-                data: {
-                    list: []
-                },
-                message:
-                    "Live history temporarily unavailable"
-            });
-        }
-
-        const data =
-            await response.json();
-
-        return res.json(data);
-
-    } catch (error) {
-
-        console.error(
-            "History proxy error:",
-            error.message
-        );
-
-        return res.json({
-            success: false,
-            data: {
-                list: []
-            },
-            message:
-                "History temporarily unavailable"
-        });
-    }
-});
+      console.log(
+        "History upstream status:",
+        response.status
       );
+
+      return res.json({
+        ok: false,
+        success: false,
+        data: {
+          list: []
+        },
+        message:
+          "Live history temporarily unavailable."
+      });
     }
 
     const text = await response.text();
@@ -586,7 +547,20 @@ app.get("/api/history", async (req, res) => {
     try {
       json = JSON.parse(text);
     } catch (error) {
-      throw new Error("History response was not JSON.");
+      console.error(
+        "History JSON parse error:",
+        error.message
+      );
+
+      return res.json({
+        ok: false,
+        success: false,
+        data: {
+          list: []
+        },
+        message:
+          "History response was not JSON."
+      });
     }
 
     res.setHeader(
@@ -594,13 +568,22 @@ app.get("/api/history", async (req, res) => {
       "no-store, no-cache, must-revalidate"
     );
 
-    res.json(json);
-  } catch (error) {
-    console.error("History proxy error:", error);
+    return res.json(json);
 
-    res.status(502).json({
+  } catch (error) {
+    console.error(
+      "History proxy error:",
+      error.message
+    );
+
+    return res.json({
       ok: false,
-      message: "Live history unavailable."
+      success: false,
+      data: {
+        list: []
+      },
+      message:
+        "Live history unavailable."
     });
   }
 });
