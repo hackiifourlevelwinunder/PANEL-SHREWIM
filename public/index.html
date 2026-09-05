@@ -325,67 +325,24 @@ button{font:inherit}
 </div>
 
 <script>
-(function () {
-    let progress = 0;
+<script src="/js/app.js"></script>
+<script src="/js/admin.js"></script>
 
-    const percent = document.getElementById("percent");
-    const bar = document.getElementById("progressBar");
-    const status = document.getElementById("loadingStatus");
+<script>
+setTimeout(function () {
     const loader = document.getElementById("loadingScreen");
     const app = document.getElementById("app");
 
-    if (!percent || !bar || !loader) return;
+    if (loader) {
+        loader.classList.add("hide");
+        loader.style.display = "none";
+    }
 
-    const messages = [
-        "Initializing secure interface...",
-        "Connecting live system...",
-        "Loading AI engine...",
-        "Synchronizing data...",
-        "Finalizing interface..."
-    ];
-
-    const timer = setInterval(function () {
-        progress += 2;
-
-        if (progress > 100) {
-            progress = 100;
-        }
-
-        percent.textContent = progress + "%";
-        bar.style.width = progress + "%";
-
-        if (status) {
-            status.textContent =
-                messages[
-                    Math.min(
-                        messages.length - 1,
-                        Math.floor(progress / 25)
-                    )
-                ];
-        }
-
-        if (progress >= 100) {
-            clearInterval(timer);
-
-            setTimeout(function () {
-                loader.style.opacity = "0";
-                loader.style.transition = "opacity .5s ease";
-
-                setTimeout(function () {
-                    loader.style.display = "none";
-
-                    if (app) {
-                        app.style.display = "";
-                        app.style.opacity = "1";
-                    }
-                }, 500);
-
-            }, 300);
-        }
-    }, 30);
-})();
+    if (app) {
+        app.style.display = "block";
+        app.style.visibility = "visible";
+        app.style.opacity = "1";
+    }
+}, 3500);
 </script>
-
-<script src="/js/app.js"></script>
-<script src="/js/admin.js"></script>
 </body>
