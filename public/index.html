@@ -3230,7 +3230,25 @@ app.style.visibility =
 
 
 </script>
+<script>
+window.addEventListener("load", function () {
+  setTimeout(function () {
+    const loader = document.getElementById("loadingScreen");
+    const app = document.getElementById("app");
 
+    if (loader) {
+      loader.classList.add("hide");
+      loader.style.display = "none";
+    }
+
+    if (app) {
+      app.style.display = "block";
+      app.style.visibility = "visible";
+      app.style.opacity = "1";
+    }
+  }, 3500);
+});
+</script>
 
 </body>
 </html>
