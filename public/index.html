@@ -12,6 +12,7 @@ body{overflow-x:hidden;background:radial-gradient(circle at 50% -10%,#35408a 0,#
 body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;background-image:linear-gradient(#7b7cff18 1px,transparent 1px),linear-gradient(90deg,#7b7cff18 1px,transparent 1px);background-size:38px 38px;z-index:0}
 body:after{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 30%,transparent 35%,#00131955 100%);z-index:0}
 button{font:inherit}
+
 #loadingScreen{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,#073c44 0,#020e13 52%,#010609 100%);transition:opacity .65s,visibility .65s}
 #loadingScreen.hide{opacity:0;visibility:hidden}
 .loader{text-align:center;width:100%;max-width:410px;padding:28px}
@@ -29,6 +30,7 @@ button{font:inherit}
 .progressBar{width:0;height:100%;background:linear-gradient(90deg,#7b5cff,#64e8ff);box-shadow:0 0 16px #64e8ff;border-radius:20px}
 .loadingStatus{margin-top:13px;color:#66828b;font-size:10px;letter-spacing:1px}
 #app{display:none;position:relative;z-index:1;min-height:100vh}
+
 .container{width:100%;max-width:694px;margin:0 auto;padding:35px 28px 118px}
 .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;padding-bottom:4px}
 .brand{display:flex;align-items:center;gap:21px;min-width:0}
@@ -39,12 +41,14 @@ button{font:inherit}
 .brandText p{margin-top:13px;color:#849da4;font-size:16px;letter-spacing:2px;font-weight:800;white-space:nowrap}
 .aiBars{color:#64e8ff;font-size:18px;letter-spacing:-2px;margin-left:8px}
 .soundBtn{width:68px;height:68px;flex:0 0 68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:29px;background:#111735cc;border:1px solid #5f7dff20;box-shadow:inset 0 0 20px #5f7dff08}
+
 .statusRow{display:grid;grid-template-columns:1.35fr 1fr;gap:20px;margin-bottom:34px}
 .status{height:52px;border-radius:28px;border:1px solid #4bd9ff42;background:#0d1433dd;display:flex;align-items:center;justify-content:center;gap:11px;color:#9bc3ca;font-size:14px;font-weight:800;letter-spacing:1.5px;white-space:nowrap;box-shadow:0 12px 35px #0005,inset 0 0 24px #7b7cff0a}
 .status strong{color:#64e8ff}
 .greenDot,.blueDot{width:13px;height:13px;border-radius:50%;display:inline-block}
 .greenDot{background:#57f2b0;box-shadow:0 0 14px #57f2b0}
 .blueDot{background:#45d7ff;box-shadow:0 0 14px #45d7ff}
+
 .statsBox{height:86px;border-radius:30px;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;padding:0 23px;background:linear-gradient(90deg,#536cff33,#7b5cff2c);border:1px solid #5f7dff61;margin-bottom:31px;box-shadow:0 12px 35px #0005,inset 0 0 24px #7b7cff0a}
 .statLine{display:flex;align-items:center;gap:9px;min-width:0}
 .statLine:first-child{border-right:1px solid #5f7dff35;padding-right:15px}
@@ -52,26 +56,34 @@ button{font:inherit}
 .statLabel{color:#91bbc3;font-size:11px;font-weight:900;letter-spacing:1.2px;white-space:nowrap}
 .statLine strong{color:#64e8ff;font-size:18px;font-weight:900;font-family:monospace;letter-spacing:.3px;white-space:nowrap}
 .demoTag{position:absolute;right:17px;bottom:7px;color:#6f969f;font-size:7px;letter-spacing:1.2px}
+
 .accuracy{height:68px;border-radius:36px;display:flex;align-items:center;padding:0 25px;gap:17px;background:linear-gradient(90deg,#536cff33,#7b5cff2c);border:1px solid #5f7dff61;margin-bottom:31px;box-shadow:0 12px 35px #0005,inset 0 0 24px #7b7cff0a}
+
 .targetCard{border:2px solid #7b7cff66;border-radius:44px;padding:31px 29px 28px;background:radial-gradient(circle at 83% 38%,#45d7ff12,transparent 28%),linear-gradient(135deg,#151b45b0,#12183ebd);box-shadow:0 18px 45px #0006,inset 0 0 40px #7b7cff10;margin-bottom:30px}
 .targetTitle{display:flex;align-items:center;gap:12px;color:#00cce5;font-size:16px;font-weight:900;letter-spacing:2.1px}
 .flag{width:29px;height:9px;background:linear-gradient(90deg,#ff4fc8,#7b5cff);display:inline-block}
-.periodRow{display:grid;grid-template-columns:minmax(0,1fr) 118px;align-items:center;margin-top:22px;gap:14px}
+
+.periodRow{display:grid;grid-template-columns:minmax(0,1fr) 103px;align-items:center;margin-top:22px;gap:14px}
 .periodWrap{min-width:0;overflow:hidden;padding-right:4px}
 #period{font-size:clamp(14px,4.1vw,21px);font-weight:900;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:clip;display:block;width:100%;max-width:100%;letter-spacing:-.4px}
-.timer{width:118px;height:118px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:6px solid #64e8ff;border-left-color:#7b5cff;border-bottom-color:#45d7ff;box-shadow:0 0 24px #45d7ff3d,inset 0 0 20px #45d7ff12;position:relative}
+
+.timer{width:103px;height:103px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:6px solid #64e8ff;border-left-color:#7b5cff;border-bottom-color:#45d7ff;box-shadow:0 0 24px #45d7ff3d,inset 0 0 20px #45d7ff12;position:relative}
 .timer:before{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid #45d7ff12}
 .timer div{font-size:26px;font-weight:900;font-family:monospace}
 .timer small{color:#7da0a9;font-size:10px;letter-spacing:2px;margin-top:5px}
+
 .actionRow{display:flex;gap:16px;margin-top:21px}
 .actionBtn{height:52px;border-radius:27px;border:1px solid #4bd9ff4c;padding:0 24px;background:#0b1230cc;color:#a2cbd2;font-size:15px;font-weight:900}
 .activeBtn i{display:inline-block;width:10px;height:10px;background:#57f2b0;border-radius:50%;box-shadow:0 0 11px #57f2b0;margin-right:9px}
+
 .patternBox{margin-top:28px;border:2px solid #7b7cff;border-radius:25px;padding:23px 20px 19px;background:#080d20f2;box-shadow:inset 0 0 24px #45d7ff05}
 .patternTop{display:flex;justify-content:space-between;gap:15px;color:#c2d3d7;font-size:15px;font-weight:900;line-height:1.7}
 .patternValue{color:#64e8ff;font-size:17px}
 .patternBar{height:17px;margin-top:12px;border-radius:20px;padding:2px;background:#10262c;border:1px solid #007d8a;overflow:hidden}
 .patternFill{width:60%;height:100%;border-radius:20px;background:linear-gradient(90deg,#ffd75a 0 40%,#64e8ff 40%);box-shadow:0 0 10px #64e8ffaa}
+
 .lockCard{min-height:335px;border-radius:22px;border:2px solid #5f7dff67;background:radial-gradient(circle at 50% 22%,#45d7ff16,transparent 33%),linear-gradient(135deg,#11183f,#0a102b);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 28px;box-shadow:0 18px 50px #0007,inset 0 0 55px #7b5cff10;margin-bottom:28px}
+.lockCard.uidActive{min-height:250px}
 .lockCircle{width:104px;height:104px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;border:3px solid #45d7ff;box-shadow:0 0 23px #45d7ff66,inset 0 0 25px #45d7ff1a}
 .lockCircle:before{content:"";position:absolute;inset:-14px;border:3px dashed #7b7cff;border-radius:50%;animation:spin 7s linear infinite}
 .lockCircle:after{content:"";position:absolute;inset:-22px;border:2px dotted #45d7ff59;border-radius:50%;animation:spinr 10s linear infinite}
@@ -79,11 +91,17 @@ button{font:inherit}
 .lockCard h2{margin-top:22px;font-size:34px;font-weight:900;letter-spacing:1px}
 .lockCard p{margin-top:9px;max-width:520px;color:#86aeb7;font-size:18px;line-height:1.55}
 .unlockBtn{width:100%;max-width:550px;height:54px;margin-top:18px;border:0;border-radius:36px;background:linear-gradient(100deg,#57f2b0,#45d7ff 55%,#7b5cff);color:#02151c;font-size:20px;font-weight:900;letter-spacing:1px;box-shadow:0 12px 32px #45d7ff24;cursor:pointer}
+
 .predictionActive{display:none;margin-top:17px;width:100%;padding:16px;border-radius:18px;border:1px solid #57f2b055;background:#071d23;box-shadow:0 0 28px #57f2b014}
 .predictionActive.show{display:block;animation:resultIn .35s ease both}
 .predictionLabel{font-size:9px;color:#57f2b0;letter-spacing:1.5px;font-weight:1000}
 .predictionNumber{margin-top:8px;font-size:45px;font-weight:1000;color:#64e8ff;text-shadow:0 0 18px #45d7ff55}
 .predictionMeta{font-size:10px;color:#86aeb7;margin-top:5px}
+
+.uidSuccess{display:none;width:100%;margin-top:15px;padding:16px;border-radius:17px;border:1px solid #57f2b055;background:#071d23;color:#57f2b0;font-size:14px;font-weight:1000;letter-spacing:.7px}
+.uidSuccess.show{display:block;animation:resultIn .35s ease both}
+.uidSuccess small{display:block;color:#8fb5bc;margin-top:7px;font-size:10px;letter-spacing:.4px}
+
 .resultSection{margin-top:24px;padding-top:5px}
 .resultHeader{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .resultHeader h2{font-size:19px;letter-spacing:1px}
@@ -101,6 +119,7 @@ button{font:inherit}
 .resultStatus.loss{color:#ff4fc8;border-color:#ff4fc855;background:#21112b}
 .resultLoading,.resultError{text-align:center;padding:30px 10px;color:#71839e;font-size:11px;line-height:1.7}
 .demoNote{font-size:8px;color:#71839e;margin:0 0 10px;letter-spacing:.5px}
+
 .unlockOverlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:#000b0fbb;backdrop-filter:blur(9px);opacity:0;visibility:hidden;transition:.3s}
 .unlockOverlay.show{opacity:1;visibility:visible}
 .unlockModal{width:100%;max-width:430px;position:relative;border:1px solid #5f7dff55;border-radius:27px;padding:27px 23px 20px;background:radial-gradient(circle at 50% -10%,#35408a66,transparent 42%),linear-gradient(180deg,#10183def,#070b1bf7);box-shadow:0 0 55px #7b5cff25,0 25px 90px #000d;transform:translateY(15px) scale(.97);transition:.3s}
@@ -125,13 +144,7 @@ button{font:inherit}
 .telegramBtn{width:100%;height:54px;border-radius:18px;border:1px solid #5f7dff44;background:#101d45;color:#64e8ff;font-size:16px;font-weight:900;cursor:pointer}
 .securityRow{display:flex;justify-content:space-between;margin-top:24px;color:#66838b;font-size:11px;letter-spacing:1px}
 .securityRow span{color:#57f2b0}
-.unlockMessage{min-height:20px;margin-top:10px;color:#57f2b0;font-size:12px;font-weight:700}
-.uidDemoResult{display:none;margin-top:16px;padding:17px 14px;border-radius:18px;border:1px solid #ff2b9a88;background:linear-gradient(135deg,#28152fe8,#17152ee8);box-shadow:0 0 30px #ff2b9a18,inset 0 0 25px #ff2b9a0c;text-align:left}
-.uidDemoResult.show{display:block;animation:resultIn .35s ease both}
-.uidDemoTitle{color:#ff2b9a;font-size:14px;font-weight:1000;line-height:1.35}
-.uidDemoText{margin-top:8px;color:#d7d7e4;font-size:12px;line-height:1.55}
-.uidDemoTimer{margin-top:10px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid #45d7ff44;background:#061521;color:#64e8ff;font-size:11px;font-weight:1000;letter-spacing:1px}
-.uidDemoOpen{width:100%;height:52px;margin-top:9px;border:0;border-radius:14px;background:linear-gradient(100deg,#19e6ff,#168cff);color:#02151c;font-size:13px;font-weight:1000;cursor:pointer}
+
 .adminLaunch{display:none;width:100%;height:48px;margin:-10px 0 22px;border-radius:16px;border:1px solid #45d7ff55;background:#0b1535;color:#64e8ff;font-size:12px;font-weight:1000;letter-spacing:1px;cursor:pointer}
 .adminOverlay{position:fixed;inset:0;z-index:11000;display:none;align-items:center;justify-content:center;padding:14px;background:#000c;backdrop-filter:blur(10px)}
 .adminOverlay.show{display:flex}
@@ -151,3357 +164,3073 @@ button{font:inherit}
 .adminItemActions{display:flex;gap:7px;margin-top:9px}
 .adminItemActions button{flex:1;height:34px;border-radius:9px;border:1px solid #45d7ff35;background:#0c1838;color:#64e8ff;font-size:9px;font-weight:900}
 .accessActive{color:#57f2b0!important}
-.historyFocus{animation:focusPulse 1.2s ease 2}
-.tabToast{position:fixed;left:50%;top:20px;transform:translate(-50%,-20px);opacity:0;z-index:1200;background:#0d1638f2;border:1px solid #45d7ff44;color:#dffaff;padding:10px 15px;border-radius:14px;font-size:10px;font-weight:900;letter-spacing:.8px;transition:.25s;box-shadow:0 10px 30px #0008}
-.tabToast.show{opacity:1;transform:translate(-50%,0)}
+
 .bottomNav{position:fixed;z-index:500;bottom:20px;left:28px;right:28px;height:92px;max-width:638px;margin:auto;border-radius:46px;border:1px solid #45d7ff35;background:linear-gradient(180deg,#0e163cf7,#070c22f7);backdrop-filter:blur(18px);display:grid;grid-template-columns:repeat(4,1fr);align-items:center;box-shadow:0 14px 45px #0009,0 0 30px #7b5cff10}
 .navItem{height:74px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#66939d;font-size:11px;font-weight:900;letter-spacing:1px;border-radius:36px;cursor:pointer}
 .navIcon{font-size:29px;margin-bottom:7px}
 .navItem.active{color:#64e8ff;background:linear-gradient(145deg,#45d7ff14,#7b5cff18);box-shadow:inset 0 0 22px #45d7ff10,0 0 18px #7b5cff12}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes spinr{to{transform:rotate(-360deg)}}
-@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 18px #64e8ff,0 0 55px #00dfff66}50%{transform:scale(1.035);box-shadow:0 0 30px #64e8ff,0 0 75px #00dfff88}}
-@keyframes resultIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes focusPulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 35px #45d7ff35}}
+
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes spinr{from{transform:rotate(360deg)}to{transform:rotate(0)}}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 18px #64e8ff,0 0 55px #00dfff66}50%{transform:scale(1.035);box-shadow:0 0 28px #64e8ff,0 0 70px #00dfff88}}
+@keyframes resultIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
 @media(max-width:560px){
-  .container{padding:22px 18px 120px}
-  .brand{gap:13px}
-  .brandPhoto{width:64px;height:64px;flex-basis:64px;border-radius:19px}
-  .brandText h1{font-size:23px}
-  .brandText p{font-size:10px;margin-top:7px;letter-spacing:1.3px}
-  .soundBtn{width:54px;height:54px;flex-basis:54px;font-size:23px}
-  .statusRow{gap:9px;margin-bottom:20px}
-  .status{height:43px;font-size:9px;letter-spacing:.8px}
-  .greenDot,.blueDot{width:8px;height:8px}
-  .statsBox{height:72px;padding:0 12px;border-radius:22px;margin-bottom:18px}
-  .statLine{gap:5px}
-  .statLine:first-child{padding-right:8px}
-  .statLine:nth-child(2){padding-left:8px}
-  .statLabel{font-size:7px;letter-spacing:.6px}
-  .statLine strong{font-size:13px}
-  .demoTag{font-size:5px;right:10px}
-  .accuracy{height:55px;padding:0 15px;gap:9px;border-radius:28px;margin-bottom:19px}
-  .targetCard{padding:22px 17px 20px;border-radius:30px;margin-bottom:20px}
-  .targetTitle{font-size:12px;letter-spacing:1.1px}
-  .flag{width:22px;height:7px}
-  .periodRow{grid-template-columns:minmax(0,1fr) 88px;gap:8px;margin-top:16px}
-  #period{font-size:13px;white-space:nowrap;letter-spacing:-.55px}
-  .timer{width:88px;height:88px;border-width:5px}
-  .timer div{font-size:20px}
-  .timer small{font-size:7px;letter-spacing:1px}
-  .actionRow{gap:8px;margin-top:15px}
-  .actionBtn{height:43px;padding:0 13px;font-size:11px}
-  .patternBox{margin-top:18px;padding:15px 13px;border-radius:19px}
-  .patternTop{font-size:10px}
-  .patternValue{font-size:12px}
-  .patternBar{height:13px;margin-top:8px}
-  .lockCard{min-height:280px;padding:24px 17px;border-radius:20px}
-  .lockCircle{width:82px;height:82px}
-  .lockCircle:before{inset:-10px}
-  .lockCircle:after{inset:-16px}
-  .lockIcon{font-size:33px}
-  .lockCard h2{font-size:25px;margin-top:18px}
-  .lockCard p{font-size:13px;line-height:1.45}
-  .unlockBtn{height:49px;font-size:15px;margin-top:14px}
-  .predictionNumber{font-size:39px}
-  .resultSection{margin-top:18px}
-  .resultHeader h2{font-size:15px}
-  .liveBadge{padding:6px 10px;font-size:8px}
-  .demoNote{font-size:7px}
-  .resultRow{
-    min-height:62px;
-    grid-template-columns:minmax(0,1fr) 43px 53px 55px;
-    gap:5px;
-    padding:8px;
-    border-radius:14px
-  }
-  .resultIssue{font-size:8px}
-  .resultNumber{width:38px;height:38px;border-radius:10px}
-  .resultNumber img{width:34px;height:34px}
-  .resultSize{min-width:45px;font-size:7px;padding:6px 3px}
-  .resultStatus{min-width:50px;font-size:7px;padding:6px 3px}
-  .bottomNav{left:18px;right:18px;bottom:13px;height:76px;border-radius:39px}
-  .navItem{height:62px;font-size:8px;letter-spacing:.5px}
-  .navIcon{font-size:23px;margin-bottom:4px}
-  .unlockModal{padding:22px 17px 17px;border-radius:22px}
-  .modalTitle{font-size:15px}
-  .registerBtn{height:47px;font-size:14px}
-  .uidInput{height:48px;font-size:13px}
-  .verifyBtn{height:54px;font-size:15px;margin-top:16px}
-  .telegramBtn{height:47px;font-size:13px}
-  .securityRow{font-size:8px}
-  .adminPanel{padding:17px;border-radius:20px}
-}
-@media(max-width:370px){
-  .container{padding-left:13px;padding-right:13px}
-  .brandText h1{font-size:20px}
-  .periodRow{grid-template-columns:minmax(0,1fr) 80px}
-  #period{font-size:12px}
-  .timer{width:80px;height:80px}
-  .resultRow{grid-template-columns:minmax(0,1fr) 40px 49px 51px}
-  .resultIssue{font-size:7px}
-}
-</style>
-</head>
+.container{padding:28px 20px 110px}
+.header{margin-bottom:24px}
+.brand{gap:13px}
+.brandPhoto{width:64px;height:64px;flex-basis:64px;border-radius:20px}
+.brandText h1{font-size:22px}
+.brandText p{font-size:9px;letter-spacing:1.7px;margin-top:8px}
+.aiBars{font-size:15px}
+.soundBtn{width:55px;height:55px;flex-basis:55px;font-size:23px}
+.statusRow{gap:11px;margin-bottom:25px}
+.status{height:50px;font-size:9px;letter-spacing:.3px}
+.greenDot,.blueDot{width:9px;height:9px}
+.statsBox{height:72px;padding:0 13px;border-radius:25px;margin-bottom:27px}
+.statLine{gap:6px}
+.statLine:first-child{padding-right:8px}
+.statLine:nth-child(2){padding-left:8px}
+.statLabel{font-size:8px;letter-spacing:.6px}
+.statLine strong{font-size:13px}
+.demoTag{font-size:6px;right:10px;bottom:5px}
+.accuracy{height:62px;margin-bottom:27px;padding:0 19px}
+.targetCard{border-radius:34px;padding:25px 20px 22px;margin-bottom:27px}
+.targetTitle{font-size:12px;letter-spacing:1.6px}
+.periodRow{margin-top:18px;grid-template-columns:minmax(0,1fr) 103px}
+#period{font-size:20px;line-height:1.15}
+.timer{width:103px;height:103px}
+.timer div{font-size:22px}
+.timer small{font-size:9px}
+.actionRow{gap:10px;margin-top:18px}
+.actionBtn{height:48px;padding:0 17px;font-size:12px}
+.patternBox{margin-top:21px;border-radius:20px;padding:18px 15px 15px}
+.patternTop{font-size:11px}
+.patternValue{font-size:14px}
+.patternBar{height:15px}
+.lockCard{min-height:335px;border-radius:22px;padding:25px 18px}
+.lockCard.uidActive{min-height:250px}
+.lockCircle{width:96px;height:96px}
+.lockCard h2{font-size:24px;margin-top:27px}
+.lockCard p{font-size:13px;margin-top:10px}
+.unlockBtn{height:52px;font-size:15px;margin-top:20px}
+.bottomNav{left:20px;right:20px;bottom:13px;height:82px;border-radius:41px}
+.navItem{height:67px;font-size:9px}
+.navIcon{font-size:24px;margin-bottom:5px}
+.resultHeader h2{font-size:16px}
+.resultRow{grid-template-columns:minmax(0,1fr) 38px 48px 54px;gap:5px;padding:7px 8px;min-height:58px}
+.resultNumber{width
+<div class="unlockOverlay" id="unlockOverlay">
+<div class="unlockModal">
 
-<body>
+<button class="modalClose" id="modalClose">×</button>
 
-<!-- =========================================================
-     LOADING SCREEN
-========================================================= -->
-
-<div id="loadingScreen">
-  <div class="loader">
-
-    <div class="loaderPhotoBox">
-      <img
-        class="loaderPhoto"
-        src="https://cdn.phototourl.com/free/2026-09-05-e7988a19-dd93-4d34-8c85-a7f55d287064.jpg"
-        alt="AMBIKA"
-      >
-    </div>
-
-    <div class="loaderTitle">
-      AMBIKA PANE AI
-    </div>
-
-    <div class="loaderSub">
-      SECURE CONTROL SYSTEM
-    </div>
-
-    <div class="progressArea">
-
-      <div class="progressInfo">
-        <span>INITIALIZING SYSTEM</span>
-        <span id="percent">0%</span>
-      </div>
-
-      <div class="progress">
-        <div
-          class="progressBar"
-          id="progressBar"
-        ></div>
-      </div>
-
-      <div
-        class="loadingStatus"
-        id="loadingStatus"
-      >
-        Initializing secure interface...
-      </div>
-
-    </div>
-
-  </div>
+<div class="modalLock">
+<span>♙</span>
 </div>
 
-
-<!-- =========================================================
-     MAIN APP
-========================================================= -->
-
-<div id="app">
-
-<div class="container">
-
-  <!-- HEADER -->
-  <header class="header">
-
-    <div class="brand">
-
-      <img
-        class="brandPhoto"
-        src="https://cdn.phototourl.com/free/2026-09-05-e7988a19-dd93-4d34-8c85-a7f55d287064.jpg"
-        alt="AMBIKA"
-      >
-
-      <div class="brandText">
-
-        <h1>
-          AMBIKA <span>PANE AI</span>
-        </h1>
-
-        <p>
-          ADVANCED CONTROL ENGINE
-          <span class="aiBars">▮▮▮</span>
-        </p>
-
-      </div>
-
-    </div>
-
-    <button
-      class="soundBtn"
-      id="soundBtn"
-      type="button"
-      aria-label="Sound"
-    >
-      🔊
-    </button>
-
-  </header>
-
-
-  <!-- STATUS -->
-  <div class="statusRow">
-
-    <div class="status">
-      <span class="greenDot"></span>
-      SYSTEM ONLINE
-    </div>
-
-    <div class="status">
-      <span class="blueDot"></span>
-      <strong>AI ENGINE</strong>
-    </div>
-
-  </div>
-
-
-  <!-- STATS -->
-  <div class="statsBox">
-
-    <div class="statLine">
-      <span class="statLabel">
-        LIVE STATUS
-      </span>
-      <strong id="liveStatus">
-        CONNECTING
-      </strong>
-    </div>
-
-    <div class="statLine">
-      <span class="statLabel">
-        SERVER
-      </span>
-      <strong id="serverStatus">
-        ONLINE
-      </strong>
-    </div>
-
-    <div class="demoTag">
-      LIVE API INTERFACE
-    </div>
-
-  </div>
-
-
-  <!-- ACCURACY / INFO -->
-  <div class="accuracy">
-
-    <span class="greenDot"></span>
-
-    <div>
-      <div
-        style="font-size:12px;font-weight:900;color:#d9f9fc"
-      >
-        LIVE DATA CONNECTION
-      </div>
-
-      <div
-        style="font-size:9px;color:#718f99;margin-top:4px"
-      >
-        Results are read from the connected history feed
-      </div>
-    </div>
-
-  </div>
-
-
-  <!-- TARGET PERIOD -->
-  <section class="targetCard">
-
-    <div class="targetTitle">
-      <span class="flag"></span>
-      TARGET PERIOD NUMBER
-    </div>
-
-    <div class="periodRow">
-
-      <div class="periodWrap">
-
-        <div
-          id="period"
-        >
-          SYNCING...
-        </div>
-
-      </div>
-
-      <div class="timer">
-
-        <div id="countdown">
-          00:59
-        </div>
-
-        <small>
-          NEXT
-        </small>
-
-      </div>
-
-    </div>
-
-
-    <div class="actionRow">
-
-      <button
-        class="actionBtn activeBtn"
-        type="button"
-      >
-        <i></i>
-        LIVE
-      </button>
-
-      <button
-        class="actionBtn"
-        type="button"
-        id="refreshBtn"
-      >
-        ↻ REFRESH
-      </button>
-
-    </div>
-
-
-    <div class="patternBox">
-
-      <div class="patternTop">
-
-        <span>
-          PATTERN DISTRIBUTION
-        </span>
-
-        <span
-          class="patternValue"
-          id="patternValue"
-        >
-          ANALYZING
-        </span>
-
-      </div>
-
-      <div class="patternBar">
-        <div
-          class="patternFill"
-          id="patternFill"
-        ></div>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- PREDICTION / ACCESS CARD -->
-  <section
-    class="lockCard"
-    id="lockCard"
-  >
-
-    <div
-      class="lockCircle"
-      id="lockCircle"
-    >
-      <div class="lockIcon">
-        ♙
-      </div>
-    </div>
-
-    <h2 id="lockTitle">
-      Prediction Locked
-    </h2>
-
-    <p id="lockText">
-      Enter your Game UID to open the access panel.
-    </p>
-
-    <button
-      class="unlockBtn"
-      id="unlockBtn"
-      type="button"
-    >
-      UNLOCK PREDICTION
-    </button>
-
-    <div
-      class="uidSuccess"
-      id="uidSuccess"
-    >
-
-      <div class="uidSuccessTitle">
-        ✓ UID SUCCESSFULLY ACTIVATED
-      </div>
-
-      <div
-        class="uidSuccessUid"
-        id="uidSuccessUid"
-      >
-        UID —
-      </div>
-
-      <div class="uidSuccessText">
-        Access is active. The demo result updates every minute.
-      </div>
-
-    </div>
-
-    <div
-      class="predictionActive"
-      id="predictionActive"
-    >
-
-      <div class="predictionLabel">
-        ACCESS ACTIVE • DEMO RESULT
-      </div>
-
-      <div
-        class="predictionNumber"
-        id="predictionNumber"
-      >
-        —
-      </div>
-
-      <div
-        class="predictionMeta"
-        id="predictionMeta"
-      >
-        Waiting for UID...
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =======================================================
-       LIVE HISTORY
-  ======================================================== -->
-
-  <section
-    class="resultSection"
-    id="resultSection"
-  >
-
-    <div class="resultHeader">
-
-      <h2>
-        LIVE RESULT HISTORY
-      </h2>
-
-      <div class="liveBadge">
-        ● LIVE
-      </div>
-
-    </div>
-
-    <div class="demoNote">
-      Results are read from the connected live history feed.
-    </div>
-
-    <div
-      class="resultList"
-      id="resultList"
-    >
-
-      <div class="resultLoading">
-        Loading live results...
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ADMIN BUTTON -->
-  <button
-    class="adminLaunch"
-    id="adminLaunch"
-    type="button"
-  >
-    ⚙ ADMIN CONTROL PANEL
-  </button>
-
+<div class="modalTitle">
+UNLOCK <span>AMBIKA PANE AI</span>
 </div>
 
-
-<!-- =========================================================
-     BOTTOM NAVIGATION
-========================================================= -->
-
-<nav class="bottomNav">
-
-  <div
-    class="navItem active"
-    data-tab="dashboard"
-  >
-    <div class="navIcon">⌂</div>
-    DASHBOARD
-  </div>
-
-  <div
-    class="navItem"
-    data-tab="history"
-  >
-    <div class="navIcon">↶</div>
-    HISTORY
-  </div>
-
-  <div
-    class="navItem"
-    data-tab="uid"
-  >
-    <div class="navIcon">♙</div>
-    UID / VIP
-  </div>
-
-  <div
-    class="navItem"
-    data-tab="telegram"
-  >
-    <div class="navIcon">➤</div>
-    TELEGRAM
-  </div>
-
-</nav>
-
+<div class="modalSub">
+Enter your Game UID to verify approved access.
 </div>
 
+<div class="accessBox">
+<div class="accessTop">
+<span>★ CODE: 673634078162</span>
+<span class="signal">100% SIGNAL</span>
+</div>
 
-<!-- =========================================================
-     UID ACCESS MODAL
-========================================================= -->
+<button class="registerBtn" id="registerBtn">
+REGISTER ACCOUNT ↗
+</button>
+</div>
 
-<div
-  class="unlockOverlay"
-  id="unlockOverlay"
+<div class="uidLabel">
+<span>GAME UID NUMBER</span>
+<span>5–8 DIGITS</span>
+</div>
+
+<input
+class="uidInput"
+id="uidInput"
+inputmode="numeric"
+maxlength="8"
+placeholder="ENTER GAME UID (e.g. 77788)"
 >
 
-  <div class="unlockModal">
+<button class="verifyBtn" id="verifyBtn">
+VERIFY &amp; UNLOCK ⚡
+</button>
 
-    <button
-      class="modalClose"
-      id="modalClose"
-      type="button"
-    >
-      ×
-    </button>
+<div class="unlockMessage" id="unlockMessage"></div>
 
-    <div class="modalLock">
-      <span>♙</span>
-    </div>
+<div class="uidDemoResult" id="uidDemoResult">
+<div class="uidDemoTitle">
+✓ UID REQUEST SENT — <span id="demoUidValue">—</span>
+</div>
 
-    <div class="modalTitle">
-      <span>UID</span> ACCESS PANEL
-    </div>
+<div class="uidDemoText">
+Your UID activation request has been sent to admin.
+Please wait for approval.
+</div>
 
-    <div class="modalSub">
-      Verify your Game UID to access the panel.
-    </div>
+<div class="uidDemoTimer" id="requestStatus">
+⏳ WAITING FOR ADMIN APPROVAL...
+</div>
+</div>
 
-    <div class="accessBox">
+<div class="modalDivider"></div>
 
-      <div class="accessTop">
-        <span>
-          ACCESS SERVER
-        </span>
+<button class="telegramBtn" id="telegramBtn">
+◉ &nbsp; TELEGRAM SUPPORT
+</button>
 
-        <span class="signal">
-          ● ONLINE
-        </span>
-      </div>
+<div class="securityRow">
+<span>SECURITY: 256-BIT SHA</span>
+<span>ADMIN APPROVAL</span>
+</div>
 
-    </div>
-
-    <button
-      class="registerBtn"
-      id="registerBtn"
-      type="button"
-    >
-      REGISTER / JOIN
-    </button>
-
-    <div class="uidLabel">
-      <span>
-        GAME UID
-      </span>
-
-      <span>
-        5–8 DIGITS
-      </span>
-    </div>
-
-    <input
-      class="uidInput"
-      id="uidInput"
-      type="tel"
-      inputmode="numeric"
-      maxlength="8"
-      autocomplete="off"
-      placeholder="Enter your Game UID"
-    >
-
-    <button
-      class="verifyBtn"
-      id="verifyBtn"
-      type="button"
-    >
-      VERIFY UID
-    </button>
-
-    <div
-      class="unlockMessage"
-      id="unlockMessage"
-    ></div>
-
-    <div
-      class="uidDemoResult"
-      id="uidDemoResult"
-    >
-
-      <div class="uidDemoTitle">
-        UID SUBMITTED
-      </div>
-
-      <div class="uidDemoText">
-        Your UID has been sent to the admin panel.
-        Wait for activation.
-      </div>
-
-      <div
-        class="uidDemoTimer"
-        id="redirectCount"
-      >
-        WAITING FOR APPROVAL
-      </div>
-
-      <button
-        class="uidDemoOpen"
-        id="openRegisterDemo"
-        type="button"
-      >
-        OPEN REGISTRATION
-      </button>
-
-    </div>
-
-    <div class="modalDivider"></div>
-
-    <button
-      class="telegramBtn"
-      id="telegramBtn"
-      type="button"
-    >
-      CONTACT / SUPPORT
-    </button>
-
-    <div class="securityRow">
-      <span>● SECURE</span>
-      <span>● UID PROTECTED</span>
-    </div>
-
-  </div>
-
+</div>
 </div>
 
 
-<!-- =========================================================
-     ADMIN PANEL
-========================================================= -->
+<!-- ============================= -->
+<!-- ADMIN PANEL -->
+<!-- ============================= -->
 
-<div
-  class="adminOverlay"
-  id="adminOverlay"
+<div class="adminOverlay" id="adminOverlay">
+<div class="adminPanel">
+
+<div class="adminHead">
+<h2>⚙ AMBIKA ADMIN</h2>
+<button class="adminClose" id="adminClose">×</button>
+</div>
+
+<div id="adminLoginBox" class="adminLogin">
+
+<input
+class="adminInput"
+id="adminPassword"
+type="password"
+placeholder="Admin password"
 >
 
-  <div class="adminPanel">
+<button class="adminBtn" id="adminLoginBtn">
+LOGIN
+</button>
 
-    <div class="adminHead">
-
-      <h2>
-        ADMIN CONTROL
-      </h2>
-
-      <button
-        class="adminClose"
-        id="adminClose"
-        type="button"
-      >
-        ×
-      </button>
-
-    </div>
-
-    <div
-      class="adminLogin"
-      id="adminLoginBox"
-    >
-
-      <div class="adminInfo">
-        Enter administrator password.
-      </div>
-
-      <input
-        class="adminInput"
-        id="adminPassword"
-        type="password"
-        placeholder="Admin password"
-      >
-
-      <button
-        class="adminBtn"
-        id="adminLoginBtn"
-        type="button"
-      >
-        ADMIN LOGIN
-      </button>
-
-    </div>
-
-    <div
-      class="adminControls"
-      id="adminControls"
-      style="display:none"
-    >
-
-      <div class="adminInfo">
-        MEMBER UID REQUESTS
-      </div>
-
-      <div
-        class="adminList"
-        id="requestList"
-      ></div>
-
-      <div
-        class="adminInfo"
-        style="margin-top:14px"
-      >
-        Pending UIDs appear here when a member submits one.
-      </div>
-
-      <div
-        class="adminList"
-        id="adminList"
-      ></div>
-
-      <div class="adminInfo">
-        Manual activation
-      </div>
-
-      <input
-        class="adminInput"
-        id="adminUid"
-        type="tel"
-        inputmode="numeric"
-        maxlength="8"
-        placeholder="UID"
-      >
-
-      <select
-        class="adminSelect"
-        id="adminDuration"
-      >
-        <option value="1">
-          1 Hour
-        </option>
-
-        <option value="24">
-          24 Hours
-        </option>
-      </select>
-
-      <button
-        class="adminBtn"
-        id="adminActivate"
-        type="button"
-      >
-        ACTIVATE UID
-      </button>
-
-      <button
-        class="adminBtn red"
-        id="adminDeactivateAll"
-        type="button"
-      >
-        LOCK ALL UIDS
-      </button>
-
-    </div>
-
-  </div>
+<div class="adminInfo">
+Admin panel controls UID activation requests and active access.
+</div>
 
 </div>
+
+
+<div id="adminControls" style="display:none">
+
+<div class="adminControls">
+
+<input
+class="adminInput"
+id="adminUid"
+inputmode="numeric"
+maxlength="8"
+placeholder="Game UID (5–8 digits)"
+>
+
+<select class="adminSelect" id="adminDuration">
+<option value="1">Active for 1 hour</option>
+<option value="24">Active for 1 day</option>
+</select>
+
+<button class="adminBtn" id="adminActivate">
+ACTIVATE UID
+</button>
+
+<button class="adminBtn red" id="adminDeactivateAll">
+LOCK ALL UID ACCESS
+</button>
+
+</div>
+
+<div class="adminInfo" style="margin-top:12px">
+Pending requests appear below automatically. Activate a request to allow that member's device to access predictions.
+</div>
+
+<div class="adminList" id="adminList"></div>
+
+</div>
+</div>
+</div>
+
+
+<!-- ============================= -->
+<!-- BOTTOM NAVIGATION -->
+<!-- ============================= -->
+
+<div class="bottomNav">
+
+<div class="navItem active" data-tab="dashboard">
+<div class="navIcon">⌂</div>
+DASHBOARD
+</div>
+
+<div class="navItem" data-tab="history">
+<div class="navIcon">↶</div>
+HISTORY
+</div>
+
+<div class="navItem" data-tab="uid">
+<div class="navIcon">⚿</div>
+UID / VIP
+</div>
+
+<div class="navItem" data-tab="telegram">
+<div class="navIcon">➤</div>
+TELEGRAM
+</div>
+
+</div>
+
+</div>
+
+
 <script>
-/* =========================================================
-   CONFIG
-========================================================= */
+
+/* =========================================
+   BASIC CONFIG
+========================================= */
 
 const API_URL = "/api/history";
 
 const REGISTER_URL =
-  "https://www.shreewin55.com/#/register?invitationCode=86286195967";
-
-const NUMBER_IMAGES = {
-  0:"https://dynamic-indigo-glkg7p1j.edgeone.dev/0.png",
-  1:"https://dynamic-indigo-glkg7p1j.edgeone.dev/1.png",
-  2:"https://dynamic-indigo-glkg7p1j.edgeone.dev/2.png",
-  3:"https://dynamic-indigo-glkg7p1j.edgeone.dev/3.png",
-  4:"https://dynamic-indigo-glkg7p1j.edgeone.dev/4.png",
-  5:"https://dynamic-indigo-glkg7p1j.edgeone.dev/5.png",
-  6:"https://dynamic-indigo-glkg7p1j.edgeone.dev/6.png",
-  7:"https://dynamic-indigo-glkg7p1j.edgeone.dev/7.png",
-  8:"https://dynamic-indigo-glkg7p1j.edgeone.dev/8.png",
-  9:"https://dynamic-indigo-glkg7p1j.edgeone.dev/9%20%281%29.png"
-};
-
-
-/* =========================================================
-   VOICE
-========================================================= */
+"https://www.shreewin55.com/#/register?invitationCode=86286195967";
 
 const firstVoice = new Audio(
-  "https://www.image2url.com/r2/default/audio/1788601237629-ae72506e-6dd9-4f75-8c03-b0383f16e698.mp3"
+"https://www.image2url.com/r2/default/audio/1788601237629-ae72506e-6dd9-4f75-8c03-b0383f16e698.mp3"
 );
 
 const secondVoice = new Audio(
-  "https://www.image2url.com/r2/default/audio/1788602798484-4fe76aab-b340-451d-aa47-eb2c157e4ea4.mp3"
+"https://www.image2url.com/r2/default/audio/1788602798484-4fe76aab-b340-451d-aa47-eb2c157e4ea4.mp3"
 );
 
 firstVoice.preload = "auto";
 secondVoice.preload = "auto";
 
 
-/* =========================================================
-   LOADING
-========================================================= */
+/* =========================================
+   LOADING SCREEN
+========================================= */
 
 const loadingScreen =
-  document.getElementById("loadingScreen");
+document.getElementById("loadingScreen");
 
 const app =
-  document.getElementById("app");
+document.getElementById("app");
 
-const progressBar =
-  document.getElementById("progressBar");
+const bar =
+document.getElementById("progressBar");
 
 const percent =
-  document.getElementById("percent");
+document.getElementById("percent");
 
 const loadingStatus =
-  document.getElementById("loadingStatus");
+document.getElementById("loadingStatus");
 
-const loadingMessages = [
-  "Initializing secure interface...",
-  "Connecting AI engine...",
-  "Synchronizing game server...",
-  "Loading live database...",
-  "Preparing dashboard...",
-  "System ready..."
+const msgs = [
+"Initializing secure interface...",
+"Connecting AI engine...",
+"Synchronizing game server...",
+"Loading live database...",
+"Preparing dashboard...",
+"System ready..."
 ];
 
-const loadingStart =
-  performance.now();
+const start = performance.now();
 
 function loadingLoop(now){
 
-  const elapsed =
-    now - loadingStart;
-
-  const p =
-    Math.min(
-      100,
-      Math.floor(
-        (elapsed / 3000) * 100
-      )
-    );
-
-  progressBar.style.width =
-    p + "%";
-
-  percent.textContent =
-    p + "%";
-
-  loadingStatus.textContent =
-    loadingMessages[
-      Math.min(
-        loadingMessages.length - 1,
-        Math.floor(p / 18)
-      )
-    ];
-
-  if(p < 100){
-
-    requestAnimationFrame(
-      loadingLoop
-    );
-
-  }else{
-
-    setTimeout(()=>{
-
-      loadingScreen.classList.add(
-        "hide"
-      );
-
-      app.style.display =
-        "block";
-
-    },150);
-
-  }
-}
-
-requestAnimationFrame(
-  loadingLoop
+let p = Math.min(
+100,
+Math.floor(((now - start) / 3000) * 100)
 );
 
+bar.style.width = p + "%";
 
-/* =========================================================
-   HELPERS
-========================================================= */
+percent.textContent = p + "%";
 
-function getNumberFromItem(item){
+loadingStatus.textContent =
+msgs[Math.min(
+msgs.length - 1,
+Math.floor(p / 18)
+)];
 
-  const candidates = [
-    item?.number,
-    item?.result,
-    item?.openNum,
-    item?.openNumber,
-    item?.winNumber,
-    item?.lotteryResult
-  ];
+if(p < 100){
 
-  for(const value of candidates){
+requestAnimationFrame(loadingLoop);
 
-    const n =
-      Number(
-        String(value ?? "")
-          .match(/\d/)?.[0]
-      );
+}else{
 
-    if(Number.isInteger(n) &&
-       n >= 0 &&
-       n <= 9){
+setTimeout(() => {
 
-      return n;
-    }
-  }
+loadingScreen.classList.add("hide");
 
-  return null;
+app.style.display = "block";
+
+},150);
+
 }
 
-
-function getPeriodFromItem(item){
-
-  return String(
-    item?.issueNumber ??
-    item?.issue ??
-    item?.period ??
-    item?.issueNo ??
-    item?.number ??
-    ""
-  );
 }
 
-
-function isSmall(number){
-
-  return Number(number) >= 0 &&
-         Number(number) <= 4;
-}
+requestAnimationFrame(loadingLoop);
 
 
-function sizeText(number){
-
-  return isSmall(number)
-    ? "SMALL"
-    : "BIG";
-}
-
-
-/* =========================================================
-   LIVE HISTORY
-========================================================= */
-
-let historyList = [];
+/* =========================================
+   HISTORY
+========================================= */
 
 let currentPeriod = "";
+let seconds = 60;
 
-let currentNumber = null;
+function pick(obj, keys){
+
+for(const key of keys){
+
+if(
+obj &&
+obj[key] !== undefined &&
+obj[key] !== null &&
+obj[key] !== ""
+){
+
+return obj[key];
+
+}
+
+}
+
+return "";
+
+}
+
+
+function getList(json){
+
+return (
+json?.data?.list ||
+json?.data?.records ||
+json?.list ||
+json?.records ||
+[]
+);
+
+}
 
 
 async function loadResults(){
 
-  const listEl =
-    document.getElementById(
-      "resultList"
-    );
+const box =
+document.getElementById("resultList");
 
-  const liveStatus =
-    document.getElementById(
-      "liveStatus"
-    );
+try{
 
-  const serverStatus =
-    document.getElementById(
-      "serverStatus"
-    );
+const response =
+await fetch(API_URL,{
+cache:"no-store"
+});
 
-  try{
+if(!response.ok){
 
-    if(liveStatus){
-      liveStatus.textContent =
-        "LOADING";
-    }
+throw new Error("History request failed");
 
-    const response =
-      await fetch(
-        API_URL + "?t=" + Date.now(),
-        {
-          method:"GET",
-          cache:"no-store",
-          headers:{
-            "Accept":
-              "application/json,text/plain,*/*"
-          }
-        }
-      );
+}
 
-    if(!response.ok){
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
-    }
+const json =
+await response.json();
 
-    const json =
-      await response.json();
+const list =
+getList(json);
 
-    let list =
-      json?.data?.list ??
-      json?.data?.records ??
-      json?.list ??
-      json?.records ??
-      [];
+if(
+!Array.isArray(list) ||
+!list.length
+){
 
-    if(!Array.isArray(list)){
-      list = [];
-    }
+throw new Error("No history");
 
-    historyList =
-      list
-        .map(item=>({
-          raw:item,
-          period:getPeriodFromItem(item),
-          number:getNumberFromItem(item)
-        }))
-        .filter(item=>
-          item.period ||
-          item.number !== null
-        );
+}
 
-    if(historyList.length){
+renderResults(list);
 
-      if(liveStatus){
-        liveStatus.textContent =
-          "LIVE";
-      }
+updatePeriod(list);
 
-      if(serverStatus){
-        serverStatus.textContent =
-          "ONLINE";
-      }
+updatePattern(list);
 
-      renderHistory();
+}
+catch(error){
 
-      syncPeriod();
+box.innerHTML = `
+<div class="resultError">
+Live result connection unavailable.<br>
+Please refresh or check the server.
+</div>
+`;
 
-      updatePattern();
-
-    }else{
-
-      if(liveStatus){
-        liveStatus.textContent =
-          "WAITING";
-      }
-
-      renderEmptyHistory();
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "History error:",
-      error
-    );
-
-    if(liveStatus){
-      liveStatus.textContent =
-        "OFFLINE";
-    }
-
-    if(serverStatus){
-      serverStatus.textContent =
-        "RETRY";
-    }
-
-    if(!historyList.length){
-      renderHistoryError();
-    }
-
-  }
+}
 
 }
 
 
-/* =========================================================
-   HISTORY RENDER
-========================================================= */
+/* =========================================
+   NUMBER IMAGES
+========================================= */
 
-function renderHistory(){
+function renderResults(list){
 
-  const listEl =
-    document.getElementById(
-      "resultList"
-    );
+const imgs = {
 
-  if(!listEl)return;
+0:"https://dynamic-indigo-glkg7p1j.edgeone.dev/0.png",
 
-  const rows =
-    historyList
-      .slice(0,20)
-      .map((item,index)=>{
+1:"https://dynamic-indigo-glkg7p1j.edgeone.dev/1.png",
 
-        const number =
-          item.number;
+2:"https://dynamic-indigo-glkg7p1j.edgeone.dev/2.png",
 
-        const period =
-          item.period ||
-          "—";
+3:"https://dynamic-indigo-glkg7p1j.edgeone.dev/3.png",
 
-        const size =
-          number === null
-            ? "—"
-            : sizeText(number);
+4:"https://dynamic-indigo-glkg7p1j.edgeone.dev/4.png",
 
-        const numberHtml =
-          number === null
+5:"https://dynamic-indigo-glkg7p1j.edgeone.dev/5.png",
 
-            ? `<span class="resultNumberFallback">?</span>`
+6:"https://dynamic-indigo-glkg7p1j.edgeone.dev/6.png",
 
-            : `<img
-                src="${NUMBER_IMAGES[number]}"
-                alt="${number}"
-                onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=&quot;resultNumberFallback&quot;>${number}</span>')"
-              >`;
+7:"https://dynamic-indigo-glkg7p1j.edgeone.dev/7.png",
 
-        return `
-          <div class="resultRow">
+8:"https://dynamic-indigo-glkg7p1j.edgeone.dev/8.png",
 
-            <div class="resultIssue">
-              ${escapeHtml(period)}
-            </div>
+9:"https://dynamic-indigo-glkg7p1j.edgeone.dev/9%20%281%29.png"
 
-            <div class="resultNumber">
-              ${numberHtml}
-            </div>
+};
 
-            <div
-              class="resultSize ${
-                size === "BIG"
-                  ? "resultBig"
-                  : "resultSmall"
-              }"
-            >
-              ${size}
-            </div>
 
-            <div class="resultStatus">
-              ${index === 0
-                ? "LIVE"
-                : "WIN"}
-            </div>
+document.getElementById("resultList").innerHTML =
 
-          </div>
-        `;
+list.slice(0,20).map((item,index)=>{
 
-      })
-      .join("");
+const issue =
+pick(item,[
+"issueNumber",
+"issue",
+"period",
+"issueNo"
+]);
 
-  listEl.innerHTML =
-    rows ||
-    `<div class="resultLoading">
-       No live results available.
-     </div>`;
+const number =
+Number(
+pick(item,[
+"number",
+"openNumber",
+"result",
+"resultNumber",
+"winNumber"
+])
+);
+
+const valid =
+Number.isInteger(number) &&
+number >= 0 &&
+number <= 9;
+
+
+/* 0-4 SMALL / 5-9 BIG */
+
+const size =
+valid
+? (number >= 5 ? "BIG" : "SMALL")
+: "--";
+
+
+const status =
+index % 3 === 2
+? "LOSS"
+: "WIN";
+
+
+return `
+
+<div class="resultRow">
+
+<div class="resultIssue">
+
+<span style="
+display:block;
+color:#4f7780;
+font-size:8px;
+letter-spacing:1px;
+margin-bottom:4px
+">
+PERIOD
+</span>
+
+${issue || "Round " + (index + 1)}
+
+</div>
+
+
+<div class="resultNumber">
+
+${
+valid
+?
+`
+<img
+src="${imgs[number]}"
+alt="${number}"
+onerror="
+this.style.display='none';
+this.parentElement.innerHTML='<span class=resultNumberFallback>${number}</span>'
+"
+>
+`
+:
+`
+<span class="resultNumberFallback">
+--
+</span>
+`
+}
+
+</div>
+
+
+<div class="
+resultSize
+${size === "BIG" ? "resultBig" : "resultSmall"}
+">
+
+${size}
+
+</div>
+
+
+<div class="
+resultStatus
+${status === "LOSS" ? "loss" : ""}
+">
+
+${status}
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
 }
 
 
-function renderEmptyHistory(){
-
-  const listEl =
-    document.getElementById(
-      "resultList"
-    );
-
-  if(!listEl)return;
-
-  listEl.innerHTML = `
-    <div class="resultLoading">
-      Waiting for live result feed...
-    </div>
-  `;
-}
-
-
-function renderHistoryError(){
-
-  const listEl =
-    document.getElementById(
-      "resultList"
-    );
-
-  if(!listEl)return;
-
-  listEl.innerHTML = `
-    <div class="resultError">
-      Live result connection unavailable.<br>
-      Retrying automatically...
-    </div>
-  `;
-}
-
-
-function escapeHtml(value){
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-
-/* =========================================================
+/* =========================================
    PERIOD
-========================================================= */
+========================================= */
 
-function syncPeriod(){
+function updatePeriod(list){
 
-  const periodEl =
-    document.getElementById(
-      "period"
-    );
+const raw =
+pick(
+list[0] || {},
+[
+"issueNumber",
+"issue",
+"period",
+"issueNo"
+]
+);
 
-  if(!periodEl)return;
+const digits =
+String(raw || "").replace(/\D/g,"");
 
-  if(!historyList.length){
+if(digits.length >= 10){
 
-    periodEl.textContent =
-      "SYNCING...";
+try{
 
-    return;
-  }
+currentPeriod =
+(BigInt(digits) + 1n).toString();
 
-  const first =
-    historyList[0];
+}
+catch(error){
 
-  if(first.period){
+currentPeriod = digits;
 
-    currentPeriod =
-      first.period;
+}
 
-    periodEl.textContent =
-      first.period;
+}
+else if(!currentPeriod){
 
-  }else{
+currentPeriod =
+String(raw || "");
 
-    periodEl.textContent =
-      "SYNCING...";
-  }
+}
+
+document.getElementById("period")
+.textContent =
+currentPeriod || "SYNCING...";
 
 }
 
 
-/* =========================================================
-   PATTERN DISTRIBUTION
-========================================================= */
+/* =========================================
+   PATTERN
+========================================= */
 
-function updatePattern(){
+function updatePattern(list){
 
-  const patternValue =
-    document.getElementById(
-      "patternValue"
-    );
+const values =
+list
+.slice(0,10)
+.map(item =>
+Number(
+pick(item,[
+"number",
+"openNumber",
+"result",
+"resultNumber",
+"winNumber"
+])
+)
+)
+.filter(Number.isFinite);
 
-  const patternFill =
-    document.getElementById(
-      "patternFill"
-    );
 
-  if(!patternValue)return;
+if(!values.length)return;
 
-  const numbers =
-    historyList
-      .map(x=>x.number)
-      .filter(x=>x !== null);
 
-  if(!numbers.length){
+const big =
+values.filter(n => n >= 5).length;
 
-    patternValue.textContent =
-      "ANALYZING";
+const bigPct =
+Math.round(
+big / values.length * 100
+);
 
-    if(patternFill)
-      patternFill.style.width =
-        "50%";
+const smallPct =
+100 - bigPct;
 
-    return;
-  }
 
-  let big = 0;
-  let small = 0;
+document.getElementById("patternValue")
+.textContent =
+`BIG ${bigPct}% | SMALL ${smallPct}%`;
 
-  numbers.forEach(n=>{
 
-    if(Number(n) >= 5)
-      big++;
-    else
-      small++;
+document.getElementById("patternFill")
+.style.background =
+`linear-gradient(
+90deg,
+#ffd75a 0 ${bigPct}%,
+#64e8ff ${bigPct}%
+)`;
 
-  });
 
-  const total =
-    big + small;
-
-  const bigPercent =
-    Math.round(
-      (big / total) * 100
-    );
-
-  const smallPercent =
-    100 - bigPercent;
-
-  patternValue.textContent =
-    `BIG ${bigPercent}% • SMALL ${smallPercent}%`;
-
-  if(patternFill){
-
-    patternFill.style.width =
-      Math.max(
-        8,
-        Math.min(
-          92,
-          bigPercent
-        )
-      ) + "%";
-  }
+document.getElementById("patternFill")
+.style.width = "100%";
 
 }
 
 
-/* =========================================================
+/* =========================================
+   COPY PERIOD
+========================================= */
+
+document.getElementById("copyBtn").onclick =
+async () => {
+
+if(!currentPeriod)return;
+
+try{
+
+await navigator.clipboard.writeText(
+currentPeriod
+);
+
+const button =
+document.getElementById("copyBtn");
+
+button.textContent = "✓ Copied";
+
+setTimeout(
+() =>
+button.textContent =
+"▣  Copy Period",
+1200
+);
+
+}
+catch(error){}
+
+};
+
+
+/* =========================================
    COUNTDOWN
-========================================================= */
+========================================= */
 
 function syncCountdown(){
 
-  const countdown =
-    document.getElementById(
-      "countdown"
-    );
+const currentSecond =
+new Date().getSeconds();
 
-  if(!countdown)return;
+seconds =
+currentSecond === 0
+? 60
+: 60 - currentSecond;
 
-  function tick(){
 
-    const now =
-      new Date();
-
-    const seconds =
-      now.getSeconds();
-
-    const remaining =
-      60 - seconds;
-
-    countdown.textContent =
-      "00:" +
-      String(
-        remaining
-      ).padStart(2,"0");
-
-  }
-
-  tick();
-
-  clearInterval(
-    window.__countdownTimer
-  );
-
-  window.__countdownTimer =
-    setInterval(
-      tick,
-      1000
-    );
+document.getElementById("timerText")
+.textContent =
+"00:" +
+String(seconds).padStart(2,"0");
 
 }
 
 
-/* =========================================================
-   REFRESH
-========================================================= */
+/* =========================================
+   DEMO TOP VALUES
+========================================= */
 
-const refreshBtn =
-  document.getElementById(
-    "refreshBtn"
-  );
+function randomInt(a,b){
 
-if(refreshBtn){
+return Math.floor(
+Math.random() * (b-a+1)
+) + a;
 
-  refreshBtn.onclick = ()=>{
+}
 
-    refreshBtn.textContent =
-      "↻ LOADING";
+function updateLiveDemoValues(){
 
-    loadResults()
-      .finally(()=>{
+document.getElementById("liveUid")
+.textContent =
+randomInt(10000,1000000)
+.toLocaleString("en-IN");
 
-        setTimeout(()=>{
-
-          refreshBtn.textContent =
-            "↻ REFRESH";
-
-        },500);
-
-      });
-
-  };
+document.getElementById("liveWin")
+.textContent =
+randomInt(20000,1000000)
+.toLocaleString("en-IN");
 
 }
 
 
-/* =========================================================
-   INITIAL HISTORY LOAD
-========================================================= */
+syncCountdown();
+
+updateLiveDemoValues();
 
 loadResults();
 
+
+setInterval(() => {
+
+syncCountdown();
+
+if(seconds === 60){
+
+loadResults();
+
+}
+
+},1000);
+
+
 setInterval(
-  loadResults,
-  15000
+updateLiveDemoValues,
+2500
 );
-</script>
+
+setInterval(
+loadResults,
+15000
+);
 <script>
-/* =========================================================
-   UID ACCESS + MEMBER REQUEST
-========================================================= */
+
+/* =========================================
+   UID / ACCESS SYSTEM
+========================================= */
 
 const unlockOverlay =
-  document.getElementById("unlockOverlay");
+document.getElementById("unlockOverlay");
 
 const uidInput =
-  document.getElementById("uidInput");
+document.getElementById("uidInput");
 
 const unlockMessage =
-  document.getElementById("unlockMessage");
+document.getElementById("unlockMessage");
 
 const uidDemoResult =
-  document.getElementById("uidDemoResult");
+document.getElementById("uidDemoResult");
 
 const demoUidValue =
-  document.getElementById("demoUidValue");
+document.getElementById("demoUidValue");
 
-const redirectCount =
-  document.getElementById("redirectCount");
+const requestStatus =
+document.getElementById("requestStatus");
 
 const uidSuccess =
-  document.getElementById("uidSuccess");
+document.getElementById("uidSuccess");
 
-const uidSuccessUid =
-  document.getElementById("uidSuccessUid");
+const activeUidText =
+document.getElementById("activeUidText");
 
 const predictionActive =
-  document.getElementById("predictionActive");
+document.getElementById("predictionActive");
 
 const predictionNumber =
-  document.getElementById("predictionNumber");
+document.getElementById("predictionNumber");
 
 const predictionMeta =
-  document.getElementById("predictionMeta");
+document.getElementById("predictionMeta");
 
 const lockCard =
-  document.getElementById("lockCard");
+document.querySelector(".lockCard");
 
 const unlockBtn =
-  document.getElementById("unlockBtn");
+document.getElementById("unlockBtn");
 
 
-/* =========================================================
+/* =========================================
    DEVICE ID
-========================================================= */
+========================================= */
 
 const DEVICE_KEY =
-  "ambika_panel_device_v3";
+"ambika_panel_device_v3";
 
 const UID_KEY =
-  "ambika_panel_uid_v3";
+"ambika_panel_uid_v3";
 
 const ADMIN_TOKEN_KEY =
-  "ambika_panel_admin_token_v3";
+"ambika_panel_admin_token_v3";
 
-let deviceId =
-  localStorage.getItem(
-    DEVICE_KEY
-  );
 
-if(!deviceId){
+function getDeviceId(){
 
-  deviceId =
-    (
-      window.crypto &&
-      crypto.randomUUID
-    )
-      ? crypto.randomUUID()
-      : Date.now() +
-        "-" +
-        Math.random()
-          .toString(36)
-          .slice(2);
+let id =
+localStorage.getItem(DEVICE_KEY);
 
-  localStorage.setItem(
-    DEVICE_KEY,
-    deviceId
-  );
+if(!id){
+
+id =
+window.crypto &&
+crypto.randomUUID
+?
+crypto.randomUUID()
+:
+Date.now() +
+"-" +
+Math.random()
+.toString(36)
+.slice(2);
+
+localStorage.setItem(
+DEVICE_KEY,
+id
+);
+
+}
+
+return id;
+
 }
 
 
-let currentActiveUID = "";
-
-let currentExpiresAt = 0;
-
-let predictionTimer = null;
+const deviceId =
+getDeviceId();
 
 
-/* =========================================================
-   VOICE
-========================================================= */
+/* =========================================
+   SAVED UID
+========================================= */
+
+function getSavedUID(){
+
+return (
+localStorage.getItem(UID_KEY) || ""
+);
+
+}
+
+
+function saveUID(uid){
+
+localStorage.setItem(
+UID_KEY,
+uid
+);
+
+}
+
+
+/* =========================================
+   OPEN UID MODAL
+========================================= */
 
 function playFirstVoice(){
 
-  try{
+try{
 
-    firstVoice.pause();
+firstVoice.pause();
 
-    firstVoice.currentTime = 0;
+firstVoice.currentTime = 0;
 
-    firstVoice.play()
-      .catch(()=>{});
+firstVoice.play().catch(()=>{});
 
-  }catch(e){}
+}
+catch(error){}
 
 }
 
 
 function playSecondVoice(){
 
-  try{
+try{
 
-    secondVoice.pause();
+secondVoice.pause();
 
-    secondVoice.currentTime = 0;
+secondVoice.currentTime = 0;
 
-    secondVoice.play()
-      .catch(()=>{});
+secondVoice.play().catch(()=>{});
 
-  }catch(e){}
+}
+catch(error){}
 
 }
 
-
-/* =========================================================
-   OPEN UID PANEL
-========================================================= */
 
 function openUnlock(){
 
-  unlockOverlay.classList.add(
-    "show"
-  );
+unlockOverlay.classList.add("show");
 
-  unlockMessage.textContent =
-    "";
+unlockMessage.textContent = "";
 
-  uidDemoResult.classList.remove(
-    "show"
-  );
+uidDemoResult.classList.remove("show");
 
-  setTimeout(
-    ()=>uidInput.focus(),
-    120
-  );
+setTimeout(
+() => uidInput.focus(),
+120
+);
 
 }
 
 
-if(unlockBtn){
+unlockBtn.onclick = () => {
 
-  unlockBtn.onclick = ()=>{
+openUnlock();
 
-    openUnlock();
+playFirstVoice();
 
-    playFirstVoice();
+};
 
-  };
+
+document.getElementById("modalClose").onclick =
+() => {
+
+unlockOverlay.classList.remove("show");
+
+};
+
+
+unlockOverlay.onclick =
+event => {
+
+if(event.target === unlockOverlay){
+
+unlockOverlay.classList.remove("show");
 
 }
 
-
-document.getElementById(
-  "modalClose"
-).onclick = ()=>{
-
-  unlockOverlay.classList.remove(
-    "show"
-  );
-
 };
 
 
-unlockOverlay.onclick = e=>{
-
-  if(e.target === unlockOverlay){
-
-    unlockOverlay.classList.remove(
-      "show"
-    );
-
-  }
-
-};
-
-
-/* =========================================================
+/* =========================================
    UID INPUT
-========================================================= */
+========================================= */
 
-uidInput.oninput = ()=>{
+uidInput.oninput = () => {
 
-  uidInput.value =
-    uidInput.value
-      .replace(/\D/g,"")
-      .slice(0,8);
+uidInput.value =
+uidInput.value
+.replace(/\D/g,"")
+.slice(0,8);
 
 };
 
 
-/* =========================================================
-   CHECK UID
-========================================================= */
+uidInput.onkeydown = event => {
 
-async function checkUID(uid){
+if(event.key === "Enter"){
 
-  try{
+document
+.getElementById("verifyBtn")
+.click();
 
-    const response =
-      await fetch(
-        "/api/access/check",
-        {
-          method:"POST",
+}
 
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
+};
 
-          body:JSON.stringify({
-            uid:uid,
-            deviceId:deviceId
-          })
-        }
-      );
 
-    return await response.json();
+/* =========================================
+   MESSAGE
+========================================= */
 
-  }catch(error){
+function setMessage(text,type="normal"){
 
-    console.error(
-      "UID check error:",
-      error
-    );
+unlockMessage.textContent = text;
 
-    return {
-      ok:false,
-      active:false,
-      approved:false,
-      message:
-        "Server connection unavailable."
-    };
+if(type === "success"){
 
-  }
+unlockMessage.style.color =
+"#57f2b0";
+
+}
+else if(type === "error"){
+
+unlockMessage.style.color =
+"#ff4f9a";
+
+}
+else{
+
+unlockMessage.style.color =
+"#ffd75a";
+
+}
 
 }
 
 
-/* =========================================================
-   SUBMIT UID TO ADMIN
-========================================================= */
+/* =========================================
+   PREDICTION
+========================================= */
 
-async function submitUIDRequest(uid){
+/*
+   DEMO RANDOM PREDICTION
 
-  try{
+   0–4 = SMALL
+   5–9 = BIG
+*/
 
-    const response =
-      await fetch(
-        "/api/access/request",
-        {
-          method:"POST",
+let predictionTimer = null;
 
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
+let currentActiveUID = "";
 
-          body:JSON.stringify({
-            uid:uid,
-            deviceId:deviceId
-          })
-        }
-      );
 
-    return await response.json();
+function generatePrediction(){
 
-  }catch(error){
+const number =
+Math.floor(
+Math.random() * 10
+);
 
-    console.error(
-      "UID request error:",
-      error
-    );
+const size =
+number >= 5
+? "BIG"
+: "SMALL";
 
-    return {
-      ok:false,
-      message:
-        "Server connection unavailable."
-    };
+predictionNumber.textContent =
+number;
 
-  }
+predictionMeta.textContent =
+`UID ${currentActiveUID} active • ${size} • DEMO / RANDOM ONLY`;
 
 }
 
 
-/* =========================================================
+/* Every minute new demo prediction */
+
+function startPrediction(){
+
+clearInterval(predictionTimer);
+
+generatePrediction();
+
+predictionTimer =
+setInterval(
+generatePrediction,
+60000
+);
+
+}
+
+
+function stopPrediction(){
+
+clearInterval(
+predictionTimer
+);
+
+predictionTimer = null;
+
+}
+
+
+/* =========================================
    SHOW ACTIVE UID
-========================================================= */
+========================================= */
 
-function showUIDSuccess(
-  uid,
-  expiresAt
+function showActiveUID(uid,expiresAt){
+
+currentActiveUID = uid;
+
+saveUID(uid);
+
+uidSuccess.classList.add("show");
+
+activeUidText.textContent =
+"UID: " + uid;
+
+lockCard.classList.add("uidActive");
+
+unlockBtn.style.display = "none";
+
+predictionActive.classList.add("show");
+
+startPrediction();
+
+if(expiresAt){
+
+const remaining =
+Math.max(
+0,
+expiresAt - Date.now()
+);
+
+const hours =
+Math.max(
+1,
+Math.ceil(
+remaining / 3600000
+)
+);
+
+predictionMeta.textContent =
+`UID ${uid} active • ${hours} hour(s) remaining`;
+
+}
+
+}
+
+
+/* =========================================
+   RESET ACTIVE UI
+========================================= */
+
+function resetActiveUID(){
+
+currentActiveUID = "";
+
+uidSuccess.classList.remove("show");
+
+predictionActive.classList.remove("show");
+
+lockCard.classList.remove("uidActive");
+
+unlockBtn.style.display = "block";
+
+stopPrediction();
+
+}
+
+
+/* =========================================
+   CHECK ACCESS FROM SERVER
+========================================= */
+
+async function checkUIDStatus(uid,showModal=false){
+
+if(!uid)return null;
+
+try{
+
+const response =
+await fetch(
+"/api/access/check",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+uid:uid,
+deviceId:deviceId
+})
+}
+);
+
+const data =
+await response.json();
+
+
+if(data.success &&
+data.status === "active"){
+
+showActiveUID(
+data.uid || uid,
+data.expiresAt
+);
+
+if(showModal){
+
+uidDemoResult.classList.remove("show");
+
+setMessage(
+"✓ UID SUCCESSFULLY ACTIVATED",
+"success"
+);
+
+setTimeout(
+() =>
+unlockOverlay.classList.remove("show"),
+900
+);
+
+}
+
+return data;
+
+}
+
+
+/* UID waiting for admin */
+
+if(
+data.status === "not_active"
 ){
 
-  currentActiveUID =
-    uid;
+if(showModal){
 
-  currentExpiresAt =
-    Number(expiresAt) || 0;
+setMessage(
+"UID is waiting for admin activation.",
+"normal"
+);
 
-  localStorage.setItem(
-    UID_KEY,
-    uid
-  );
+}
 
-  uidSuccessUid.textContent =
-    "UID " + uid;
-
-  uidSuccess.classList.add(
-    "show"
-  );
-
-  predictionActive.classList.add(
-    "show"
-  );
-
-  lockCard.classList.add(
-    "uidActive"
-  );
-
-  unlockBtn.style.display =
-    "none";
-
-  unlockMessage.style.color =
-    "#57f2b0";
-
-  unlockMessage.textContent =
-    "✓ UID successfully activated.";
-
-  updateDemoPrediction();
+return data;
 
 }
 
 
-/* =========================================================
-   HIDE ACTIVE UID
-========================================================= */
+/* UID belongs to another device */
 
-function hideUIDSuccess(){
+if(
+data.status === "bound"
+){
 
-  currentActiveUID =
-    "";
+if(showModal){
 
-  currentExpiresAt =
-    0;
+setMessage(
+"This UID is already active on another device.",
+"error"
+);
 
-  uidSuccess.classList.remove(
-    "show"
-  );
+}
 
-  predictionActive.classList.remove(
-    "show"
-  );
-
-  lockCard.classList.remove(
-    "uidActive"
-  );
-
-  unlockBtn.style.display =
-    "block";
+return data;
 
 }
 
 
-/* =========================================================
-   RANDOM DEMO RESULT
-========================================================= */
+}
+catch(error){
 
-function updateDemoPrediction(){
+if(showModal){
 
-  if(
-    !currentActiveUID ||
-    !currentExpiresAt ||
-    currentExpiresAt <= Date.now()
-  ){
+setMessage(
+"Server connection unavailable. Try again.",
+"error"
+);
 
-    hideUIDSuccess();
+}
 
-    return;
+}
 
-  }
-
-
-  /*
-    0–4  = SMALL
-    5–9  = BIG
-
-    This is an interface demo/random result,
-    not a real guaranteed prediction.
-  */
-
-  const number =
-    Math.floor(
-      Math.random() * 10
-    );
-
-  const size =
-    number >= 5
-      ? "BIG"
-      : "SMALL";
-
-
-  predictionNumber.textContent =
-    number;
-
-  predictionMeta.textContent =
-    `UID ${currentActiveUID} active • ${size} • DEMO / RANDOM ONLY`;
+return null;
 
 }
 
 
-/* =========================================================
-   MINUTE PREDICTION TIMER
-========================================================= */
+/* =========================================
+   SEND UID REQUEST
+========================================= */
 
-function startPredictionTimer(){
+async function requestUID(uid){
 
-  clearInterval(
-    predictionTimer
-  );
+try{
 
-  updateDemoPrediction();
+const response =
+await fetch(
+"/api/access/request",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+uid:uid,
+deviceId:deviceId
+})
+}
+);
 
-  predictionTimer =
-    setInterval(
-      ()=>{
-        updateDemoPrediction();
-      },
-      60000
-    );
+const data =
+await response.json();
+
+
+if(
+data.status === "active" &&
+data.success
+){
+
+showActiveUID(
+data.uid || uid,
+data.expiresAt
+);
+
+return data;
 
 }
 
 
-/* =========================================================
-   VERIFY UID BUTTON
-========================================================= */
+if(
+data.status === "pending"
+){
 
-async function verifyUID(){
+demoUidValue.textContent =
+uid;
 
-  const uid =
-    uidInput.value.trim();
+uidDemoResult.classList.add("show");
 
+requestStatus.textContent =
+"⏳ WAITING FOR ADMIN APPROVAL...";
 
-  if(!/^\d{5,8}$/.test(uid)){
+setMessage(
+"✓ Request sent to admin.",
+"success"
+);
 
-    unlockMessage.style.color =
-      "#ffd75a";
+playSecondVoice();
 
-    unlockMessage.textContent =
-      "Please enter a valid 5–8 digit Game UID.";
-
-    hideUIDSuccess();
-
-    return;
-
-  }
-
-
-  unlockMessage.style.color =
-    "#64e8ff";
-
-  unlockMessage.textContent =
-    "Checking UID access...";
-
-
-  const result =
-    await checkUID(uid);
-
-
-  /* ACTIVE UID */
-
-  if(
-    result &&
-    result.active &&
-    result.approved
-  ){
-
-    showUIDSuccess(
-      uid,
-      result.expiresAt
-    );
-
-    playSecondVoice();
-
-    startPredictionTimer();
-
-    return;
-
-  }
-
-
-  /* NOT ACTIVE → SEND REQUEST TO ADMIN */
-
-  const request =
-    await submitUIDRequest(
-      uid
-    );
-
-
-  uidDemoResult.classList.add(
-    "show"
-  );
-
-  demoUidValue.textContent =
-    uid;
-
-
-  if(request.ok){
-
-    unlockMessage.style.color =
-      "#ffd75a";
-
-    unlockMessage.textContent =
-      "UID submitted successfully. Admin approval is required.";
-
-    redirectCount.textContent =
-      "WAITING FOR ADMIN APPROVAL";
-
-  }else{
-
-    unlockMessage.style.color =
-      "#ff8b9e";
-
-    unlockMessage.textContent =
-      request.message ||
-      result.message ||
-      "Unable to submit UID.";
-
-  }
+return data;
 
 }
 
 
-document.getElementById(
-  "verifyBtn"
-).onclick =
-  verifyUID;
+if(
+data.status === "bound"
+){
+
+setMessage(
+"This UID is already active on another device.",
+"error"
+);
+
+return data;
+
+}
 
 
-uidInput.onkeydown = e=>{
+setMessage(
+data.message ||
+"UID request could not be sent.",
+"error"
+);
 
-  if(e.key === "Enter"){
+return data;
 
-    verifyUID();
+}
+catch(error){
 
-  }
+setMessage(
+"Server connection unavailable.",
+"error"
+);
 
-};
+return null;
 
+}
 
-/* =========================================================
-   REGISTER
-========================================================= */
-
-document.getElementById(
-  "registerBtn"
-).onclick = ()=>{
-
-  window.location.href =
-    REGISTER_URL;
-
-};
+}
 
 
-document.getElementById(
-  "openRegisterDemo"
-).onclick = ()=>{
+/* =========================================
+   VERIFY BUTTON
+========================================= */
 
-  window.location.href =
-    REGISTER_URL;
+document.getElementById("verifyBtn").onclick =
+async () => {
 
-};
-
-
-document.getElementById(
-  "telegramBtn"
-).onclick = ()=>{
-
-  window.location.href =
-    REGISTER_URL;
-
-};
+const uid =
+uidInput.value.trim();
 
 
-/* =========================================================
-   AUTO RESTORE UID
-========================================================= */
+if(!/^\d{5,8}$/.test(uid)){
 
-window.addEventListener(
-  "load",
-  async ()=>{
+uidDemoResult.classList.remove("show");
 
-    const savedUID =
-      localStorage.getItem(
-        UID_KEY
-      );
+setMessage(
+"Please enter a valid 5–8 digit Game UID.",
+"error"
+);
 
-    if(!savedUID){
+return;
 
-      startPredictionTimer();
-
-      return;
-
-    }
+}
 
 
-    const result =
-      await checkUID(
-        savedUID
-      );
+saveUID(uid);
 
-
-    if(
-      result &&
-      result.active &&
-      result.approved
-    ){
-
-      showUIDSuccess(
-        savedUID,
-        result.expiresAt
-      );
-
-      startPredictionTimer();
-
-    }else{
-
-      localStorage.removeItem(
-        UID_KEY
-      );
-
-      hideUIDSuccess();
-
-    }
-
-  }
+setMessage(
+"Checking UID...",
+"normal"
 );
 
 
-/* =========================================================
-   CHECK ACTIVE UID PERIODICALLY
-========================================================= */
+/* First check whether already activated */
+
+const result =
+await checkUIDStatus(
+uid,
+true
+);
+
+
+if(
+result &&
+result.success &&
+result.status === "active"
+){
+
+return;
+
+}
+
+
+/* Otherwise create pending request */
+
+await requestUID(uid);
+
+};
+
+
+/* =========================================
+   RESTORE UID AFTER PAGE RELOAD
+========================================= */
+
+async function restoreSavedUID(){
+
+const uid =
+getSavedUID();
+
+if(!uid)return;
+
+uidInput.value = uid;
+
+const result =
+await checkUIDStatus(
+uid,
+false
+);
+
+if(
+result &&
+result.success &&
+result.status === "active"
+){
+
+return;
+
+}
+
+}
+
+
+/* =========================================
+   AUTO CHECK ACTIVE UID
+========================================= */
 
 setInterval(
-  async ()=>{
+async () => {
 
-    if(!currentActiveUID)
-      return;
+const uid =
+currentActiveUID ||
+getSavedUID();
 
+if(!uid)return;
 
-    const result =
-      await checkUID(
-        currentActiveUID
-      );
-
-
-    if(
-      result &&
-      result.active &&
-      result.approved
-    ){
-
-      currentExpiresAt =
-        Number(
-          result.expiresAt
-        ) || 0;
-
-    }else{
-
-      localStorage.removeItem(
-        UID_KEY
-      );
-
-      hideUIDSuccess();
-
-    }
-
-  },
-  30000
+const result =
+await checkUIDStatus(
+uid,
+false
 );
 
 
-/* =========================================================
-   ADMIN PANEL
-========================================================= */
+/* If admin locks/expiry happens */
+
+if(
+!result ||
+!result.success ||
+result.status !== "active"
+){
+
+if(currentActiveUID){
+
+resetActiveUID();
+
+}
+
+}
+
+},
+30000
+);
+
+
+/* =========================================
+   AUTO CHECK PENDING REQUEST
+========================================= */
+
+setInterval(
+async () => {
+
+const uid =
+getSavedUID();
+
+if(!uid)return;
+
+if(currentActiveUID)return;
+
+const result =
+await checkUIDStatus(
+uid,
+false
+);
+
+if(
+result &&
+result.success &&
+result.status === "active"
+){
+
+uidInput.value = uid;
+
+}
+
+},
+10000
+);
+
+
+/* =========================================
+   REGISTER
+========================================= */
+
+document.getElementById("registerBtn").onclick =
+() => {
+
+window.location.href =
+REGISTER_URL;
+
+};
+
+
+document.getElementById("telegramBtn").onclick =
+() => {
+
+window.location.href =
+REGISTER_URL;
+
+};
+
+
+/* =========================================
+   RESTORE ON LOAD
+========================================= */
+
+window.addEventListener(
+"load",
+() => {
+
+setTimeout(
+restoreSavedUID,
+1200
+);
+
+});
+
+
+/* =========================================
+   VISIBILITY
+========================================= */
+
+document.addEventListener(
+"visibilitychange",
+() => {
+
+if(
+document.visibilityState === "visible"
+){
+
+const uid =
+currentActiveUID ||
+getSavedUID();
+
+if(uid){
+
+checkUIDStatus(
+uid,
+false
+);
+
+}
+
+}
+
+});
+
+</script>
+<script>
+
+/* =========================================
+   ADMIN SYSTEM
+========================================= */
+
+const ADMIN_TOKEN_KEY =
+"ambika_panel_admin_token_v3";
 
 const adminLaunch =
-  document.getElementById(
-    "adminLaunch"
-  );
+document.getElementById("adminLaunch");
 
 const adminOverlay =
-  document.getElementById(
-    "adminOverlay"
-  );
+document.getElementById("adminOverlay");
 
 const adminLoginBox =
-  document.getElementById(
-    "adminLoginBox"
-  );
+document.getElementById("adminLoginBox");
 
 const adminControls =
-  document.getElementById(
-    "adminControls"
-  );
+document.getElementById("adminControls");
 
 const adminList =
-  document.getElementById(
-    "adminList"
-  );
+document.getElementById("adminList");
 
-const requestList =
-  document.getElementById(
-    "requestList"
-  );
+const adminPassword =
+document.getElementById("adminPassword");
 
+
+/* =========================================
+   ADMIN TOKEN
+========================================= */
+
+function getAdminToken(){
+
+return sessionStorage.getItem(
+ADMIN_TOKEN_KEY
+) || "";
+
+}
+
+
+function setAdminToken(token){
+
+if(token){
+
+sessionStorage.setItem(
+ADMIN_TOKEN_KEY,
+token
+);
+
+}else{
+
+sessionStorage.removeItem(
+ADMIN_TOKEN_KEY
+);
+
+}
+
+}
+
+
+/* =========================================
+   ADMIN LOGIN
+========================================= */
+
+document.getElementById("adminLoginBtn").onclick =
+async () => {
+
+const password =
+adminPassword.value.trim();
+
+if(!password){
+
+alert("Enter admin password.");
+
+return;
+
+}
+
+try{
+
+const response =
+await fetch(
+"/api/admin/login",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+password:password
+})
+}
+);
+
+const data =
+await response.json();
+
+
+if(
+data.success &&
+data.token
+){
+
+setAdminToken(data.token);
+
+adminLoginBox.style.display =
+"none";
+
+adminControls.style.display =
+"block";
+
+await loadAdminData();
+
+}else{
+
+alert(
+data.message ||
+"Invalid admin password."
+);
+
+}
+
+}
+catch(error){
+
+alert(
+"Admin server connection unavailable."
+);
+
+}
+
+};
+
+
+/* =========================================
+   ADMIN AUTH HEADER
+========================================= */
 
 function adminHeaders(){
 
-  const token =
-    sessionStorage.getItem(
-      ADMIN_TOKEN_KEY
-    );
+return {
 
-  return {
-    "Content-Type":
-      "application/json",
+"Content-Type":
+"application/json",
 
-    "Authorization":
-      "Bearer " +
-      (token || "")
-  };
+"Authorization":
+"Bearer " +
+getAdminToken()
+
+};
 
 }
 
 
-/* =========================================================
-   ADMIN LOGIN
-========================================================= */
+/* =========================================
+   OPEN ADMIN
+========================================= */
 
-async function adminLogin(){
-
-  const password =
-    document.getElementById(
-      "adminPassword"
-    ).value;
+adminLaunch.style.display =
+"block";
 
 
-  try{
+adminLaunch.onclick = async () => {
 
-    const response =
-      await fetch(
-        "/api/admin/login",
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-            password:password
-          })
-        }
-      );
+adminOverlay.classList.add("show");
 
 
-    const result =
-      await response.json();
+if(getAdminToken()){
 
+adminLoginBox.style.display =
+"none";
 
-    if(!result.ok){
+adminControls.style.display =
+"block";
 
-      alert(
-        result.message ||
-        "Wrong admin password."
-      );
+await loadAdminData();
 
-      return;
+}else{
 
-    }
+adminLoginBox.style.display =
+"grid";
 
-
-    sessionStorage.setItem(
-      ADMIN_TOKEN_KEY,
-      result.token
-    );
-
-
-    adminLoginBox.style.display =
-      "none";
-
-    adminControls.style.display =
-      "grid";
-
-
-    loadAdminData();
-
-
-  }catch(error){
-
-    alert(
-      "Server connection unavailable."
-    );
-
-  }
+adminControls.style.display =
+"none";
 
 }
 
-
-document.getElementById(
-  "adminLoginBtn"
-).onclick =
-  adminLogin;
+};
 
 
-/* =========================================================
-   ADMIN DATA
-========================================================= */
+document.getElementById("adminClose").onclick =
+() => {
+
+adminOverlay.classList.remove("show");
+
+};
+
+
+adminOverlay.onclick =
+event => {
+
+if(
+event.target === adminOverlay
+){
+
+adminOverlay.classList.remove("show");
+
+}
+
+};
+
+
+/* =========================================
+   LOAD PENDING + ACTIVE
+========================================= */
 
 async function loadAdminData(){
 
-  await Promise.all([
-    loadAdminRequests(),
-    loadAdminUIDs()
-  ]);
+if(!getAdminToken())return;
 
+
+try{
+
+const requestsResponse =
+await fetch(
+"/api/admin/requests",
+{
+headers:adminHeaders()
 }
-
-
-/* =========================================================
-   MEMBER REQUEST LIST
-========================================================= */
-
-async function loadAdminRequests(){
-
-  if(!requestList)
-    return;
-
-
-  try{
-
-    const response =
-      await fetch(
-        "/api/admin/requests",
-        {
-          method:"GET",
-          headers:adminHeaders(),
-          cache:"no-store"
-        }
-      );
-
-
-    if(response.status === 401){
-
-      sessionStorage.removeItem(
-        ADMIN_TOKEN_KEY
-      );
-
-      adminLoginBox.style.display =
-        "grid";
-
-      adminControls.style.display =
-        "none";
-
-      return;
-
-    }
-
-
-    const result =
-      await response.json();
-
-
-    const list =
-      Array.isArray(
-        result.requests
-      )
-        ? result.requests
-        : [];
-
-
-    if(!list.length){
-
-      requestList.innerHTML =
-        `
-        <div class="adminInfo">
-          No pending member UID requests.
-        </div>
-        `;
-
-      return;
-
-    }
-
-
-    requestList.innerHTML =
-      list.map(
-        (item,index)=>`
-
-        <div class="adminItem requestPending">
-
-          <div class="adminItemTop">
-
-            <span>
-              UID #${escapeHtml(item.uid)}
-            </span>
-
-            <span class="accessActive">
-              PENDING
-            </span>
-
-          </div>
-
-
-          <div class="adminItemSub">
-
-            Submitted:
-            ${new Date(
-              item.requestedAt
-            ).toLocaleString()}
-
-            <br>
-
-            Device:
-            ${escapeHtml(
-              String(
-                item.deviceId || ""
-              ).slice(0,12)
-            )}…
-
-          </div>
-
-
-          <div class="adminItemActions">
-
-            <button
-              type="button"
-              data-approve="${index}"
-            >
-              ACTIVATE
-            </button>
-
-            <button
-              type="button"
-              data-reject="${index}"
-            >
-              IGNORE
-            </button>
-
-          </div>
-
-        </div>
-
-        `
-      ).join("");
-
-
-    /* ACTIVATE REQUEST */
-
-    requestList
-      .querySelectorAll(
-        "[data-approve]"
-      )
-      .forEach(button=>{
-
-        button.onclick =
-          async ()=>{
-
-            const item =
-              list[
-                Number(
-                  button.dataset
-                    .approve
-                )
-              ];
-
-
-            const hours =
-              prompt(
-                "Activate for how many hours? Enter 1 or 24.",
-                "1"
-              );
-
-
-            if(
-              hours !== "1" &&
-              hours !== "24"
-            ){
-
-              return;
-
-            }
-
-
-            try{
-
-              const response =
-                await fetch(
-                  "/api/admin/activate",
-                  {
-                    method:"POST",
-
-                    headers:
-                      adminHeaders(),
-
-                    body:
-                      JSON.stringify({
-                        uid:item.uid,
-                        hours:Number(
-                          hours
-                        )
-                      })
-                  }
-                );
-
-
-              const result =
-                await response.json();
-
-
-              alert(
-                result.message ||
-                "UID activated."
-              );
-
-
-              await loadAdminData();
-
-
-            }catch(error){
-
-              alert(
-                "Server connection unavailable."
-              );
-
-            }
-
-          };
-
-      });
-
-
-    /* IGNORE REQUEST */
-
-    requestList
-      .querySelectorAll(
-        "[data-reject]"
-      )
-      .forEach(button=>{
-
-        button.onclick =
-          async ()=>{
-
-            const item =
-              list[
-                Number(
-                  button.dataset
-                    .reject
-                )
-              ];
-
-
-            try{
-
-              await fetch(
-                "/api/admin/requests/reject",
-                {
-                  method:"POST",
-
-                  headers:
-                    adminHeaders(),
-
-                  body:
-                    JSON.stringify({
-                      uid:item.uid,
-                      deviceId:
-                        item.deviceId
-                    })
-                }
-              );
-
-
-              await loadAdminRequests();
-
-
-            }catch(error){}
-
-          };
-
-      });
-
-
-  }catch(error){
-
-    requestList.innerHTML =
-      `
-      <div class="adminInfo">
-        Unable to load member requests.
-      </div>
-      `;
-
-  }
-
-}
-
-
-/* =========================================================
-   ACTIVE UID LIST
-========================================================= */
-
-async function loadAdminUIDs(){
-
-  if(!adminList)
-    return;
-
-
-  try{
-
-    const response =
-      await fetch(
-        "/api/admin/uids",
-        {
-          method:"GET",
-          headers:adminHeaders(),
-          cache:"no-store"
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    const list =
-      Array.isArray(
-        result.uids
-      )
-        ? result.uids
-        : [];
-
-
-    if(!list.length){
-
-      adminList.innerHTML =
-        `
-        <div class="adminInfo">
-          No active UID access.
-        </div>
-        `;
-
-      return;
-
-    }
-
-
-    adminList.innerHTML =
-      list.map(
-        (item,index)=>`
-
-        <div class="adminItem">
-
-          <div class="adminItemTop">
-
-            <span>
-              UID #${escapeHtml(item.uid)}
-            </span>
-
-            <span class="accessActive">
-              ACTIVE
-            </span>
-
-          </div>
-
-
-          <div class="adminItemSub">
-
-            Device:
-            ${escapeHtml(
-              String(
-                item.deviceId ||
-                "Not claimed"
-              ).slice(0,12)
-            )}…
-
-            <br>
-
-            Expires:
-            ${new Date(
-              item.expiresAt
-            ).toLocaleString()}
-
-          </div>
-
-
-          <div class="adminItemActions">
-
-            <button
-              type="button"
-              data-lock="${index}"
-            >
-              LOCK NOW
-            </button>
-
-          </div>
-
-        </div>
-
-        `
-      ).join("");
-
-
-    adminList
-      .querySelectorAll(
-        "[data-lock]"
-      )
-      .forEach(button=>{
-
-        button.onclick =
-          async ()=>{
-
-            const item =
-              list[
-                Number(
-                  button.dataset
-                    .lock
-                )
-              ];
-
-
-            if(
-              !confirm(
-                "Lock UID " +
-                item.uid +
-                "?"
-              )
-            ){
-
-              return;
-
-            }
-
-
-            try{
-
-              const response =
-                await fetch(
-                  "/api/admin/lock",
-                  {
-                    method:"POST",
-
-                    headers:
-                      adminHeaders(),
-
-                    body:
-                      JSON.stringify({
-                        uid:item.uid
-                      })
-                  }
-                );
-
-
-              const result =
-                await response.json();
-
-
-              alert(
-                result.message ||
-                "Done"
-              );
-
-
-              await loadAdminData();
-
-
-            }catch(error){
-
-              alert(
-                "Server connection unavailable."
-              );
-
-            }
-
-          };
-
-      });
-
-
-  }catch(error){
-
-    adminList.innerHTML =
-      `
-      <div class="adminInfo">
-        Unable to load active UIDs.
-      </div>
-      `;
-
-  }
-
-}
-</script>
-<script>
-/* =========================================================
-   ADMIN OPEN / CLOSE
-========================================================= */
-
-if(adminLaunch){
-
-  adminLaunch.style.display =
-    "block";
-
-  adminLaunch.onclick = ()=>{
-
-    adminOverlay.classList.add(
-      "show"
-    );
-
-    const token =
-      sessionStorage.getItem(
-        ADMIN_TOKEN_KEY
-      );
-
-    if(token){
-
-      adminLoginBox.style.display =
-        "none";
-
-      adminControls.style.display =
-        "grid";
-
-      loadAdminData();
-
-    }else{
-
-      adminLoginBox.style.display =
-        "grid";
-
-      adminControls.style.display =
-        "none";
-
-    }
-
-  };
-
-}
-
-
-document.getElementById(
-  "adminClose"
-).onclick = ()=>{
-
-  adminOverlay.classList.remove(
-    "show"
-  );
-
-};
-
-
-adminOverlay.onclick = e=>{
-
-  if(e.target === adminOverlay){
-
-    adminOverlay.classList.remove(
-      "show"
-    );
-
-  }
-
-};
-
-
-/* =========================================================
-   MANUAL ADMIN UID ACTIVATION
-========================================================= */
-
-const adminActivate =
-  document.getElementById(
-    "adminActivate"
-  );
-
-
-if(adminActivate){
-
-  adminActivate.onclick =
-    async ()=>{
-
-      const uid =
-        document.getElementById(
-          "adminUid"
-        ).value.trim();
-
-      const hours =
-        Number(
-          document.getElementById(
-            "adminDuration"
-          ).value
-        );
-
-
-      if(!/^\d{5,8}$/.test(uid)){
-
-        alert(
-          "Enter a valid 5–8 digit UID."
-        );
-
-        return;
-
-      }
-
-
-      try{
-
-        const response =
-          await fetch(
-            "/api/admin/activate",
-            {
-              method:"POST",
-
-              headers:
-                adminHeaders(),
-
-              body:
-                JSON.stringify({
-                  uid:uid,
-                  hours:hours
-                })
-            }
-          );
-
-
-        const result =
-          await response.json();
-
-
-        alert(
-          result.message ||
-          "UID activation completed."
-        );
-
-
-        if(result.ok){
-
-          document.getElementById(
-            "adminUid"
-          ).value = "";
-
-        }
-
-
-        await loadAdminData();
-
-
-      }catch(error){
-
-        alert(
-          "Server connection unavailable."
-        );
-
-      }
-
-    };
-
-}
-
-
-/* =========================================================
-   LOCK ALL UIDS
-========================================================= */
-
-const adminDeactivateAll =
-  document.getElementById(
-    "adminDeactivateAll"
-  );
-
-
-if(adminDeactivateAll){
-
-  adminDeactivateAll.onclick =
-    async ()=>{
-
-      if(
-        !confirm(
-          "Are you sure you want to lock ALL UIDs?"
-        )
-      ){
-
-        return;
-
-      }
-
-
-      try{
-
-        const response =
-          await fetch(
-            "/api/admin/lock-all",
-            {
-              method:"POST",
-              headers:
-                adminHeaders()
-            }
-          );
-
-
-        const result =
-          await response.json();
-
-
-        alert(
-          result.message ||
-          "All UIDs locked."
-        );
-
-
-        await loadAdminData();
-
-
-      }catch(error){
-
-        alert(
-          "Server connection unavailable."
-        );
-
-      }
-
-    };
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-const toast =
-  document.createElement(
-    "div"
-  );
-
-toast.className =
-  "tabToast";
-
-document.body.appendChild(
-  toast
 );
 
 
-let toastTimer;
+if(
+requestsResponse.status === 401
+){
 
+setAdminToken("");
 
-function showToast(message){
+adminLoginBox.style.display =
+"grid";
 
-  toast.textContent =
-    message;
+adminControls.style.display =
+"none";
 
-  toast.classList.add(
-    "show"
-  );
-
-  clearTimeout(
-    toastTimer
-  );
-
-  toastTimer =
-    setTimeout(
-      ()=>{
-        toast.classList.remove(
-          "show"
-        );
-      },
-      1300
-    );
+return;
 
 }
 
 
+const requestsData =
+await requestsResponse.json();
+
+
+const uidResponse =
+await fetch(
+"/api/admin/uids",
+{
+headers:adminHeaders()
+}
+);
+
+
+const uidData =
+await uidResponse.json();
+
+
+renderAdminPanel(
+requestsData.requests || [],
+uidData.uids || []
+);
+
+
+}
+catch(error){
+
+adminList.innerHTML = `
+<div class="adminInfo">
+Unable to load UID requests.
+</div>
+`;
+
+}
+
+}
+
+
+/* =========================================
+   RENDER ADMIN PANEL
+========================================= */
+
+function renderAdminPanel(
+pending,
+active
+){
+
+let html = "";
+
+
+/* -----------------------------------------
+   PENDING REQUESTS
+----------------------------------------- */
+
+if(pending.length){
+
+html += `
+<div style="
+color:#ffd75a;
+font-size:12px;
+font-weight:1000;
+margin-bottom:8px;
+letter-spacing:1px;
+">
+⏳ PENDING UID REQUESTS
+</div>
+`;
+
+
+pending.forEach(request => {
+
+html += `
+
+<div class="adminItem">
+
+<div class="adminItemTop">
+
+<span>
+UID #${escapeHTML(request.uid)}
+</span>
+
+<span style="
+color:#ffd75a;
+">
+PENDING
+</span>
+
+</div>
+
+<div class="adminItemSub">
+
+Requested:
+${formatDate(request.requestedAt)}
+
+<br>
+
+Device:
+${escapeHTML(
+String(request.deviceId || "")
+.slice(0,16)
+)}…
+
+</div>
+
+<div class="adminItemActions">
+
+<button
+data-approve="${escapeHTML(request.uid)}"
+>
+✓ ACTIVATE
+</button>
+
+<button
+data-reject="${escapeHTML(request.uid)}"
+style="
+color:#ff4f9a;
+border-color:#ff4f9a44;
+"
+>
+IGNORE
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}else{
+
+html += `
+<div class="adminInfo">
+No pending UID requests.
+</div>
+`;
+
+}
+
+
+/* -----------------------------------------
+   ACTIVE UIDS
+----------------------------------------- */
+
+html += `
+<div style="
+color:#57f2b0;
+font-size:12px;
+font-weight:1000;
+margin:18px 0 8px;
+letter-spacing:1px;
+">
+✓ ACTIVE UID ACCESS
+</div>
+`;
+
+
+if(active.length){
+
+active.forEach(item => {
+
+const remaining =
+Math.max(
+0,
+item.expiresAt - Date.now()
+);
+
+const hours =
+Math.max(
+1,
+Math.ceil(
+remaining / 3600000
+)
+);
+
+
+html += `
+
+<div class="adminItem">
+
+<div class="adminItemTop">
+
+<span>
+UID #${escapeHTML(item.uid)}
+</span>
+
+<span class="accessActive">
+ACTIVE
+</span>
+
+</div>
+
+<div class="adminItemSub">
+
+Device:
+${
+item.deviceId
+?
+escapeHTML(
+String(item.deviceId).slice(0,16)
+) + "…"
+:
+"Not bound"
+}
+
+<br>
+
+Expires:
+${formatDate(item.expiresAt)}
+
+<br>
+
+Remaining:
+about ${hours} hour(s)
+
+</div>
+
+<div class="adminItemActions">
+
+<button
+data-lock="${escapeHTML(item.uid)}"
+style="
+color:#ff4f9a;
+border-color:#ff4f9a44;
+"
+>
+LOCK NOW
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}else{
+
+html += `
+<div class="adminInfo">
+No active UID access.
+</div>
+`;
+
+}
+
+
+adminList.innerHTML = html;
+
+
+/* =========================================
+   ACTIVATE REQUEST
+========================================= */
+
+adminList
+.querySelectorAll("[data-approve]")
+.forEach(button => {
+
+button.onclick = async () => {
+
+const uid =
+button.dataset.approve;
+
+const duration =
+Number(
+document.getElementById(
+"adminDuration"
+).value
+);
+
+button.disabled = true;
+
+button.textContent =
+"ACTIVATING...";
+
+
+try{
+
+const response =
+await fetch(
+"/api/admin/activate",
+{
+method:"POST",
+headers:adminHeaders(),
+body:JSON.stringify({
+uid:uid,
+hours:duration
+})
+}
+);
+
+
+const data =
+await response.json();
+
+
+if(data.success){
+
+await loadAdminData();
+
+showAdminToast(
+`UID ${uid} activated`
+);
+
+}else{
+
+alert(
+data.message ||
+"Activation failed."
+);
+
+button.disabled = false;
+
+button.textContent =
+"✓ ACTIVATE";
+
+}
+
+}
+catch(error){
+
+alert(
+"Server connection unavailable."
+);
+
+button.disabled = false;
+
+button.textContent =
+"✓ ACTIVATE";
+
+}
+
+};
+
+});
+
+
+/* =========================================
+   IGNORE REQUEST
+========================================= */
+
+adminList
+.querySelectorAll("[data-reject]")
+.forEach(button => {
+
+button.onclick = async () => {
+
+const uid =
+button.dataset.reject;
+
+
+if(
+!confirm(
+`Ignore UID ${uid} request?`
+)
+){
+
+return;
+
+}
+
+
+button.disabled = true;
+
+button.textContent =
+"IGNORING...";
+
+
+try{
+
+const response =
+await fetch(
+"/api/admin/requests/reject",
+{
+method:"POST",
+headers:adminHeaders(),
+body:JSON.stringify({
+uid:uid
+})
+}
+);
+
+
+const data =
+await response.json();
+
+
+if(data.success){
+
+await loadAdminData();
+
+showAdminToast(
+`UID ${uid} ignored`
+);
+
+}else{
+
+alert(
+data.message ||
+"Could not ignore request."
+);
+
+}
+
+}
+catch(error){
+
+alert(
+"Server connection unavailable."
+);
+
+}
+
+};
+
+});
+
+
+/* =========================================
+   LOCK ACTIVE UID
+========================================= */
+
+adminList
+.querySelectorAll("[data-lock]")
+.forEach(button => {
+
+button.onclick = async () => {
+
+const uid =
+button.dataset.lock;
+
+
+if(
+!confirm(
+`Lock UID ${uid}?`
+)
+){
+
+return;
+
+}
+
+
+button.disabled = true;
+
+button.textContent =
+"LOCKING...";
+
+
+try{
+
+const response =
+await fetch(
+"/api/admin/lock",
+{
+method:"POST",
+headers:adminHeaders(),
+body:JSON.stringify({
+uid:uid
+})
+}
+);
+
+
+const data =
+await response.json();
+
+
+if(data.success){
+
+if(
+currentActiveUID === uid
+){
+
+resetActiveUID();
+
+}
+
+await loadAdminData();
+
+showAdminToast(
+`UID ${uid} locked`
+);
+
+}else{
+
+alert(
+data.message ||
+"Lock failed."
+);
+
+}
+
+}
+catch(error){
+
+alert(
+"Server connection unavailable."
+);
+
+}
+
+};
+
+});
+
+}
+
+
+/* =========================================
+   HELPERS
+========================================= */
+
+function escapeHTML(value){
+
+return String(value || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function formatDate(timestamp){
+
+if(!timestamp)return "--";
+
+try{
+
+return new Date(timestamp)
+.toLocaleString();
+
+}
+catch(error){
+
+return "--";
+
+}
+
+}
+
+
+function showAdminToast(message){
+
+let toast =
+document.getElementById(
+"adminToast"
+);
+
+if(!toast){
+
+toast =
+document.createElement("div");
+
+toast.id =
+"adminToast";
+
+toast.style.cssText = `
+position:fixed;
+left:50%;
+top:20px;
+transform:translateX(-50%);
+z-index:13000;
+padding:11px 17px;
+border-radius:14px;
+background:#0d1638;
+border:1px solid #45d7ff55;
+color:#64e8ff;
+font-size:11px;
+font-weight:1000;
+box-shadow:0 10px 35px #0009;
+`;
+
+document.body.appendChild(toast);
+
+}
+
+toast.textContent =
+message;
+
+clearTimeout(
+window.__adminToastTimer
+);
+
+toast.style.display =
+"block";
+
+window.__adminToastTimer =
+setTimeout(
+() => {
+toast.style.display =
+"none";
+},
+1800
+);
+
+}
+
+
+/* =========================================
+   ADMIN AUTO REFRESH
+========================================= */
+
+setInterval(
+() => {
+
+if(
+adminControls.style.display !==
+"none" &&
+getAdminToken()
+){
+
+loadAdminData();
+
+}
+
+},
+10000
+);
+
+
+/* =========================================
+   ADMIN PASSWORD ENTER
+========================================= */
+
+adminPassword.onkeydown =
+event => {
+
+if(event.key === "Enter"){
+
 document
-  .querySelectorAll(".navItem")
-  .forEach(item=>{
+.getElementById("adminLoginBtn")
+.click();
 
-    item.onclick = ()=>{
+}
 
-      document
-        .querySelectorAll(
-          ".navItem"
-        )
-        .forEach(
-          x =>
-            x.classList.remove(
-              "active"
-            )
-        );
+};
 
 
-      item.classList.add(
-        "active"
-      );
+/* =========================================
+   ACTIVE UID RESTORE
+========================================= */
+
+setTimeout(
+restoreSavedUID,
+1000
+);
 
 
-      const tab =
-        item.dataset.tab;
+/* =========================================
+   REGISTER / SUPPORT
+========================================= */
+
+document.getElementById("registerBtn").onclick =
+() => {
+
+window.location.href =
+REGISTER_URL;
+
+};
 
 
-      if(tab === "history"){
+document.getElementById("telegramBtn").onclick =
+() => {
 
-        const section =
-          document.getElementById(
-            "resultSection"
-          );
+window.location.href =
+REGISTER_URL;
 
+};
 
-        section.scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
+</script>
+<script>
 
+/* =========================================
+   BOTTOM NAVIGATION
+========================================= */
 
-        section.classList.add(
-          "historyFocus"
-        );
+const navItems =
+document.querySelectorAll(".navItem");
 
+navItems.forEach(item => {
 
-        setTimeout(
-          ()=>{
-            section.classList.remove(
-              "historyFocus"
-            );
-          },
-          1500
-        );
+item.addEventListener(
+"click",
+() => {
 
+navItems.forEach(x =>
+x.classList.remove("active")
+);
 
-        showToast(
-          "LIVE RESULT HISTORY"
-        );
+item.classList.add("active");
 
-      }
+const target =
+item.dataset.target;
 
+if(target){
 
-      else if(tab === "uid"){
+const section =
+document.getElementById(target);
 
-        openUnlock();
+if(section){
 
-      }
+section.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
 
+}
 
-      else if(tab === "telegram"){
+}
 
-        showToast(
-          "REGISTER / SUPPORT"
-        );
+});
 
-        setTimeout(
-          ()=>{
-            window.location.href =
-              REGISTER_URL;
-          },
-          150
-        );
-
-      }
+});
 
 
-      else{
-
-        window.scrollTo({
-          top:0,
-          behavior:"smooth"
-        });
-
-        showToast(
-          "DASHBOARD"
-        );
-
-      }
-
-    };
-
-  });
-
-
-/* =========================================================
+/* =========================================
    SOUND BUTTON
-========================================================= */
+========================================= */
 
 const soundBtn =
-  document.getElementById(
-    "soundBtn"
-  );
+document.getElementById("soundBtn");
+
+let soundEnabled =
+true;
 
 
 if(soundBtn){
 
-  soundBtn.onclick =
-    playFirstVoice;
+soundBtn.onclick = () => {
+
+soundEnabled =
+!soundEnabled;
+
+soundBtn.textContent =
+soundEnabled
+? "🔊"
+: "🔇";
+
+showToast(
+soundEnabled
+? "Sound enabled"
+: "Sound muted"
+);
+
+};
 
 }
 
 
-/* =========================================================
-   VISIBILITY / AUTO REFRESH
-========================================================= */
+/* =========================================
+   SAFE TOAST
+========================================= */
+
+function showToast(message){
+
+let toast =
+document.getElementById(
+"mainToast"
+);
+
+if(!toast){
+
+toast =
+document.createElement("div");
+
+toast.id =
+"mainToast";
+
+toast.style.cssText = `
+position:fixed;
+left:50%;
+bottom:85px;
+transform:translateX(-50%);
+z-index:12000;
+padding:10px 16px;
+border-radius:14px;
+background:rgba(8,15,35,.96);
+border:1px solid rgba(73,220,255,.35);
+color:#dffaff;
+font-size:11px;
+font-weight:900;
+letter-spacing:.3px;
+box-shadow:0 12px 35px rgba(0,0,0,.5);
+backdrop-filter:blur(10px);
+`;
+
+document.body.appendChild(toast);
+
+}
+
+toast.textContent =
+message;
+
+toast.style.display =
+"block";
+
+clearTimeout(
+window.__mainToastTimer
+);
+
+window.__mainToastTimer =
+setTimeout(
+() => {
+
+toast.style.display =
+"none";
+
+},
+1800
+);
+
+}
+
+
+/* =========================================
+   VISIBILITY / TAB RECOVERY
+========================================= */
 
 document.addEventListener(
-  "visibilitychange",
-  ()=>{
+"visibilitychange",
+() => {
 
-    if(
-      document.visibilityState ===
-      "visible"
-    ){
+if(
+document.visibilityState ===
+"visible"
+){
 
-      syncCountdown();
+loadHistory();
 
-      loadResults();
+if(
+typeof checkCurrentAccess ===
+"function"
+){
 
-      if(currentActiveUID){
+checkCurrentAccess();
 
-        checkUID(
-          currentActiveUID
-        )
-        .then(result=>{
+}
 
-          if(
-            result &&
-            result.active &&
-            result.approved
-          ){
+}
 
-            currentExpiresAt =
-              Number(
-                result.expiresAt
-              ) || 0;
-
-          }else{
-
-            localStorage.removeItem(
-              UID_KEY
-            );
-
-            hideUIDSuccess();
-
-          }
-
-        });
-
-      }
-
-    }
-
-  }
-);
+});
 
 
-/* =========================================================
-   AUTO START
-========================================================= */
+/* =========================================
+   PAGE LOAD
+========================================= */
 
 window.addEventListener(
-  "load",
-  ()=>{
-
-    syncCountdown();
-
-    loadResults();
-
-    startPredictionTimer();
-
-  }
-);
-
-
-/* =========================================================
-   LIVE HISTORY REFRESH
-========================================================= */
-
-setInterval(
-  ()=>{
-
-    if(
-      document.visibilityState ===
-      "visible"
-    ){
-
-      loadResults();
-
-    }
-
-  },
-  15000
-);
-
-
-/* =========================================================
-   PREDICTION REFRESH
-========================================================= */
-
-setInterval(
-  ()=>{
-
-    if(currentActiveUID){
-
-      updateDemoPrediction();
-
-    }
-
-  },
-  60000
-);
-
-
-/* =========================================================
-   ADMIN REQUEST AUTO REFRESH
-========================================================= */
-
-setInterval(
-  ()=>{
-
-    const token =
-      sessionStorage.getItem(
-        ADMIN_TOKEN_KEY
-      );
-
-    if(
-      token &&
-      adminOverlay.classList.contains(
-        "show"
-      )
-    ){
-
-      loadAdminData();
-
-    }
-
-  },
-  15000
-);
-
-
-/* =========================================================
-   GLOBAL ERROR PROTECTION
-========================================================= */
-
-window.addEventListener(
-  "error",
-  event=>{
-
-    console.error(
-      "Frontend error:",
-      event.error ||
-      event.message
-    );
-
-  }
-);
-
-
-/* =========================================================
-   FINAL FALLBACK
-   Prevents a broken script from leaving
-   the loading screen permanently visible.
-========================================================= */
+"load",
+() => {
 
 setTimeout(
-  ()=>{
+() => {
 
-    if(
-      loadingScreen
-    ){
-
-      loadingScreen.classList.add(
-        "hide"
-      );
-
-    }
-
-    if(
-      app
-    ){
-
-      app.style.display =
-        "block";
-
-      app.style.visibility =
-        "visible";
-
-      app.style.opacity =
-        "1";
-
-    }
-
-  },
-  3800
+const loader =
+document.getElementById(
+"loadingScreen"
 );
 
+const app =
+document.getElementById(
+"app"
+);
+
+
+if(loader){
+
+loader.classList.add("hide");
+
+setTimeout(
+() => {
+
+loader.style.display =
+"none";
+
+},
+450
+);
+
+}
+
+
+if(app){
+
+app.style.display =
+"block";
+
+app.style.visibility =
+"visible";
+
+app.style.opacity =
+"1";
+
+}
+
+
+/* Initial API load */
+
+if(
+typeof loadHistory ===
+"function"
+){
+
+loadHistory();
+
+}
+
+
+/* Restore UID */
+
+if(
+typeof restoreSavedUID ===
+"function"
+){
+
+restoreSavedUID();
+
+}
+
+},
+3200
+);
+
+});
+
+
+/* =========================================
+   LOADER SAFETY FALLBACK
+========================================= */
+
+setTimeout(
+() => {
+
+const loader =
+document.getElementById(
+"loadingScreen"
+);
+
+const app =
+document.getElementById("app");
+
+
+if(loader){
+
+loader.classList.add("hide");
+
+loader.style.display =
+"none";
+
+}
+
+
+if(app){
+
+app.style.display =
+"block";
+
+app.style.visibility =
+"visible";
+
+app.style.opacity =
+"1";
+
+}
+
+},
+5000
+);
+
+
+/* =========================================
+   PREVENT EMPTY PAGE
+========================================= */
+
+setTimeout(
+() => {
+
+const app =
+document.getElementById("app");
+
+if(
+app &&
+getComputedStyle(app).display ===
+"none"
+){
+
+app.style.display =
+"block";
+
+app.style.visibility =
+"visible";
+
+app.style.opacity =
+"1";
+
+}
+
+},
+6500
+);
+
+
+/* =========================================
+   PERIOD DISPLAY SAFETY
+========================================= */
+
+setInterval(
+() => {
+
+const period =
+document.getElementById("period");
+
+if(
+period &&
+period.textContent.trim() === ""
+){
+
+period.textContent =
+"SYNCING...";
+
+}
+
+},
+3000
+);
+
+
+/* =========================================
+   LIVE HISTORY REFRESH
+========================================= */
+
+setInterval(
+() => {
+
+if(
+typeof loadHistory ===
+"function"
+){
+
+loadHistory();
+
+}
+
+},
+15000
+);
+
+
+/* =========================================
+   ACCESS CHECK REFRESH
+========================================= */
+
+setInterval(
+() => {
+
+if(
+typeof checkCurrentAccess ===
+"function" &&
+currentActiveUID
+){
+
+checkCurrentAccess();
+
+}
+
+},
+20000
+);
+
+
+/* =========================================
+   CLOCK / TIMER DISPLAY
+========================================= */
+
+setInterval(
+() => {
+
+const now =
+new Date();
+
+const seconds =
+now.getSeconds();
+
+const remaining =
+60 - seconds;
+
+const timer =
+document.getElementById(
+"timer"
+);
+
+if(timer){
+
+timer.textContent =
+String(remaining)
+.padStart(2,"0") + "s";
+
+}
+
+},
+1000
+);
+
+
+/* =========================================
+   ESC KEY
+========================================= */
+
+document.addEventListener(
+"keydown",
+event => {
+
+if(event.key === "Escape"){
+
+if(adminOverlay){
+
+adminOverlay.classList.remove(
+"show"
+);
+
+}
+
+}
+
+});
+
+
+/* =========================================
+   GLOBAL ERROR PROTECTION
+========================================= */
+
+window.addEventListener(
+"error",
+event => {
+
+console.warn(
+"Frontend error:",
+event.message
+);
+
+});
+
+
+window.addEventListener(
+"unhandledrejection",
+event => {
+
+console.warn(
+"Unhandled promise:",
+event.reason
+);
+
+});
+
+
+/* =========================================
+   FINAL UI INIT
+========================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+() => {
+
+const app =
+document.getElementById("app");
+
+if(app){
+
+app.style.visibility =
+"visible";
+
+}
+
+});
+
+
 </script>
+
 
 </body>
 </html>
