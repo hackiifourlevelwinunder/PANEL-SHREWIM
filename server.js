@@ -519,8 +519,63 @@ app.get("/api/history", async (req, res) => {
     });
 
     if (!response.ok) {
-      throw new Error(
-        `History server returned ${response.status}`
+     app.get("/api/history", async (req, res) => {
+    try {
+        const url =
+            "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+
+        const response = await fetch(
+            url + "?t=" + Date.now(),
+            {
+                headers: {
+                    "User-Agent":
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36",
+                    "Accept":
+                        "application/json,text/plain,*/*",
+                    "Referer":
+                        "https://draw.ar-lottery01.com/"
+                }
+            }
+        );
+
+        if (!response.ok) {
+            console.log(
+                "History upstream status:",
+                response.status
+            );
+
+            return res.json({
+                success: false,
+                data: {
+                    list: []
+                },
+                message:
+                    "Live history temporarily unavailable"
+            });
+        }
+
+        const data =
+            await response.json();
+
+        return res.json(data);
+
+    } catch (error) {
+
+        console.error(
+            "History proxy error:",
+            error.message
+        );
+
+        return res.json({
+            success: false,
+            data: {
+                list: []
+            },
+            message:
+                "History temporarily unavailable"
+        });
+    }
+});
       );
     }
 
